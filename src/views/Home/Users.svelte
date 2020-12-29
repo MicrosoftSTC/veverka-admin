@@ -17,7 +17,6 @@
 
     let activeUsersInGrid = allUsers;
 
-
     function handleActionAble(event) {
         actionAble = event.detail;
     }
