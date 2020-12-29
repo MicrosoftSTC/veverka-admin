@@ -23,7 +23,8 @@
 
     function filterByUsername(event){
         let usernameStart = event.detail;
-        activeUsersInGrid = allUsers.filter(user => user.username.startsWith(usernameStart));
+        if(usernameStart === "") activeUsersInGrid = allUsers;
+        activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(usernameStart));
     }
 
     function filterByReport(event){
@@ -38,9 +39,19 @@
             activeUsersInGrid = allUsers.filter(user => user.banned === true);
         }
     }
+
+    function filterByGroupFounders(event){
+        console.log(event);
+        let showOnlyGroupFounders = event.detail;
+        if(showOnlyGroupFounders){
+            activeUsersInGrid = activeUsersInGrid.filter(user => user.founder === true);
+        }else{
+            activeUsersInGrid = allUsers;
+        }
+    }
 </script>
 <h3 class="text-h4">Users administration</h3>
-<UsersFilter on:filter-by-username={filterByUsername} on:filter-by-report={filterByReport}/>
+<UsersFilter on:filter-by-group-founders={filterByGroupFounders} on:filter-by-username={filterByUsername} on:filter-by-report={filterByReport}/>
 <Row>
     <Col cols="{8}">
         <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>

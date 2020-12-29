@@ -13,6 +13,7 @@
 
     const dispatch = createEventDispatcher();
 
+    let showOnlyGroupFounders = false;
     let group = 3;
     let min = 0;
     let max = 423423;
@@ -39,6 +40,11 @@
     function filterByReports(group){
         dispatch("filter-by-report", group)
     }
+
+    function filterByGroupFounders() {
+        showOnlyGroupFounders = !showOnlyGroupFounders;
+        dispatch("filter-by-group-founders", showOnlyGroupFounders);
+    }
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -57,7 +63,7 @@
                 <Slider min="{0}" max="{3000}" value={value} thumb={[true, true]} persistentThumb>Range</Slider>
             </Col>
             <Col>
-                <Switch value="1">Show only group founders</Switch>
+                <Switch on:change={() => filterByGroupFounders()}>Show only group founders</Switch>
             </Col>
         </Row>
         <Row>
