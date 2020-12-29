@@ -34,6 +34,11 @@
         let username = event.target.value;
         dispatch("filter-by-username", username);
     }
+
+    $:filterByReports(group);
+    function filterByReports(group){
+        dispatch("filter-by-report", group)
+    }
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -58,10 +63,10 @@
         <Row>
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
-                    <Radio bind:group value={1}>Show only reported</Radio>
-                    <Radio bind:group value={2}>Show only non-reported</Radio>
-                    <Radio bind:group value={3}>Show all</Radio>
-                    <Radio bind:group value={4}>Show only banned</Radio>
+                    <Radio bind:group value={"only-reported"}>Show only reported</Radio>
+                    <Radio bind:group value={"only-nonreported"}>Show only non-reported</Radio>
+                    <Radio bind:group value={"all"}>Show all</Radio>
+                    <Radio bind:group value={"only-banned"}>Show only banned</Radio>
                 </div>
             </Col>
             <Col cols="{3}">

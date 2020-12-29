@@ -25,9 +25,22 @@
         let usernameStart = event.detail;
         activeUsersInGrid = allUsers.filter(user => user.username.startsWith(usernameStart));
     }
+
+    function filterByReport(event){
+        let reportPolicy = event.detail;
+        if(reportPolicy === "only-reported"){
+            activeUsersInGrid = allUsers.filter(user => user.needsReview === true);
+        }else if(reportPolicy === "only-nonreported"){
+            activeUsersInGrid = allUsers.filter(user => user.needsReview === false);
+        }else if(reportPolicy === "all"){
+            activeUsersInGrid = allUsers;
+        }else if(reportPolicy === "only-banned"){
+            activeUsersInGrid = allUsers.filter(user => user.banned === true);
+        }
+    }
 </script>
 <h3 class="text-h4">Users administration</h3>
-<UsersFilter on:filter-by-username={filterByUsername}/>
+<UsersFilter on:filter-by-username={filterByUsername} on:filter-by-report={filterByReport}/>
 <Row>
     <Col cols="{8}">
         <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>
