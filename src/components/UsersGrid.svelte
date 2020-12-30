@@ -49,17 +49,17 @@
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile" /></Avatar>
                     </span>
-                        {user.username}
+                        {user.username}, <Chip size="x-small" class="grey white-text">{user.points}</Chip>
                         {#if user.banned}
-                        <Chip class="ma-2 red white-text">Banned</Chip>
-                            {:else if user.needsReview}
+                            <Chip class="ma-2 red white-text">Banned</Chip>
+                        {:else if user.needsReview}
                             <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
                         {/if}
                         {#if user.founder}
                             <Chip label class="ma-2 light-blue accent-3 white-text">Founder</Chip>
                         {/if}
                         <span slot="subtitle">
-                        <p>{user.name}, 3012 points, {user.joined}</p>
+                        <p>{user.name}, {user.joined}</p>
                     </span>
                     </ListItem>
                 {/each}

@@ -66,6 +66,17 @@
                         if(b.joined > a.joined) return 1;
                         else return -1;
                     })
+                    break;
+                case "PointsAcs":
+                    activeUsersInGrid.sort((a,b) => {
+                        return a.points - b.points
+                    })
+                    break;
+                case "PointsDesc":
+                    activeUsersInGrid.sort((a,b) => {
+                        return b.points - a.points
+                    })
+                    break;
             }
         }
     }
