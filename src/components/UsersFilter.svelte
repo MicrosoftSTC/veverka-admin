@@ -22,8 +22,8 @@
     const items = [
         { name: 'Username Asc', value: 'UsernameAsc' },
         { name: 'Username Desc', value: 'UsernameDesc' },
-        { name: 'Joined Asc', value: 'JoinedAsc' },
-        { name: 'Joined Desc', value: 'JoinedDesc' },
+        { name: 'Joined Oldest', value: 'JoinedAsc' },
+        { name: 'Joined Newest', value: 'JoinedDesc' },
         { name: "Points Acs", value: "PointsAcs"},
         { name: "Points Desc", value: 'PointsDesc'}
     ];

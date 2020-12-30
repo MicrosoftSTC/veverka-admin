@@ -59,7 +59,7 @@
                             <Chip label class="ma-2 light-blue accent-3 white-text">Founder</Chip>
                         {/if}
                         <span slot="subtitle">
-                        <p>{user.name}, 3012 points</p>
+                        <p>{user.name}, 3012 points, {user.joined}</p>
                     </span>
                     </ListItem>
                 {/each}

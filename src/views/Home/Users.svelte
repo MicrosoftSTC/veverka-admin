@@ -55,6 +55,17 @@
                         return b.username.localeCompare(a.username);
                     })
                     break;
+                case "JoinedAsc":
+                    activeUsersInGrid.sort((a, b) => {
+                        if(a.joined > b.joined) return 1;
+                        else return -1;
+                    })
+                    break;
+                case "JoinedDesc":
+                    activeUsersInGrid.sort((a, b) => {
+                        if(b.joined > a.joined) return 1;
+                        else return -1;
+                    })
             }
         }
     }

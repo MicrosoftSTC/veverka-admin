@@ -1,5 +1,9 @@
 import { writable } from 'svelte/store';
 
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 export const mockedUsers = writable(
     [
         {
@@ -8,7 +12,8 @@ export const mockedUsers = writable(
             num: 54,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Jarmila Krásná",
@@ -16,7 +21,8 @@ export const mockedUsers = writable(
             num: 21,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Josef Drsný",
@@ -24,7 +30,8 @@ export const mockedUsers = writable(
             num: 666,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Lucifer Hrozný",
@@ -32,7 +39,8 @@ export const mockedUsers = writable(
             num: 767,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Marek Přeskočpole",
@@ -40,7 +48,8 @@ export const mockedUsers = writable(
             num: 90,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Jiří Oberfrajer",
@@ -48,7 +57,8 @@ export const mockedUsers = writable(
             num: 4334,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Barbora Jablková",
@@ -56,7 +66,8 @@ export const mockedUsers = writable(
             num: 11,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Jakub Kohák",
@@ -64,7 +75,8 @@ export const mockedUsers = writable(
             num: 3424,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
         {
             name: "Kateřina Peake",
@@ -72,7 +84,8 @@ export const mockedUsers = writable(
             num: 76,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 7
+            founder: Math.random().toString().slice(2,3) > 7,
+            joined: randomDate(new Date(2012, 0, 1), new Date())
         },
     ]
 );
