@@ -16,7 +16,6 @@
     });
 
     let activeUsersInGrid = allUsers;
-    let usersBeforeFounderFilter;
 
     function handleActionAble(event) {
         actionAble = event.detail;

@@ -30,9 +30,7 @@
 
     let username = "";
     let filterByFounders = false;
-    let group = 3;
     let filterByReports;
-    $:filterByReports = group;
     let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4};
 
     function filterEvent(fieldName, value){
@@ -79,10 +77,10 @@
         <Row>
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
-                    <Radio bind:group value={1}>Show only reported</Radio>
-                    <Radio bind:group value={2}>Show only non-reported</Radio>
-                    <Radio bind:group value={3}>Show all</Radio>
-                    <Radio bind:group value={4}>Show only banned</Radio>
+                    <Radio bind:group={filterByReports} value={1}>Show only reported</Radio>
+                    <Radio bind:group={filterByReports} value={2}>Show only non-reported</Radio>
+                    <Radio bind:group={filterByReports} value={3}>Show all</Radio>
+                    <Radio bind:group={filterByReports} value={4}>Show only banned</Radio>
                 </div>
             </Col>
             <Col cols="{3}">
