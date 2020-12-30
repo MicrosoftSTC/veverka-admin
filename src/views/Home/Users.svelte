@@ -39,6 +39,22 @@
                     break;
                 case 4:
                     activeUsersInGrid = activeUsersInGrid.filter(user => user.banned);
+                    break;
+            }
+        }
+        if(event.detail.order !== "none"){
+            console.log("hello from switch");
+            switch(event.detail.order){
+                case "UsernameAsc":
+                    activeUsersInGrid.sort((a, b) => {
+                        return a.username.localeCompare(b.username);
+                    });
+                    break;
+                case "UsernameDesc":
+                    activeUsersInGrid.sort((a, b) => {
+                        return b.username.localeCompare(a.username);
+                    })
+                    break;
             }
         }
     }

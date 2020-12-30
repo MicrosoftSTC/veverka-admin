@@ -20,18 +20,19 @@
     let value = [0, 3000];
 
     const items = [
-        { name: 'Username Asc', value: 'Username Asc' },
-        { name: 'Username Desc', value: 'Username Desc' },
-        { name: 'Joined Asc', value: 'Joined Asc' },
-        { name: 'Joined Desc', value: 'Joined Desc' },
-        { name: "Points Acs", value: "Points Acs"},
-        { name: "Points Desc", value: 'Points Desc'}
+        { name: 'Username Asc', value: 'UsernameAsc' },
+        { name: 'Username Desc', value: 'UsernameDesc' },
+        { name: 'Joined Asc', value: 'JoinedAsc' },
+        { name: 'Joined Desc', value: 'JoinedDesc' },
+        { name: "Points Acs", value: "PointsAcs"},
+        { name: "Points Desc", value: 'PointsDesc'}
     ];
 
     let username = "";
     let filterByFounders = false;
     let filterByReports;
-    let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4};
+    let selectedValue;
+    let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4, "order": "none"};
 
     function filterEvent(fieldName, value){
         filterConstraints = {...filterConstraints, [fieldName]:value};
@@ -51,8 +52,12 @@
         filterEvent("filterByReports", reportsDependency);
     }
 
-    $:reportsFilter(filterByReports);
+    function order(orderDependency){
+        filterEvent("order", orderDependency);
+    }
 
+    $:reportsFilter(filterByReports);
+    $:order(selectedValue);
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -84,7 +89,7 @@
                 </div>
             </Col>
             <Col cols="{3}">
-                <Select solo {items} class="mt-n3" placeholder="Sort by"/>
+                <Select solo bind:value={selectedValue} {items} class="mt-n3" placeholder="Sort by"/>
             </Col>
         </Row>
     </CardText>
