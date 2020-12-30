@@ -8,7 +8,7 @@ export const mockedUsers = writable(
             num: 54,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Jarmila Krásná",
@@ -16,7 +16,7 @@ export const mockedUsers = writable(
             num: 21,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Josef Drsný",
@@ -24,7 +24,7 @@ export const mockedUsers = writable(
             num: 666,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Lucifer Hrozný",
@@ -32,7 +32,7 @@ export const mockedUsers = writable(
             num: 767,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Marek Přeskočpole",
@@ -40,7 +40,7 @@ export const mockedUsers = writable(
             num: 90,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Jiří Oberfrajer",
@@ -48,7 +48,7 @@ export const mockedUsers = writable(
             num: 4334,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Barbora Jablková",
@@ -56,7 +56,7 @@ export const mockedUsers = writable(
             num: 11,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Jakub Kohák",
@@ -64,7 +64,7 @@ export const mockedUsers = writable(
             num: 3424,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
         {
             name: "Kateřina Peake",
@@ -72,7 +72,7 @@ export const mockedUsers = writable(
             num: 76,
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
-            founder: Math.random().toString().slice(2,3) > 8.5
+            founder: Math.random().toString().slice(2,3) > 7
         },
     ]
 );

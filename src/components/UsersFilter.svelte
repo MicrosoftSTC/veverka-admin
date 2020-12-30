@@ -12,9 +12,6 @@
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
     const dispatch = createEventDispatcher();
-
-    let showOnlyGroupFounders = false;
-    let group = 3;
     let min = 0;
     let max = 423423;
     let slider;
@@ -31,20 +28,33 @@
         { name: "Points Desc", value: 'Points Desc'}
     ];
 
+    let username = "";
+    let filterByFounders = false;
+    let group = 3;
+    let filterByReports;
+    $:filterByReports = group;
+    let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4};
+
+    function filterEvent(fieldName, value){
+        filterConstraints = {...filterConstraints, [fieldName]:value};
+        dispatch("filter-event", filterConstraints);
+    }
+
     function filterByUsername(event){
-        let username = event.target.value;
-        dispatch("filter-by-username", username);
+        filterEvent("username", username);
     }
 
-    $:filterByReports(group);
-    function filterByReports(group){
-        dispatch("filter-by-report", group)
+    function foundersFilter(){
+        filterByFounders = !filterByFounders;
+        filterEvent("filterByFounders", filterByFounders);
     }
 
-    function filterByGroupFounders() {
-        showOnlyGroupFounders = !showOnlyGroupFounders;
-        dispatch("filter-by-group-founders", showOnlyGroupFounders);
+    function reportsFilter(reportsDependency){
+        filterEvent("filterByReports", reportsDependency);
     }
+
+    $:reportsFilter(filterByReports);
+
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -57,22 +67,22 @@
     <CardText>
         <Row>
             <Col>
-                <TextField on:input={(event) => filterByUsername(event)} filled>Search by username</TextField>
+                <TextField bind:value={username} on:input={(event) => filterByUsername(event)} filled>Search by username</TextField>
             </Col>
             <Col cols="{6}">
-                <Slider min="{0}" max="{3000}" value={value} thumb={[true, true]} persistentThumb>Range</Slider>
+                <Slider min="{0}" max="{3000}" bind:value={value} thumb={[true, true]} persistentThumb>Range</Slider>
             </Col>
             <Col>
-                <Switch on:change={() => filterByGroupFounders()}>Show only group founders</Switch>
+                <Switch on:change={() => foundersFilter()}>Show only group founders</Switch>
             </Col>
         </Row>
         <Row>
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
-                    <Radio bind:group value={"only-reported"}>Show only reported</Radio>
-                    <Radio bind:group value={"only-nonreported"}>Show only non-reported</Radio>
-                    <Radio bind:group value={"all"}>Show all</Radio>
-                    <Radio bind:group value={"only-banned"}>Show only banned</Radio>
+                    <Radio bind:group value={1}>Show only reported</Radio>
+                    <Radio bind:group value={2}>Show only non-reported</Radio>
+                    <Radio bind:group value={3}>Show all</Radio>
+                    <Radio bind:group value={4}>Show only banned</Radio>
                 </div>
             </Col>
             <Col cols="{3}">

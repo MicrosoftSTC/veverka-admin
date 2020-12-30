@@ -16,42 +16,36 @@
     });
 
     let activeUsersInGrid = allUsers;
+    let usersBeforeFounderFilter;
 
     function handleActionAble(event) {
         actionAble = event.detail;
     }
 
-    function filterByUsername(event){
-        let usernameStart = event.detail;
-        if(usernameStart === "") activeUsersInGrid = allUsers;
-        activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(usernameStart));
-    }
-
-    function filterByReport(event){
-        let reportPolicy = event.detail;
-        if(reportPolicy === "only-reported"){
-            activeUsersInGrid = allUsers.filter(user => user.needsReview === true);
-        }else if(reportPolicy === "only-nonreported"){
-            activeUsersInGrid = allUsers.filter(user => user.needsReview === false);
-        }else if(reportPolicy === "all"){
-            activeUsersInGrid = allUsers;
-        }else if(reportPolicy === "only-banned"){
-            activeUsersInGrid = allUsers.filter(user => user.banned === true);
+    function filterHandler(event){
+        activeUsersInGrid = allUsers;
+        if(event.detail.username != ""){
+            activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(event.detail.username));
         }
-    }
-
-    function filterByGroupFounders(event){
-        console.log(event);
-        let showOnlyGroupFounders = event.detail;
-        if(showOnlyGroupFounders){
-            activeUsersInGrid = activeUsersInGrid.filter(user => user.founder === true);
-        }else{
-            activeUsersInGrid = allUsers;
+        if(event.detail.filterByFounders){
+            activeUsersInGrid = activeUsersInGrid.filter(user => user.founder);
+        }
+        if(event.detail.filterByReports !== 3){
+            switch (event.detail.filterByReports) {
+                case 1:
+                    activeUsersInGrid = activeUsersInGrid.filter(user => user.needsReview);
+                    break;
+                case 2:
+                    activeUsersInGrid = activeUsersInGrid.filter(user => !user.needsReview);
+                    break;
+                case 4:
+                    activeUsersInGrid = activeUsersInGrid.filter(user => user.banned);
+            }
         }
     }
 </script>
 <h3 class="text-h4">Users administration</h3>
-<UsersFilter on:filter-by-group-founders={filterByGroupFounders} on:filter-by-username={filterByUsername} on:filter-by-report={filterByReport}/>
+<UsersFilter on:filter-event={filterHandler}/>
 <Row>
     <Col cols="{8}">
         <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>
