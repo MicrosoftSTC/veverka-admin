@@ -15,7 +15,20 @@
         allUsers = u;
     });
 
+
     let activeUsersInGrid = allUsers;
+
+    let maxUserScoreIndex = 0;
+
+    $:activeUsersInGrid.forEach((user, index) => {
+        if(activeUsersInGrid[maxUserScoreIndex]){
+            if(activeUsersInGrid[index].points > activeUsersInGrid[maxUserScoreIndex].points){
+                maxUserScoreIndex = index;
+            }
+        }else{
+            maxUserScoreIndex = 0;
+        }
+    })
 
     function handleActionAble(event) {
         actionAble = event.detail;
@@ -43,7 +56,6 @@
             }
         }
         if(event.detail.order !== "none"){
-            console.log("hello from switch");
             switch(event.detail.order){
                 case "UsernameAsc":
                     activeUsersInGrid.sort((a, b) => {
@@ -79,10 +91,18 @@
                     break;
             }
         }
+        if(activeUsersInGrid[maxUserScoreIndex] && (event.detail.pointsScale[0] != 0 || event.detail.pointsScale[1] != activeUsersInGrid[maxUserScoreIndex].points)){
+            let min = event.detail.pointsScale[0];
+            let max = event.detail.pointsScale[1];
+
+            activeUsersInGrid = activeUsersInGrid.filter(user => {
+                return user.points >= min && user.points <= max;
+            })
+        }
     }
 </script>
 <h3 class="text-h4">Users administration</h3>
-<UsersFilter on:filter-event={filterHandler}/>
+<UsersFilter on:filter-event={filterHandler} maxUserScore="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
 <Row>
     <Col cols="{8}">
         <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>

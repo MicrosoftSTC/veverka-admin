@@ -11,13 +11,15 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
+    export let maxUserScore;
+
     const dispatch = createEventDispatcher();
     let min = 0;
     let max = 423423;
     let slider;
     let showFilter = false;
-
-    let value = [0, 3000];
+    let initialMaxOnSlider = maxUserScore;
+    let value = [0, initialMaxOnSlider];
 
     const items = [
         { name: 'Username Asc', value: 'UsernameAsc' },
@@ -32,7 +34,7 @@
     let filterByFounders = false;
     let filterByReports;
     let selectedValue;
-    let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4, "order": "none"};
+    let filterConstraints = {"username": "", "filterByFounders": false, "filterByReports": 4, "order": "none", "pointsScale": [0, initialMaxOnSlider]};
 
     function filterEvent(fieldName, value){
         filterConstraints = {...filterConstraints, [fieldName]:value};
@@ -56,6 +58,10 @@
         filterEvent("order", orderDependency);
     }
 
+    function scaleFilter(){
+        filterEvent("pointsScale", value)
+    }
+
     $:reportsFilter(filterByReports);
     $:order(selectedValue);
 </script>
@@ -73,7 +79,7 @@
                 <TextField bind:value={username} on:input={(event) => filterByUsername(event)} filled>Search by username</TextField>
             </Col>
             <Col cols="{6}">
-                <Slider min="{0}" max="{3000}" bind:value={value} thumb={[true, true]} persistentThumb>Range</Slider>
+                <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSlider}" bind:value={value} thumb={[true, true]} persistentThumb>Restrict points</Slider>
             </Col>
             <Col>
                 <Switch on:change={() => foundersFilter()}>Show only group founders</Switch>

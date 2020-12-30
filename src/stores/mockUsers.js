@@ -14,7 +14,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Jarmila Krásná",
@@ -24,7 +24,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Josef Drsný",
@@ -34,7 +34,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Lucifer Hrozný",
@@ -44,7 +44,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Marek Přeskočpole",
@@ -54,7 +54,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Jiří Oberfrajer",
@@ -64,7 +64,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Barbora Jablková",
@@ -74,7 +74,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Jakub Kohák",
@@ -84,7 +84,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
         {
             name: "Kateřina Peake",
@@ -94,7 +94,7 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
         },
     ]
 );
