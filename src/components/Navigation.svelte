@@ -1,8 +1,6 @@
 <script>
     import {pushTo} from "../utils/redirectService"
 
-    import AppBar from 'svelte-materialify/src/components/AppBar';
-    import Button from 'svelte-materialify/src/components/Button';
     import Icon from "svelte-materialify/src/components/Icon"
     import ListItem from "svelte-materialify/src/components/List/ListItem.svelte"
     import List from "svelte-materialify/src/components/List/List.svelte"
@@ -10,8 +8,7 @@
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Divider from "svelte-materialify/src/components/Divider/Divider.svelte"
     import NavigationDrawer from "svelte-materialify/src/components/NavigationDrawer/NavigationDrawer.svelte"
-    import Overlay from "svelte-materialify/src/components/Overlay/Overlay.svelte"
-    import {mdiMenu, mdiHome, mdiAccountBoxOutline, mdiChartBox} from "@mdi/js"
+    import {mdiHome, mdiAccountBoxOutline, mdiChartBox} from "@mdi/js"
 
     let active;
 </script>
@@ -25,7 +22,7 @@
         </ListItem>
         <Divider />
         <List dense nav>
-            <ListItem>
+            <ListItem on:click={() => pushTo('/home')}>
                         <span slot="prepend">
                             <Icon path="{mdiHome}" />
                         </span>
@@ -45,7 +42,7 @@
                 <span slot="append">
                             <Icon class="mdi mdi-chevron-up" rotate={active ? 0 : 180} />
                         </span>
-                <ListItem>Users</ListItem>
+                <ListItem  on:click={() => pushTo('/home/statistics/users')}>Users</ListItem>
                 <ListItem>Groups</ListItem>
                 <ListItem>Public Wall</ListItem>
                 <ListItem>Metrics</ListItem>
