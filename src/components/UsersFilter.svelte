@@ -41,7 +41,7 @@
         dispatch("filter-event", filterConstraints);
     }
 
-    function filterByUsername(event){
+    function filterByUsername(_event){
         filterEvent("username", username);
     }
 
