@@ -55,12 +55,12 @@
         case "communities":
             textInputLabel = "Search by community name";
             sliderLabel = "Restrict members";
-            radioLabels = ["Show only banned", "Show only investigated", "Show all"];
+            radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
             selectOptions = [
-                { name: 'Community name Asc', value: 'Community name Asc' },
-                { name: 'Community name Desc', value: 'Community name Desc' },
-                { name: 'Founded Oldest', value: 'Founded Oldest' },
-                { name: 'Founded Newest', value: 'Founded Newest' },
+                { name: 'Name Asc', value: 'Name Asc' },
+                { name: 'Name Desc', value: 'Name Desc' },
+                { name: 'Since Oldest', value: 'Since Oldest' },
+                { name: 'Since Newest', value: 'Since Newest' },
                 { name: 'Members Asc', value: 'Members Asc' },
                 { name: 'Members Desc', value: 'Members Desc' },
             ];

@@ -1,4 +1,3 @@
-// type is users or communities, needed for knowing what properties does the [data] object have
 export default function filter(data, event){
     let fields;
 
@@ -31,21 +30,14 @@ export default function filter(data, event){
         radioField: {
             1: "needsReview",
             2: "needsReview",
+            4: "banned"
         },
-        // selectOptions : [
-        //     { name: 'Username Asc', value: 'Username Asc' },
-        //     { name: 'Username Desc', value: 'Username Desc' },
-        //     { name: 'Joined Oldest', value: 'Joined Oldest' },
-        //     { name: 'Joined Newest', value: 'Joined Newest' },
-        //     { name: "Points Acs", value: "Points Acs"},
-        //     { name: "Points Desc", value: 'Points Desc'}
-        // ],
         selectOptions : {
             nameAsc: 'Name Asc',
             nameDesc: 'Name Desc',
             sinceAsc: 'Since Oldest',
             sinceDesc: 'Since Newest',
-            numericAsc: 'Members Acs',
+            numericAsc: 'Members Asc',
             numericDesc: 'Members Desc'
         },
         orderFields: {
@@ -55,7 +47,7 @@ export default function filter(data, event){
         }
 
     }
-    
+
     let objectKeys = Object.keys(data[0]);
     let filterConstraints = event.detail;
     
@@ -97,9 +89,7 @@ export default function filter(data, event){
                 })
                 break;
             case fields.selectOptions.sinceAsc:
-                console.log("smg");
                 data.sort((a, b) => {
-                    console.log(a[fields.orderFields.since]);
                     return a[fields.orderFields.since] > b[fields.orderFields.since] ? 1:-1;
                 })
                 break;

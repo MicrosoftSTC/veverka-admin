@@ -6,6 +6,7 @@
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
+    import filter from "../../components/FilterScript";
 
     let gridType = "communities";
     let actionAble = false;
@@ -20,14 +21,14 @@
         actionAble = event.detail;
     }
 
-    function filterHandler(event){
-        activeCommunitiesInGrid = allCommunities;
+    function filterHandler(event) {
+        activeCommunitiesInGrid = filter(allCommunities,event);
     }
 </script>
 <h3 class="text-h4">Community administration</h3>
 <Filter filterType="{'communities'}" on:filter-event={filterHandler} maxValueOnSlider="{maxMembers}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} {actionAble} bind:data="{allCommunities}" on:item-selected={handleActionAble}/>
+        <Grid {gridType} {actionAble} bind:data="{activeCommunitiesInGrid}" on:item-selected={handleActionAble}/>
     </Col>
 </Row>
