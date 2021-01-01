@@ -11,7 +11,7 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
-    export let filterType;
+    export let filterType; // users or communities
     export let maxValueOnSlider;
 
     // filter-specific labels etc.
@@ -44,23 +44,25 @@
             switchLabel = "Show only group founders";
             radioLabels = ["Show only reported", "Show only non-reported", "Show all", "Show only banned"];
             selectOptions = [
-                { name: 'Username Asc', value: 'nameAsc' },
-                { name: 'Username Desc', value: 'nameDesc' },
-                { name: 'Joined Oldest', value: 'joinedAsc' },
-                { name: 'Joined Newest', value: 'joinedDesc' },
-                { name: "Points Acs", value: "pointsAsc"},
-                { name: "Points Desc", value: 'pointsDesc'}
+                { name: 'Username Asc', value: 'Username Asc' },
+                { name: 'Username Desc', value: 'Username Desc' },
+                { name: 'Joined Oldest', value: 'Joined Oldest' },
+                { name: 'Joined Newest', value: 'Joined Newest' },
+                { name: "Points Acs", value: "Points Acs"},
+                { name: "Points Desc", value: 'Points Desc'}
             ];
             break;
         case "communities":
             textInputLabel = "Search by community name";
             sliderLabel = "Restrict members";
-            radioLabels = ["Show only reported", "Show only non-reported", "Show all", "Show only banned"];
+            radioLabels = ["Show only banned", "Show only investigated", "Show all"];
             selectOptions = [
-                { name: 'Community name Asc', value: 'nameAsc' },
-                { name: 'Community name Desc', value: 'nameDesc' },
-                { name: 'Founded Oldest', value: 'foundedAsc' },
-                { name: 'Founded Newest', value: 'foundedDesc' },
+                { name: 'Community name Asc', value: 'Community name Asc' },
+                { name: 'Community name Desc', value: 'Community name Desc' },
+                { name: 'Founded Oldest', value: 'Founded Oldest' },
+                { name: 'Founded Newest', value: 'Founded Newest' },
+                { name: 'Members Asc', value: 'Members Asc' },
+                { name: 'Members Desc', value: 'Members Desc' },
             ];
             break;
     }

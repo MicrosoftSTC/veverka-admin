@@ -1,5 +1,5 @@
 <script>
-    import UsersGrid from "../../components/UsersGrid.svelte";
+    import Grid from "../../components/Grid.svelte";
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
@@ -9,6 +9,7 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
 
     let actionAble = false;
+    let gridType = "users";
 
     let allUsers = [];
     mockedUsers.subscribe(u => {
@@ -35,7 +36,6 @@
     }
 
     function filterHandler(event){
-        console.log(event);
         activeUsersInGrid = allUsers;
         if(event.detail.textInputValue != ""){
             activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(event.detail.textInputValue));
@@ -46,7 +46,6 @@
         if(event.detail.filterByRadio !== 3){
             switch (event.detail.filterByReports) {
                 case 1:
-                    console.log("got here");
                     activeUsersInGrid = activeUsersInGrid.filter(user => user.needsReview);
                     break;
                 case 2:
@@ -59,34 +58,34 @@
         }
         if(event.detail.order !== "none"){
             switch(event.detail.order){
-                case "UsernameAsc":
+                case "Username Asc":
                     activeUsersInGrid.sort((a, b) => {
                         return a.username.localeCompare(b.username);
                     });
                     break;
-                case "UsernameDesc":
+                case "Username Desc":
                     activeUsersInGrid.sort((a, b) => {
                         return b.username.localeCompare(a.username);
                     })
                     break;
-                case "JoinedAsc":
+                case "Joined Oldest":
                     activeUsersInGrid.sort((a, b) => {
                         if(a.joined > b.joined) return 1;
                         else return -1;
                     })
                     break;
-                case "JoinedDesc":
+                case "Joined Newest":
                     activeUsersInGrid.sort((a, b) => {
                         if(b.joined > a.joined) return 1;
                         else return -1;
                     })
                     break;
-                case "PointsAcs":
+                case "Points Acs":
                     activeUsersInGrid.sort((a,b) => {
                         return a.points - b.points
                     })
                     break;
-                case "PointsDesc":
+                case "Points Desc":
                     activeUsersInGrid.sort((a,b) => {
                         return b.points - a.points
                     })
@@ -107,7 +106,7 @@
 <Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
 <Row>
     <Col cols="{8}">
-        <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>
+        <Grid {gridType} {actionAble} bind:data="{activeUsersInGrid}" on:user-selected={handleActionAble}/>
     </Col>
     <Col cols="{4}">
         <UserActions {actionAble}/>
