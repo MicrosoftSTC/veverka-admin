@@ -32,7 +32,7 @@
     let filterConstraints = {
         "textInputValue": "",
         "filterBySwitch": false,
-        "filterByRadio": 4,
+        "filterByRadio": 3,
         "order": "none",
         "pointsScale": [0, initialMaxOnSlider]
     };
@@ -82,7 +82,7 @@
     }
 
     function filterByRadioValue(reportsDependency){
-        filterEvent("filterByReports", reportsDependency);
+        filterEvent("filterByRadio", reportsDependency);
     }
 
     function scaleFilter(){

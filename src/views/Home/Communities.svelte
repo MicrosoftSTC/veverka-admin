@@ -1,7 +1,33 @@
 <script>
     import Filter from "../../components/Filter.svelte";
+    import Grid from "../../components/Grid.svelte";
 
     import {mockedCommunities} from "../../stores/mockCommunities"
+
+    import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
+    import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
+
+    let gridType = "communities";
+    let actionAble = false;
+    let allCommunities;
+    mockedCommunities.subscribe(communities => {
+        allCommunities = communities;
+    });
+    let activeCommunitiesInGrid = allCommunities;
+    let maxMembers = Math.max(...allCommunities.map(c => c.members));
+
+    function handleActionAble(event) {
+        actionAble = event.detail;
+    }
+
+    function filterHandler(event){
+        activeCommunitiesInGrid = allCommunities;
+    }
 </script>
 <h3 class="text-h4">Community administration</h3>
-<Filter filterType="{'communities'}"/>
+<Filter filterType="{'communities'}" on:filter-event={filterHandler} maxValueOnSlider="{maxMembers}"/>
+<Row>
+    <Col cols="{8}">
+        <Grid {gridType} {actionAble} bind:data="{allCommunities}" on:item-selected={handleActionAble}/>
+    </Col>
+</Row>

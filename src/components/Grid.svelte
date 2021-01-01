@@ -29,9 +29,9 @@
 
     function userSelected() {
         if (actionAble) {
-            dispatch("user-selected", true)
+            dispatch("item-selected", true)
         } else {
-            dispatch("user-selected", false)
+            dispatch("item-selected", false)
         }
     }
 </script>
@@ -51,7 +51,7 @@
                             <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                         </span>
                             {user.username},
-                            <Chip size="x-small" class="grey white-text">{user.points}</Chip>
+                            <Chip size="x-small" class="grey white-text">{user.points} Points</Chip>
                             {#if user.banned}
                                 <Chip class="ma-2 red white-text">Banned</Chip>
                             {:else if user.needsReview}
@@ -72,7 +72,7 @@
                             <Avatar size={40}><img src="{`//picsum.photos/${community.members}`}" alt="profile"/></Avatar>
                         </span>
                             {community.name},
-                            <Chip size="x-small" class="grey white-text">{community.members}</Chip>
+                            <Chip size="x-small" class="grey white-text">{community.members} Members</Chip>
                             {#if community.banned}
                                 <Chip class="ma-2 red white-text">Banned</Chip>
                             {:else if community.needsReview}
