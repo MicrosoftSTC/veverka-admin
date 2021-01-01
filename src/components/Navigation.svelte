@@ -8,7 +8,7 @@
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Divider from "svelte-materialify/src/components/Divider/Divider.svelte"
     import NavigationDrawer from "svelte-materialify/src/components/NavigationDrawer/NavigationDrawer.svelte"
-    import {mdiHome, mdiAccountBoxOutline, mdiChartBox} from "@mdi/js"
+    import {mdiHome, mdiAccountBoxOutline, mdiChartBox, mdiHumanQueue } from "@mdi/js"
 
     let active;
 </script>
@@ -33,6 +33,12 @@
                           <Icon path="{mdiAccountBoxOutline}" />
                         </span>
                 Users
+            </ListItem>
+            <ListItem on:click={() => pushTo('/home/communities')}>
+                        <span slot="prepend">
+                          <Icon path="{mdiHumanQueue}" />
+                        </span>
+                Communities
             </ListItem>
             <ListGroup bind:active offset={72}>
                         <span slot="prepend">

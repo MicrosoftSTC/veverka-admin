@@ -1,6 +1,6 @@
 <script>
     import UsersGrid from "../../components/UsersGrid.svelte";
-    import UsersFilter from "../../components/UsersFilter.svelte";
+    import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
     import {mockedUsers} from "../../stores/mockUsers"
@@ -35,16 +35,18 @@
     }
 
     function filterHandler(event){
+        console.log(event);
         activeUsersInGrid = allUsers;
-        if(event.detail.username != ""){
-            activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(event.detail.username));
+        if(event.detail.textInputValue != ""){
+            activeUsersInGrid = activeUsersInGrid.filter(user => user.username.startsWith(event.detail.textInputValue));
         }
-        if(event.detail.filterByFounders){
+        if(event.detail.filterBySwitch){
             activeUsersInGrid = activeUsersInGrid.filter(user => user.founder);
         }
-        if(event.detail.filterByReports !== 3){
+        if(event.detail.filterByRadio !== 3){
             switch (event.detail.filterByReports) {
                 case 1:
+                    console.log("got here");
                     activeUsersInGrid = activeUsersInGrid.filter(user => user.needsReview);
                     break;
                 case 2:
@@ -102,7 +104,7 @@
     }
 </script>
 <h3 class="text-h4">Users administration</h3>
-<UsersFilter on:filter-event={filterHandler} maxUserScore="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
+<Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
 <Row>
     <Col cols="{8}">
         <UsersGrid {actionAble} bind:users="{activeUsersInGrid}" on:user-selected={handleActionAble}/>
