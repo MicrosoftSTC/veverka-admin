@@ -1,12 +1,13 @@
 <script>
     import Filter from "../../components/Filter.svelte";
     import Grid from "../../components/Grid.svelte";
+    import CommunityDetail from "../../components/CommunityDetail.svelte"
 
     import {mockedCommunities} from "../../stores/mockCommunities"
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
-    import filter from "../../components/FilterScript";
+    import filter from "../../utils/FilterScript";
 
     let gridType = "communities";
     let actionAble = false;
@@ -30,5 +31,8 @@
 <Row>
     <Col cols="{8}">
         <Grid {gridType} {actionAble} bind:data="{activeCommunitiesInGrid}" on:item-selected={handleActionAble}/>
+    </Col>
+    <Col>
+        <CommunityDetail/>
     </Col>
 </Row>

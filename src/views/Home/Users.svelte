@@ -3,7 +3,7 @@
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
-    import filter from "../../components/FilterScript";
+    import filter from "../../utils/FilterScript";
 
     import {mockedUsers} from "../../stores/mockUsers"
 
