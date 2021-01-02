@@ -32,9 +32,9 @@
 <Filter filterType="{'communities'}" on:filter-event={filterHandler} maxValueOnSlider="{maxMembers}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} bind:selectedEntities bind:data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
+        <Grid {gridType} bind:data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col>
-        <CommunityDetail {selectedEntities}/>
+        <CommunityDetail selectedCommunity="{selectedEntities[selectedEntities.length - 1]}"/>
     </Col>
 </Row>

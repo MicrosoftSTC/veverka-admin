@@ -10,7 +10,7 @@
 
     export let gridType;
     export let data = [];
-    export let selectedEntities = [];
+    let selectedEntities = [];
 
     const dispatch = createEventDispatcher();
 
