@@ -9,6 +9,8 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import filter from "../../utils/FilterScript";
 
+    // variable to hold state of entities selected in Grid component
+    let selectedEntities = [];
     let gridType = "communities";
     let actionAble = false;
     let allCommunities;
@@ -30,9 +32,9 @@
 <Filter filterType="{'communities'}" on:filter-event={filterHandler} maxValueOnSlider="{maxMembers}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} {actionAble} bind:data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
+        <Grid {gridType} bind:selectedEntities bind:data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col>
-        <CommunityDetail/>
+        <CommunityDetail {selectedEntities}/>
     </Col>
 </Row>

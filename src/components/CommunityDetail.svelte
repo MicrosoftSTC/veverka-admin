@@ -8,9 +8,9 @@
     import Checkbox from 'svelte-materialify/src/components/Checkbox';
     import Button from 'svelte-materialify/src/components/Button';
     import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte'
-    import Snackbar from 'svelte-materialify/src/components/Snackbar/Snackbar.svelte'
+    import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
 
-    export let detailAble = false;
+    export let selectedEntities;
     let active = false;
     let snackbar = false;
 </script>
@@ -19,7 +19,13 @@
         <span class="text-overline">
             Community detail
         </span>
-        {#if detailAble}
+        {#if selectedEntities.length === 1}
+            <div>
+                <div style="margin: auto; text-align: center">
+                    <Avatar size={150}><img src="{`//picsum.photos/${54}`}" alt="profile"/></Avatar>
+                </div>
+                {selectedEntities[0].name}
+            </div>
         {:else}
             <p class="text-subtitle-2">Select a community to view its details</p>
         {/if}
