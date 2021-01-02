@@ -9,7 +9,7 @@
 
     function makeCharts(context3d){
         new Chart(context3d, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
@@ -35,12 +35,9 @@
                 }]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+                events: ['click'],
+                tooltips: {
+                    mode: 'point'
                 }
             }
         });
@@ -112,7 +109,7 @@
     <Col>
         <Card outlined style="max-height: 75vh; max-width: 50vw">
             <div class="pl-4 pr-4 pt-2 pb-2">
-                <span class="text-overline">Fancy graph 1</span>
+                <span class="text-overline">Overall Users</span>
                 <div>
                     <canvas id="myChart0"></canvas>
                 </div>
@@ -122,7 +119,7 @@
     <Col>
         <Card outlined style="max-height: 75vh; max-width: 50vw">
             <div class="pl-4 pr-4 pt-2 pb-2">
-                <span class="text-overline">Fancy graph 2</span>
+                <span class="text-overline">New Users Joined</span>
                 <div>
                     <canvas id="myChart1"></canvas>
                 </div>
