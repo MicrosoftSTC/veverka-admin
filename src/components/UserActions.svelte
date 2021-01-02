@@ -10,7 +10,7 @@
     import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte'
     import Snackbar from 'svelte-materialify/src/components/Snackbar/Snackbar.svelte'
 
-    export let actionAble = false;
+    export let selectedEntities;
     let active = false;
     let snackbar = false;
 </script>
@@ -19,7 +19,7 @@
         <span class="text-overline">
             User actions
         </span>
-        {#if actionAble}
+        {#if selectedEntities.length > 0}
             <ExpansionPanels multiple>
                 <ExpansionPanel>
                     <span slot="header">Report user</span>

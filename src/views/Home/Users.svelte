@@ -40,6 +40,8 @@
     function filterHandler(event) {
         activeUsersInGrid = filter(allUsers,event);
     }
+
+    $:console.log(selectedEntities);
 </script>
 <h3 class="text-h4">Users administration</h3>
 <Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
@@ -48,6 +50,6 @@
         <Grid {gridType} bind:selectedEntities bind:data="{activeUsersInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col cols="{4}">
-        <UserActions/>
+        <UserActions {selectedEntities}/>
     </Col>
 </Row>

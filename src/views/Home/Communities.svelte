@@ -18,10 +18,8 @@
     let activeCommunitiesInGrid = allCommunities;
     let maxMembers = Math.max(...allCommunities.map(c => c.members));
 
-    function handleActionAble(event) {
-        if(event.detail){
-            console.log("action");
-        }
+    function handleEntitySelect(event) {
+        selectedEntities = event.detail;
     }
 
     function filterHandler(event) {
@@ -32,7 +30,7 @@
 <Filter filterType="{'communities'}" on:filter-event={filterHandler} maxValueOnSlider="{maxMembers}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} {actionAble} bind:data="{activeCommunitiesInGrid}" on:item-selected={handleActionAble}/>
+        <Grid {gridType} {actionAble} bind:data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col>
         <CommunityDetail/>
