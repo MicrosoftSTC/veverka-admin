@@ -26,7 +26,7 @@ export default function filter(data, event){
 
     let communityFields = {
         textField:"name",
-        // switchField:"founder",
+        secondTextField: "founder",
         radioField: {
             1: "needsReview",
             2: "needsReview",
@@ -66,6 +66,11 @@ export default function filter(data, event){
     if(filterConstraints.textInputValue !== ""){
         data = data.filter(entity => entity[fields.textField].startsWith(filterConstraints.textInputValue));
     }
+
+    if(filterConstraints.secondTextInputValue !== ""){
+        data = data.filter(entity => entity[fields.secondTextField].startsWith(filterConstraints.secondTextInputValue));
+    }
+
     if(filterConstraints.filterBySwitch){
         data = data.filter(entity => entity[fields.switchField]);
     }

@@ -16,6 +16,7 @@
 
     // filter-specific labels etc.
     let textInputLabel;
+    let secondTextInputLabel;
     let sliderLabel;
     let switchLabel;
     let radioLabels;
@@ -27,10 +28,13 @@
     let initialValueOnSlider = [0, initialMaxOnSlider];
     let selectedValue;
     let textInputValue = "";
+    let secondTextInputValue = "";
     let filterBySwitch = false;
     let filterByRadio = 3;
     let filterConstraints = {
         "textInputValue": "",
+        "secondTextInputValue": "",
+        "secondInputValue": "",
         "filterBySwitch": false,
         "filterByRadio": 3,
         "order": "none",
@@ -54,6 +58,7 @@
             break;
         case "communities":
             textInputLabel = "Search by community name";
+            secondTextInputLabel = "Search by founder username";
             sliderLabel = "Restrict members";
             radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
             selectOptions = [
@@ -72,8 +77,12 @@
         dispatch("filter-event", filterConstraints);
     }
 
-    function filterByTextInputValue(_event){
+    function filterByTextInputValue(){
         filterEvent("textInputValue", textInputValue);
+    }
+
+    function filterBySecondTextInputValue(){
+        filterEvent("secondTextInputValue", secondTextInputValue);
     }
 
     function filterBySwitchValue(){
@@ -107,8 +116,13 @@
     <CardText>
         <Row>
             <Col>
-                <TextField bind:value={textInputValue} on:input={(event) => filterByTextInputValue(event)} filled>{textInputLabel}</TextField>
+                <TextField bind:value={textInputValue} on:input={() => filterByTextInputValue()} filled>{textInputLabel}</TextField>
             </Col>
+            {#if secondTextInputLabel}
+            <Col>
+                <TextField bind:value={secondTextInputValue} on:input={() => filterBySecondTextInputValue()} filled>{secondTextInputLabel}</TextField>
+            </Col>
+            {/if}
             <Col cols="{6}">
                 <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSlider}" bind:value={initialValueOnSlider} thumb={[true, true]} persistentThumb>{sliderLabel}</Slider>
             </Col>
