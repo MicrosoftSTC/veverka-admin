@@ -10,14 +10,14 @@
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
 
-    let actionAble = false;
+    // variable to hold state of entities selected in Grid component
+    let selectedEntities = [];
     let gridType = "users";
 
     let allUsers = [];
     mockedUsers.subscribe(u => {
         allUsers = u;
     });
-
 
     let activeUsersInGrid = allUsers;
 
@@ -33,12 +33,11 @@
         }
     })
 
-    function handleActionAble(event) {
-        actionAble = event.detail;
+    function handleEntitySelect(event) {
+        selectedEntities = event.detail;
     }
 
     function filterHandler(event) {
-        console.log(event);
         activeUsersInGrid = filter(allUsers,event);
     }
 </script>
@@ -46,9 +45,9 @@
 <Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} {actionAble} bind:data="{activeUsersInGrid}" on:item-selected={handleActionAble}/>
+        <Grid {gridType} bind:selectedEntities bind:data="{activeUsersInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col cols="{4}">
-        <UserActions {actionAble}/>
+        <UserActions/>
     </Col>
 </Row>

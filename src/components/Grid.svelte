@@ -9,30 +9,24 @@
     import Chip from 'svelte-materialify/src/components/Chip';
 
     export let gridType;
-    export let actionAble;
     export let data = [];
-    let selectedUsers = [];
+    export let selectedEntities = [];
 
     const dispatch = createEventDispatcher();
 
-    function selectUser(username) {
-        let usernameIsNew = selectedUsers.findIndex(i => i === username);
-        if (usernameIsNew > -1) {
-            selectedUsers = selectedUsers.filter(un => un !== username);
+    function selectEntity(entity) {
+        let name = entity.name;
+        let entityIsNew = selectedEntities.findIndex(en => en.name === name);
+        if (entityIsNew > -1) {
+            selectedEntities = selectedEntities.filter(en => en.name !== name);
         } else {
-            selectedUsers = [...selectedUsers, username]
+            selectedEntities = [...selectedEntities, entity]
         }
-        if (!actionAble) actionAble = true;
-        else if (selectedUsers.length === 0) actionAble = false;
-        userSelected();
+        entitySelected();
     }
 
-    function userSelected() {
-        if (actionAble) {
-            dispatch("item-selected", true)
-        } else {
-            dispatch("item-selected", false)
-        }
+    function entitySelected() {
+        dispatch("entity-selected", selectedEntities);
     }
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
@@ -46,7 +40,7 @@
             <ListItemGroup multiple>
                 {#if gridType === "users"}
                     {#each data as user}
-                        <ListItem on:click={() => selectUser(user.username)} value="{user.username}">
+                        <ListItem on:click={() => selectEntity(user)} value="{user.username}">
                         <span slot="prepend" class="mt-n2">
                             <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                         </span>
@@ -67,7 +61,7 @@
                     {/each}
                 {:else if gridType === "communities"}
                     {#each data as community}
-                        <ListItem on:click={() => selectUser(community.name)} value="{community.name}">
+                        <ListItem on:click={() => selectEntity(community.name)} value="{community.name}">
                         <span slot="prepend" class="mt-n2">
                             <Avatar size={40}><img src="{`//picsum.photos/${community.members}`}" alt="profile"/></Avatar>
                         </span>

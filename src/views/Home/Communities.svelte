@@ -19,7 +19,9 @@
     let maxMembers = Math.max(...allCommunities.map(c => c.members));
 
     function handleActionAble(event) {
-        actionAble = event.detail;
+        if(event.detail){
+            console.log("action");
+        }
     }
 
     function filterHandler(event) {
