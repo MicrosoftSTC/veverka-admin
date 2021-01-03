@@ -29,7 +29,7 @@
         dispatch("entity-selected", selectedEntities);
     }
 
-    $:console.log(selectedEntities);
+    $:console.log(data);
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
@@ -46,7 +46,7 @@
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                     </span>
-                        {user.username},
+                        {user.username}
                         <Chip size="x-small" class="grey white-text">{user.points} Points</Chip>
                         {#if user.banned}
                             <Chip class="ma-2 red white-text">Banned</Chip>
@@ -69,7 +69,7 @@
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${community.members}`}" alt="profile"/></Avatar>
                     </span>
-                        {community.name},
+                        {community.name}
                         <Chip size="x-small" class="grey white-text">{community.members} Members</Chip>
                         {#if community.banned}
                             <Chip class="ma-2 red white-text">Banned</Chip>
@@ -84,6 +84,29 @@
                     </span>
                     </ListItem>
                 {/each}
+                </ListItemGroup>
+            {:else if gridType === "tests"}
+                <ListItemGroup>
+                    {#each data as test}
+                        <ListItem on:click={() => selectEntity(test)} value="{test.name}">
+                        <span slot="prepend" class="mt-n2">
+                            <Avatar size={40}><img src="{`//picsum.photos/${test.points}`}" alt="profile"/></Avatar>
+                        </span>
+                            {test.name}
+                            <Chip size="x-small" class="grey white-text">{test.points} Points</Chip>
+                            <Chip size="x-small" class="green white-text">{test.completedUsers.length} Users Completed</Chip>
+                            <Chip size="x-small" class="purple white-text">{test.questions.length} Questions</Chip>
+                            {#if test.banned}
+                                <Chip class="ma-2 red white-text">Banned</Chip>
+                            {:else if test.needsReview}
+                                <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
+                            {/if}
+                            <Chip label class="ma-2 light-blue accent-3 white-text">{test.creatorUsername}</Chip>
+                            <span slot="subtitle">
+                                <p>{test.created}</p>
+                            </span>
+                        </ListItem>
+                    {/each}
                 </ListItemGroup>
             {/if}
         </div>

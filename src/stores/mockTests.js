@@ -10,8 +10,11 @@ export const mockedTests = writable(
             name: "Geography knowledge test",
             creatorUsername: "HnědýBobr",
             points: parseInt(Math.random().toString().slice(2, 3)),
+            created: randomDate(new Date(2012, 0, 1), new Date()),
             category: "Geography",
             badge: "some badge to be implemented",
+            needsReview: Math.random().toString().slice(2,3) > 5,
+            banned: Math.random().toString().slice(2,3) > 7.5,
             completedUsers: [
                 {
                     name: "František Oprcálek",
@@ -84,6 +87,23 @@ export const mockedTests = writable(
                             correct: false
                         }
                     ]
+                },
+                {
+                    content: "Who is the name of the biggest desert on planet Earth",
+                    answers: [
+                        {
+                            content: "Antarctic desert",
+                            correct: true
+                        },
+                        {
+                            content: "Sahara",
+                            correct: false
+                        },
+                        {
+                            content: "Gobi",
+                            correct: false
+                        }
+                    ]
                 }
             ]
         },
@@ -91,8 +111,11 @@ export const mockedTests = writable(
             name: "Kurt Cobain knowledge test",
             creatorUsername: "NirvanaFan09",
             points: parseInt(Math.random().toString().slice(2, 3)),
+            created: randomDate(new Date(2012, 0, 1), new Date()),
             category: "Music",
             badge: "some badge to be implemented",
+            needsReview: Math.random().toString().slice(2,3) > 5,
+            banned: Math.random().toString().slice(2,3) > 7.5,
             completedUsers: [
                 {
                     name: "Josef Drsný",

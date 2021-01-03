@@ -3,6 +3,7 @@
     import Grid from "../../components/Grid.svelte";
 
     import {mockedTests} from "../../stores/mockTests"
+    import filter from "../../utils/FilterScript";
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
@@ -19,17 +20,20 @@
     let maxPoints = Math.max(...allTests.map(c => c.points));
     let maxCompletedUsers = Math.max(...allTests.map(c => c.completedUsers.length));
 
-    function filterHandler() {
-
+    function filterHandler(event) {
+        console.log(event.detail);
+        activeTestsInGrid = filter(allTests, event)
     }
 
     function handleEntitySelect(){
 
     }
+
+    $:console.log(activeTestsInGrid);
 </script>
 <Filter filterType="{'tests'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}" maxValueOnSecondSlider="{maxCompletedUsers}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} data="{$mockedTests}" on:entity-selected={handleEntitySelect}/>
+        <Grid {gridType} data="{activeTestsInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
 </Row>

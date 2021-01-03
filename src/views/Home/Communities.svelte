@@ -5,9 +5,10 @@
 
     import {mockedCommunities} from "../../stores/mockCommunities"
 
+    import filter from "../../utils/FilterScript";
+
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
-    import filter from "../../utils/FilterScript";
 
     // variable to hold state of entities selected in Grid component
     let selectedEntities = [];

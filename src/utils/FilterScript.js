@@ -48,16 +48,45 @@ export default function filter(data, event){
 
     }
 
+    let testFields = {
+        textField:"name",
+        secondTextField: "creatorUsername",
+        radioField: {
+            1: "needsReview",
+            2: "needsReview",
+            4: "banned"
+        },
+        selectOptions : {
+            nameAsc: 'Name Asc',
+            nameDesc: 'Name Desc',
+            sinceAsc: 'Created Oldest',
+            sinceDesc: 'Created Newest',
+            numericAsc: 'Points Acs',
+            numericDesc: 'Points Desc',
+            secondNumericAsc: "Questions Asc",
+            secondNumericDesc: "Questions Desc",
+        },
+        orderFields: {
+            name: "name",
+            since: "created",
+            numeric: "points",
+            numericSecond: "questions"
+        }
+    }
+
     let objectKeys = Object.keys(data[0]);
     let filterConstraints = event.detail;
     
     if(objectKeys.includes("username")){
         // data is list of users
         fields = usersFields;
-    }else if(objectKeys.includes("name")){
+    }else if(objectKeys.includes("creatorUsername")){
+        fields = testFields;
+    }
+    else if(objectKeys.includes("name")){
         // data is list of communities
         fields = communityFields;
-    }else{
+    } else{
         throw new Error(`Data type not supported by function ${filter.name}`);
     }
 
@@ -111,6 +140,22 @@ export default function filter(data, event){
             case fields.selectOptions.numericDesc:
                 data.sort((a, b) => {
                     return b[fields.orderFields.numeric] - a[fields.orderFields.numeric];
+                })
+                break;
+            case fields.selectOptions.secondNumericAsc:
+                data.sort((a, b) => {
+                    if(objectKeys.includes("creatorUsername")){
+                        return a[fields.orderFields.numericSecond].length - b[fields.orderFields.numericSecond].length;
+                    }
+                    return a[fields.orderFields.numericSecond] - b[fields.orderFields.numericSecond];
+                })
+                break;
+            case fields.selectOptions.secondNumericDesc:
+                data.sort((a, b) => {
+                    if(objectKeys.includes("creatorUsername")){
+                        return b[fields.orderFields.numericSecond].length - a[fields.orderFields.numericSecond].length;
+                    }
+                    return b[fields.orderFields.numericSecond] - a[fields.orderFields.numericSecond];
                 })
                 break;
         }
