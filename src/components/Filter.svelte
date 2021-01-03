@@ -13,11 +13,13 @@
 
     export let filterType; // users or communities
     export let maxValueOnSlider;
+    export let maxValueOnSecondSlider;
 
     // filter-specific labels etc.
     let textInputLabel;
     let secondTextInputLabel;
     let sliderLabel;
+    let secondSliderLabel;
     let switchLabel;
     let radioLabels;
     let selectOptions;
@@ -25,7 +27,9 @@
     const dispatch = createEventDispatcher();
     let showFilter = false;
     let initialMaxOnSlider = maxValueOnSlider;
+    let initialMaxOnSecondSlider = maxValueOnSecondSlider;
     let initialValueOnSlider = [0, initialMaxOnSlider];
+    let initialValueSecondOnSlider = [0, maxValueOnSecondSlider];
     let selectedValue;
     let textInputValue = "";
     let secondTextInputValue = "";
@@ -38,7 +42,8 @@
         "filterBySwitch": false,
         "filterByRadio": 3,
         "order": "none",
-        "pointsScale": [0, initialMaxOnSlider]
+        "pointsScale": [0, initialMaxOnSlider],
+        "secondPointsScale":[0, initialMaxOnSlider]
     };
 
     switch(filterType){
@@ -70,6 +75,23 @@
                 { name: 'Members Desc', value: 'Members Desc' },
             ];
             break;
+        case "tests":
+            textInputLabel = "Search by test name";
+            secondTextInputLabel = "Search by creator username";
+            sliderLabel = "Restrict points";
+            secondSliderLabel = "Restrict users completed";
+            radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
+            selectOptions = [
+                { name: 'Name Asc', value: 'Name Asc' },
+                { name: 'Name Desc', value: 'Name Desc' },
+                { name: 'Created Oldest', value: 'Created Oldest' },
+                { name: 'Created Newest', value: 'Created Newest' },
+                { name: "Points Acs", value: "Points Acs"},
+                { name: "Points Desc", value: 'Points Desc'},
+                {name: "Questions Count Asc", value: "Questions Asc"},
+                {name: "Questions Count Desc", value: "Questions Desc"},
+            ];
+            break;
     }
 
     function filterEvent(fieldName, value){
@@ -98,6 +120,10 @@
         filterEvent("pointsScale", initialValueOnSlider)
     }
 
+    function scaleSecondFilter(){
+        filterEvent("pointsScale", initialValueOnSlider)
+    }
+
     function order(orderDependency){
         filterEvent("order", orderDependency);
     }
@@ -123,14 +149,23 @@
                 <TextField bind:value={secondTextInputValue} on:input={() => filterBySecondTextInputValue()} filled>{secondTextInputLabel}</TextField>
             </Col>
             {/if}
-            <Col cols="{6}">
-                <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSlider}" bind:value={initialValueOnSlider} thumb={[true, true]} persistentThumb>{sliderLabel}</Slider>
+            <Col cols="{filterType === 'tests' ? 8 : 6}">
+                <Row>
+                    <Col>
+                        <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSlider}" bind:value={initialValueOnSlider} thumb={[true, true]} persistentThumb>{sliderLabel}</Slider>
+                    </Col>
+                    {#if secondSliderLabel}
+                        <Col>
+                        <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSecondSlider}" bind:value={initialValueSecondOnSlider} thumb={[true, true]} persistentThumb>{secondSliderLabel}</Slider>
+                        </Col>
+                    {/if}
+                </Row>
             </Col>
+            {#if switchLabel}
             <Col>
-                {#if switchLabel}
-                    <Switch on:change={() => filterBySwitchValue()}>{switchLabel}</Switch>
-                {/if}
+                <Switch on:change={() => filterBySwitchValue()}>{switchLabel}</Switch>
             </Col>
+            {/if}
         </Row>
         <Row>
             <Col cols="{6}">

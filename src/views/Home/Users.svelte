@@ -47,7 +47,7 @@
 <Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
 <Row>
     <Col cols="{8}">
-        <Grid {gridType} bind:data="{activeUsersInGrid}" on:entity-selected={handleEntitySelect}/>
+        <Grid {gridType} data="{activeUsersInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col cols="{4}">
         <UserActions {selectedEntities}/>
