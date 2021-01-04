@@ -11,22 +11,36 @@
     export let gridType;
     export let data = [];
     let selectedEntities = [];
+    let selectedEntity = null;
+    let entitySelectedInGrid = false;
 
     const dispatch = createEventDispatcher();
 
     function selectEntity(entity) {
-        let name = entity.name;
-        let entityIsNew = selectedEntities.findIndex(en => en.name === name);
-        if (entityIsNew > -1) {
-            selectedEntities = selectedEntities.filter(en => en.name !== name);
-        } else {
-            selectedEntities = [...selectedEntities, entity]
+        if(gridType === "users"){
+            let name = entity.name;
+            let entityIsNew = selectedEntities.findIndex(en => en.name === name);
+            if (entityIsNew > -1) {
+                selectedEntities = selectedEntities.filter(en => en.name !== name);
+            } else {
+                selectedEntities = [...selectedEntities, entity]
+            }
+            entitySelected(selectedEntities);
+        }else{
+            if(entitySelectedInGrid && selectedEntity.id === entity.id){
+                // unselect currently selected entity
+                selectedEntity = null;
+                entitySelectedInGrid = false;
+            }else{
+                selectedEntity = entity;
+                entitySelectedInGrid = true;
+            }
+            entitySelected(selectedEntity);
         }
-        entitySelected();
     }
 
-    function entitySelected() {
-        dispatch("entity-selected", selectedEntities);
+    function entitySelected(selected) {
+        dispatch("entity-selected", selected);
     }
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">

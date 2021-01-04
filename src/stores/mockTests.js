@@ -1,5 +1,11 @@
 import { writable } from 'svelte/store';
 
+let id = 0;
+
+function getId(){
+    return ++id;
+}
+
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
@@ -8,6 +14,7 @@ export const mockedTests = writable(
     [
         {
             name: "Geography knowledge test",
+            id: getId(),
             creatorUsername: "HnědýBobr",
             points: parseInt(Math.random().toString().slice(2, 3)),
             created: randomDate(new Date(2012, 0, 1), new Date()),
@@ -119,6 +126,7 @@ export const mockedTests = writable(
         },
         {
             name: "Kurt Cobain knowledge test",
+            id: getId(),
             creatorUsername: "NirvanaFan09",
             points: parseInt(Math.random().toString().slice(2, 3)),
             created: randomDate(new Date(2012, 0, 1), new Date()),

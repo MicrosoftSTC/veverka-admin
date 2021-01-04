@@ -49,7 +49,7 @@ export default function filter(data, event){
             numeric: "members"
         },
         sliderFields : {
-            firstValue: "points",
+            firstValue: "members",
         }
 
     }

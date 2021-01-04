@@ -11,7 +11,7 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
 
     // variable to hold state of entities selected in Grid component
-    let selectedEntities = [];
+    let selectedEntity;
     let gridType = "communities";
     let actionAble = false;
     let allCommunities;
@@ -22,7 +22,7 @@
     let maxMembers = Math.max(...allCommunities.map(c => c.members));
 
     function handleEntitySelect(event) {
-        selectedEntities = event.detail;
+        selectedEntity = event.detail;
     }
 
     function filterHandler(event) {
@@ -36,6 +36,6 @@
         <Grid {gridType} data="{activeCommunitiesInGrid}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col>
-        <CommunityDetail selectedCommunity="{selectedEntities[selectedEntities.length - 1]}"/>
+        <CommunityDetail selectedCommunity="{selectedEntity}"/>
     </Col>
 </Row>

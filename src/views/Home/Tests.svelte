@@ -8,7 +8,8 @@
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
 
-    let selectedEntities = [];
+    let selectedEntity;
+    let selectedEntitiesLength;
     let gridType = 'tests';
 
     let allTests = [];
@@ -24,8 +25,8 @@
         activeTestsInGrid = filter(allTests, event)
     }
 
-    function handleEntitySelect(){
-
+    function handleEntitySelect(event){
+        selectedEntity = event.detail;
     }
 </script>
 <h3 class="text-h4">Community administration</h3>
