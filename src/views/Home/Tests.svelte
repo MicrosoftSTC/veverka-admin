@@ -7,6 +7,9 @@
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
+    import TestActions from "../../components/TestActions.svelte";
+
+
 
     let selectedEntity;
     let selectedEntitiesLength;
@@ -25,14 +28,17 @@
         activeTestsInGrid = filter(allTests, event)
     }
 
-    function handleEntitySelect(event){
+    function handleEntitySelect(event) {
         selectedEntity = event.detail;
     }
 </script>
-<h3 class="text-h4">Community administration</h3>
+<h3 class="text-h4">Tests administration</h3>
 <Filter filterType="{'tests'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}" maxValueOnSecondSlider="{maxCompletedUsers}"/>
 <Row>
     <Col cols="{8}">
         <Grid {gridType} data="{activeTestsInGrid}" on:entity-selected={handleEntitySelect}/>
+    </Col>
+    <Col>
+        <TestActions selectedTest="{selectedEntity}"/>
     </Col>
 </Row>
