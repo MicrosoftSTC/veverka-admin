@@ -1,9 +1,15 @@
 <script>
+    import {pushTo} from "../utils/redirectService";
+
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
     import Button from 'svelte-materialify/src/components/Button';
 
     export let selectedTest;
+
+    function redirectToTestDetails(){
+        pushTo(`/home/tests/${selectedTest.id}`);
+    }
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -30,7 +36,7 @@
                         </div>
                     {/each}
                 </div>
-                <Button block class="pink accent-2 white-text" depressed>More details & administration</Button>
+                <Button on:click={redirectToTestDetails} block class="pink accent-2 white-text" depressed>More details & administration</Button>
             </div>
             {:else}
             <p class="text-subtitle-2">Select a test to view its details</p>
