@@ -104,6 +104,7 @@ export default function filter(data, event){
 
     let maxNumericValueOnSecondSlider;
 
+    // if an entity is filterable by this value
     if(fields.sliderFields.secondValue){
         maxNumericValueOnSecondSlider = Math.max(...data.map(c => c[fields.sliderFields.secondValue].length));
     }

@@ -28,6 +28,7 @@
 
     }
 </script>
+<h3 class="text-h4">Community administration</h3>
 <Filter filterType="{'tests'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}" maxValueOnSecondSlider="{maxCompletedUsers}"/>
 <Row>
     <Col cols="{8}">
