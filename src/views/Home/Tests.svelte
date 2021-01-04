@@ -21,15 +21,12 @@
     let maxCompletedUsers = Math.max(...allTests.map(c => c.completedUsers.length));
 
     function filterHandler(event) {
-        console.log(event.detail);
         activeTestsInGrid = filter(allTests, event)
     }
 
     function handleEntitySelect(){
 
     }
-
-    $:console.log(activeTestsInGrid);
 </script>
 <Filter filterType="{'tests'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}" maxValueOnSecondSlider="{maxCompletedUsers}"/>
 <Row>

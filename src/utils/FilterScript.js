@@ -21,6 +21,9 @@ export default function filter(data, event){
             name: "username",
             since: "joined",
             numeric: "points"
+        },
+        sliderFields : {
+            firstValue: "points",
         }
     }
 
@@ -44,6 +47,9 @@ export default function filter(data, event){
             name: "name",
             since: "since",
             numeric: "members"
+        },
+        sliderFields : {
+            firstValue: "points",
         }
 
     }
@@ -71,6 +77,10 @@ export default function filter(data, event){
             since: "created",
             numeric: "points",
             numericSecond: "questions"
+        },
+        sliderFields : {
+            firstValue: "points",
+            secondValue: "completedUsers"
         }
     }
 
@@ -91,6 +101,12 @@ export default function filter(data, event){
     }
 
     let maxNumericValueOnSlider = Math.max(...data.map(c => c[fields.orderFields.numeric]));
+
+    let maxNumericValueOnSecondSlider;
+
+    if(fields.sliderFields.secondValue){
+        maxNumericValueOnSecondSlider = Math.max(...data.map(c => c[fields.sliderFields.secondValue].length));
+    }
 
     if(filterConstraints.textInputValue !== ""){
         data = data.filter(entity => entity[fields.textField].startsWith(filterConstraints.textInputValue));
@@ -160,12 +176,21 @@ export default function filter(data, event){
                 break;
         }
     }
-    if(event.detail.pointsScale[0] !== 0 || event.detail.pointsScale[1] !== maxNumericValueOnSlider){
-        let min = event.detail.pointsScale[0];
-        let max = event.detail.pointsScale[1];
+    if(filterConstraints.pointsScale[0] !== 0 || filterConstraints.pointsScale[1] !== maxNumericValueOnSlider){
+        let min = filterConstraints.pointsScale[0];
+        let max = filterConstraints.pointsScale[1];
 
         data = data.filter(entity => {
-            return entity[fields.orderFields.numeric] >= min && entity[fields.orderFields.numeric] <= max;
+            return entity[fields.sliderFields.firstValue] >= min && entity[fields.sliderFields.firstValue] <= max;
+        })
+    }
+
+    if(maxNumericValueOnSecondSlider && (filterConstraints.secondPointsScale[0] !== 0 || filterConstraints.secondPointsScale[1] !== maxNumericValueOnSecondSlider)){
+        let min = filterConstraints.secondPointsScale[0];
+        let max = filterConstraints.secondPointsScale[1];
+
+        data = data.filter(entity => {
+            return entity[fields.sliderFields.secondValue].length >= min && entity[fields.sliderFields.secondValue].length <= max;
         })
     }
 

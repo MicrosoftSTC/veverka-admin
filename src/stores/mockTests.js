@@ -35,6 +35,16 @@ export const mockedTests = writable(
                     founder: Math.random().toString().slice(2, 3) > 7,
                     joined: randomDate(new Date(2012, 0, 1), new Date()),
                     points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                },
+                {
+                    name: "Bořek Mořelepil",
+                    username: "See_Gluer32",
+                    num: 9934,
+                    needsReview: Math.random().toString().slice(2, 3) > 5,
+                    banned: Math.random().toString().slice(2, 3) > 7.5,
+                    founder: Math.random().toString().slice(2, 3) > 7,
+                    joined: randomDate(new Date(2012, 0, 1), new Date()),
+                    points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
                 }
             ],
             questions: [

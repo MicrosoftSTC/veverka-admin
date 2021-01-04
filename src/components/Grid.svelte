@@ -28,8 +28,6 @@
     function entitySelected() {
         dispatch("entity-selected", selectedEntities);
     }
-
-    $:console.log(data);
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">

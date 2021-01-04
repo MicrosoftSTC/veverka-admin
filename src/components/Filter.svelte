@@ -43,7 +43,7 @@
         "filterByRadio": 3,
         "order": "none",
         "pointsScale": [0, initialMaxOnSlider],
-        "secondPointsScale":[0, initialMaxOnSlider]
+        "secondPointsScale":[0, initialMaxOnSecondSlider]
     };
 
     switch(filterType){
@@ -121,7 +121,7 @@
     }
 
     function scaleSecondFilter(){
-        filterEvent("pointsScale", initialValueOnSlider)
+        filterEvent("secondPointsScale", initialValueSecondOnSlider)
     }
 
     function order(orderDependency){
@@ -156,7 +156,7 @@
                     </Col>
                     {#if secondSliderLabel}
                         <Col>
-                        <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSecondSlider}" bind:value={initialValueSecondOnSlider} thumb={[true, true]} persistentThumb>{secondSliderLabel}</Slider>
+                        <Slider on:update={() => scaleSecondFilter()} min="{0}" max="{initialMaxOnSecondSlider}" bind:value={initialValueSecondOnSlider} thumb={[true, true]} persistentThumb>{secondSliderLabel}</Slider>
                         </Col>
                     {/if}
                 </Row>
