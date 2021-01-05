@@ -158,7 +158,8 @@ export const mockedTests = writable(
             ],
             questions: [
                 {
-                    content: "What instrument has kurt cobain played the most?",
+                    id: getId(),
+                    content: "What instrument has Kurt Cobain played the most?",
                     answers: [
                         {
                             content: "Electric guitar",
@@ -179,6 +180,7 @@ export const mockedTests = writable(
                     ]
                 },
                 {
+                    id: getId(),
                     content: "What song did not Kurt Cobain write?",
                     answers: [
                         {

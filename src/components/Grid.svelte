@@ -10,6 +10,7 @@
 
     export let gridType;
     export let data = [];
+    console.log(data);
     let selectedEntities = [];
     let selectedEntity = null;
     let entitySelectedInGrid = false;
@@ -117,6 +118,26 @@
                             <span slot="subtitle">
                                 <p>{test.created}</p>
                             </span>
+                        </ListItem>
+                    {/each}
+                </ListItemGroup>
+            {:else if gridType === "questions"}
+                <ListItemGroup>
+                    {#each data as question}
+                        <ListItem on:click={() => selectEntity(question)} value="{question.content}">
+                            {question.content}
+                            <Chip size="x-small" class="grey white-text">{question.answers.length} Questions</Chip>
+<!--                            <Chip size="x-small" class="green white-text">{test.completedUsers.length} Users Completed</Chip>-->
+<!--                            <Chip size="x-small" class="purple white-text">{test.questions.length} Questions</Chip>-->
+<!--                            {#if test.banned}-->
+<!--                                <Chip class="ma-2 red white-text">Banned</Chip>-->
+<!--                            {:else if test.needsReview}-->
+<!--                                <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>-->
+<!--                            {/if}-->
+<!--                            <Chip label class="ma-2 light-blue accent-3 white-text">{test.creatorUsername}</Chip>-->
+<!--                            <span slot="subtitle">-->
+<!--                                <p>{test.created}</p>-->
+<!--                            </span>-->
                         </ListItem>
                     {/each}
                 </ListItemGroup>
