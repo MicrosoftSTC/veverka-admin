@@ -10,8 +10,8 @@
     import ExpansionPanels from 'svelte-materialify/src/components/ExpansionPanels';
     import ExpansionPanel from 'svelte-materialify/src/components/ExpansionPanels/ExpansionPanel.svelte';
     import Checkbox from 'svelte-materialify/src/components/Checkbox';
+    import Radio from 'svelte-materialify/src/components/Radio'
 
-    import {location} from 'svelte-spa-router'
     import {mockedTests} from "../../stores/mockTests";
 
     export let params = {};
@@ -19,6 +19,8 @@
     let allTests = [];
     let selectedTest;
     let selectedQuestion;
+    let selectedUser;
+    let selectedGrid = "questions";
 
     mockedTests.subscribe(t => {
         allTests = t;
@@ -26,20 +28,18 @@
 
     selectedTest = allTests.filter(t => t.id == params.id)[0];
 
-    function handleEntitySelect(event) {
+    function handleQuestionSelect(event) {
         selectedQuestion = event.detail;
         console.log(selectedQuestion);
     }
+
+    function handleUserSelect(event){
+        selectedUser = event.detail;
+    }
 </script>
-<p>
-    Test Detail page, {params.id}
-</p>
-<p>The current page is: {$location}</p>
+<h3 class="text-h4">Test detail</h3>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
-        <span class="text-overline">
-            Test detail
-        </span>
         {#if selectedTest}
             <Row>
                 <Col>
@@ -93,7 +93,15 @@
             </Row>
             <Row>
                 <Col>
-                    <Grid gridType={"questions"} data="{selectedTest.questions}" on:entity-selected={handleEntitySelect}/>
+                    <div class="d-flex justify-space-around">
+                        <Radio bind:group={selectedGrid} value={"questions"}>Show questions</Radio>
+                        <Radio bind:group={selectedGrid} value={"users"}>Show completed users</Radio>
+                    </div>
+                    {#if selectedGrid === "questions"}
+                        <Grid label="{'questions board'}" gridType={"questions"} data="{selectedTest.questions}" on:entity-selected={handleQuestionSelect}/>
+                        {:else}
+                        <Grid label="{'completed users board'}" disabled="{true}" gridType={"users"} data="{selectedTest.completedUsers}" on:entity-selected={handleUserSelect}/>
+                    {/if}
                 </Col>
                 <Col>
                     <QuestionDetail detailedQuestion="{selectedQuestion}"/>

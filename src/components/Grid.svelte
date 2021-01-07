@@ -10,7 +10,8 @@
 
     export let gridType;
     export let data = [];
-    console.log(data);
+    export let label = "board";
+    export let disabled = false;
     let selectedEntities = [];
     let selectedEntity = null;
     let entitySelectedInGrid = false;
@@ -47,7 +48,7 @@
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
         <span class="text-overline">
-            Board
+            {label}
         </span>
     </div>
     <CardText>
@@ -55,7 +56,7 @@
             {#if gridType === "users"}
                 <ListItemGroup multiple>
                 {#each data as user}
-                    <ListItem on:click={() => selectEntity(user)} value="{user.username}">
+                    <ListItem bind:disabled on:click={() => selectEntity(user)} value="{user.username}">
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                     </span>
@@ -123,23 +124,12 @@
                 </ListItemGroup>
             {:else if gridType === "questions"}
                 <ListItemGroup>
-                    {#each data as question}
-                        <ListItem on:click={() => selectEntity(question)} value="{question.content}">
-                            {question.content}
-                            <Chip size="x-small" class="grey white-text">{question.answers.length} Answers</Chip>
-<!--                            <Chip size="x-small" class="green white-text">{test.completedUsers.length} Users Completed</Chip>-->
-<!--                            <Chip size="x-small" class="purple white-text">{test.questions.length} Questions</Chip>-->
-<!--                            {#if test.banned}-->
-<!--                                <Chip class="ma-2 red white-text">Banned</Chip>-->
-<!--                            {:else if test.needsReview}-->
-<!--                                <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>-->
-<!--                            {/if}-->
-<!--                            <Chip label class="ma-2 light-blue accent-3 white-text">{test.creatorUsername}</Chip>-->
-<!--                            <span slot="subtitle">-->
-<!--                                <p>{test.created}</p>-->
-<!--                            </span>-->
-                        </ListItem>
-                    {/each}
+                        {#each data as question}
+                            <ListItem on:click={() => selectEntity(question)} value="{question.content}">
+                                {question.content}
+                                <Chip size="x-small" class="grey white-text">{question.answers.length} Answers</Chip>
+                            </ListItem>
+                        {/each}
                 </ListItemGroup>
             {/if}
         </div>
