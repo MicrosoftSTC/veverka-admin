@@ -30,7 +30,6 @@
 
     function handleQuestionSelect(event) {
         selectedQuestion = event.detail;
-        console.log(selectedQuestion);
     }
 
     function handleUserSelect(event){

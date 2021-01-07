@@ -56,6 +56,7 @@ export const mockedTests = writable(
             ],
             questions: [
                 {
+                    id: getId(),
                     content: "What is the biggest continent on Earth?",
                     answers: [
                         {
@@ -89,6 +90,7 @@ export const mockedTests = writable(
                     ]
                 },
                 {
+                    id: getId(),
                     content: "Which country has the most citizens?",
                     answers: [
                         {
@@ -106,6 +108,7 @@ export const mockedTests = writable(
                     ]
                 },
                 {
+                    id: getId(),
                     content: "Who is the name of the biggest desert on planet Earth",
                     answers: [
                         {

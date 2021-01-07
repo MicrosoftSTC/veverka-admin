@@ -14,7 +14,7 @@
                 {#each detailedQuestion.answers as answer}
                     <div class="d-flex justify-space-between align-baseline">
                         <span class="mr-4">{answer.content}</span>
-                        <Chip label class="{answer.correct ? 'ma-2 red accent-3 white-text' : 'ma-2 green accent-3 white-text'}">{answer.correct}</Chip>
+                        <Chip label class="{answer.correct ? 'ma-2 green accent-3 white-text' : 'ma-2 red accent-3 white-text'}">{answer.correct}</Chip>
                     </div>
                 {/each}
             {:else}
