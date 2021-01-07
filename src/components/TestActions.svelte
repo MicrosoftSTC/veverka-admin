@@ -27,10 +27,10 @@
                         <div class="d-flex justify-space-between mr-16">
                             <p class="text-subtitle-2">{field.toString().slice(0, 1).toUpperCase() + field.toString().slice(1, field.length)}</p>
                             {#if field === "created"}
-                            <p>{selectedTest[field].toString().slice(0, 15)}</p>
-                                {:else if field === "completedUsers" || field === "questions"}
+                                <p>{selectedTest[field].toString().slice(0, 15)}</p>
+                            {:else if field === "completedUsers" || field === "questions" || field === "reports"}
                                 <p>{selectedTest[field].length}</p>
-                                {:else}
+                            {:else}
                                 <p>{selectedTest[field]}</p>
                             {/if}
                         </div>

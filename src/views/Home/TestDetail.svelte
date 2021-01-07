@@ -1,6 +1,7 @@
 <script>
     import Grid from "../../components/Grid.svelte";
     import QuestionDetail from "../../components/QuestionDetail.svelte";
+    import ReportDetail from "../../components/ReportDetail.svelte";
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
@@ -17,6 +18,7 @@
     let selectedTest;
     let selectedQuestion;
     let selectedUser;
+    let selectedReport;
     let selectedGrid = "questions";
 
     mockedTests.subscribe(t => {
@@ -31,6 +33,11 @@
 
     function handleUserSelect(event) {
         selectedUser = event.detail;
+    }
+
+    function handleReportSelected(event){
+        console.log(event.detail);
+        selectedReport = event.detail;
     }
 
     function hideQuestionDetailsData(_) {
@@ -60,7 +67,7 @@
                                 <p class="text-subtitle-2">{field.toString().slice(0, 1).toUpperCase() + field.toString().slice(1, field.length)}</p>
                                 {#if field === "created"}
                                     <p>{selectedTest[field].toString().slice(0, 15)}</p>
-                                {:else if field === "completedUsers" || field === "questions"}
+                                {:else if field === "completedUsers" || field === "questions" || field === "reports"}
                                     <p>{selectedTest[field].length}</p>
                                 {:else}
                                     <p>{selectedTest[field]}</p>
@@ -86,6 +93,16 @@
                     <QuestionDetail detailedQuestion="{selectedGrid === 'users' ? null : selectedQuestion}"/>
                 </Col>
             </Row>
+            {#if selectedTest.reports.length !== 0}
+                <Row>
+                    <Col>
+                        <Grid label="reports board" gridType="{'testReports'}" data="{selectedTest.reports}" on:entity-selected={handleReportSelected}/>
+                    </Col>
+                    <Col>
+                        <ReportDetail detailedReport="{selectedReport}"/>
+                    </Col>
+                </Row>
+            {/if}
         {:else}
             <p class="text-subtitle-2">Select a test to view its details</p>
         {/if}

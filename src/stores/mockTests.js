@@ -22,6 +22,7 @@ export const mockedTests = writable(
             badge: "some badge to be implemented",
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
+            reports: [],
             completedUsers: [
                 {
                     name: "František Oprcálek",
@@ -137,6 +138,38 @@ export const mockedTests = writable(
             badge: "some badge to be implemented",
             needsReview: Math.random().toString().slice(2,3) > 5,
             banned: Math.random().toString().slice(2,3) > 7.5,
+            reports: [
+                {
+                    id: getId(),
+                    reporter: {
+                        name: "Pavel Křídlo",
+                        username: "Wingman90",
+                        num: 1,
+                        needsReview: Math.random().toString().slice(2,3) > 5,
+                        banned: Math.random().toString().slice(2,3) > 7.5,
+                        founder: Math.random().toString().slice(2,3) > 7,
+                        joined: randomDate(new Date(2012, 0, 1), new Date()),
+                        points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                    },
+                    reports: ["rasism", "trolling"],
+                    comment: "This test is not a very good one, I don't like it, the question 3 is offensive agains helicopters"
+                },
+                {
+                    id: getId(),
+                    reporter: {
+                        name: "Friend Chicked",
+                        username: "KFC54",
+                        num: 876,
+                        needsReview: Math.random().toString().slice(2,3) > 5,
+                        banned: Math.random().toString().slice(2,3) > 7.5,
+                        founder: Math.random().toString().slice(2,3) > 7,
+                        joined: randomDate(new Date(2012, 0, 1), new Date()),
+                        points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                    },
+                    reports: ["sexual harrasment", "insulting others"],
+                    comment: "This test offends me, it shows naked letters, and has wrong answers"
+                }
+            ],
             completedUsers: [
                 {
                     name: "Josef Drsný",

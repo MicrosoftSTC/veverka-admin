@@ -7,6 +7,11 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
 </script>
 <Card>
+    <div class="pl-4 pr-4 pt-3">
+        <span class="text-overline">
+            Test Reports
+        </span>
+    </div>
     <CardText>
         <ExpansionPanels multiple accordion>
             <ExpansionPanel>

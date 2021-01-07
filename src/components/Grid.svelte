@@ -44,6 +44,8 @@
     function entitySelected(selected) {
         dispatch("entity-selected", selected);
     }
+
+    console.log(data);
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
@@ -130,6 +132,20 @@
                                 <Chip size="x-small" class="grey white-text">{question.answers.length} Answers</Chip>
                             </ListItem>
                         {/each}
+                </ListItemGroup>
+            {:else if gridType="testReports"}
+                <ListItemGroup>
+                    {#each data as report}
+                        <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
+                            {report.reporter.username}
+                            {#each report.reports as charge}
+                                <Chip size="x-small" class="red white-text ml-1">{charge.charAt(0).toUpperCase() + charge.slice(1)}</Chip>
+                            {/each}
+                            {#if report.comment}
+                                <Chip size="x-small" class="blue white-text">Comment</Chip>
+                            {/if}
+                        </ListItem>
+                    {/each}
                 </ListItemGroup>
             {/if}
         </div>
