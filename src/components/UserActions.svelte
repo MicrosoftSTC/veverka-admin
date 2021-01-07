@@ -20,7 +20,7 @@
             User actions
         </span>
         {#if selectedEntities.length > 0}
-            <ExpansionPanels multiple>
+            <ExpansionPanels multiple accordion>
                 <ExpansionPanel>
                     <span slot="header">Report user</span>
                     <div>

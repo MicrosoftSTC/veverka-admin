@@ -126,7 +126,7 @@
                     {#each data as question}
                         <ListItem on:click={() => selectEntity(question)} value="{question.content}">
                             {question.content}
-                            <Chip size="x-small" class="grey white-text">{question.answers.length} Questions</Chip>
+                            <Chip size="x-small" class="grey white-text">{question.answers.length} Answers</Chip>
 <!--                            <Chip size="x-small" class="green white-text">{test.completedUsers.length} Users Completed</Chip>-->
 <!--                            <Chip size="x-small" class="purple white-text">{test.questions.length} Questions</Chip>-->
 <!--                            {#if test.banned}-->
