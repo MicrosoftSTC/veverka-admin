@@ -36,6 +36,12 @@
     function handleUserSelect(event){
         selectedUser = event.detail;
     }
+
+    function hideQuestionDetailsData(_){
+        if(selectedGrid === "users") selectedQuestion = null;
+    }
+
+    $:hideQuestionDetailsData(selectedGrid)
 </script>
 <h3 class="text-h4">Test detail</h3>
 <Card outlined style="min-width: 100%" class="mt-3">
