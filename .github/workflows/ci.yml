@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        node: [12.x, 14.x, 15.x]
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-11.0, macos-latest, windows-latest, windows-2016]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Cache dependencies Node
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install
+        run: npm i
+
+      - name: Build Svelte
+        run: npm run build
