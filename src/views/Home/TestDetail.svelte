@@ -1,5 +1,4 @@
 <script>
-    import Filter from "../../components/Filter.svelte";
     import Grid from "../../components/Grid.svelte";
     import QuestionDetail from "../../components/QuestionDetail.svelte";
 
@@ -7,12 +6,10 @@
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
-    import ExpansionPanels from 'svelte-materialify/src/components/ExpansionPanels';
-    import ExpansionPanel from 'svelte-materialify/src/components/ExpansionPanels/ExpansionPanel.svelte';
-    import Checkbox from 'svelte-materialify/src/components/Checkbox';
-    import Radio from 'svelte-materialify/src/components/Radio'
+    import Radio from 'svelte-materialify/src/components/Radio';
 
     import {mockedTests} from "../../stores/mockTests";
+    import TestReports from "../../components/TestReports.svelte";
 
     export let params = {};
 
@@ -32,12 +29,12 @@
         selectedQuestion = event.detail;
     }
 
-    function handleUserSelect(event){
+    function handleUserSelect(event) {
         selectedUser = event.detail;
     }
 
-    function hideQuestionDetailsData(_){
-        if(selectedGrid === "users") selectedQuestion = null;
+    function hideQuestionDetailsData(_) {
+        if (selectedGrid === "users") selectedQuestion = null;
     }
 
     $:hideQuestionDetailsData(selectedGrid)
@@ -53,30 +50,7 @@
                             <Avatar size={150}><img src="{`//picsum.photos/${selectedTest.id * Math.random().toString().slice(2, 5)}`}"/></Avatar>
                         </div>
                         <div class="text-h6 mt-3 mb-3" style="text-align: center">{selectedTest.name}</div>
-                        <ExpansionPanels multiple accordion>
-                            <ExpansionPanel>
-                                <span slot="header">Report Test</span>
-                                <div>
-                                    <Checkbox color="orange accent-3">Sexual harrasment</Checkbox>
-                                    <Checkbox color="orange accent-3">Trolling</Checkbox>
-                                    <Checkbox color="orange accent-3">Rasism</Checkbox>
-                                    <Checkbox color="orange accent-3">Insulting others</Checkbox>
-                                </div>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <span slot="header">Review test</span>
-                                <div>
-                                    <Checkbox indeterminate color="error">Sexual harrasment (32)</Checkbox>
-                                    <Checkbox color="error">Trolling (12)</Checkbox>
-                                    <Checkbox indeterminate color="error">Rasism (78)</Checkbox>
-                                    <Checkbox color="error">Insulting others (3)</Checkbox>
-                                </div>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <span slot="header">More actions</span>
-                                <Checkbox color="error">Ban this test</Checkbox>
-                            </ExpansionPanel>
-                        </ExpansionPanels>
+                        <TestReports/>
                     </div>
                 </Col>
                 <Col>
