@@ -104,7 +104,7 @@
                     {/if}
                 </Col>
                 <Col>
-                    <QuestionDetail detailedQuestion="{selectedQuestion}"/>
+                    <QuestionDetail detailedQuestion="{selectedGrid === 'users' ? null : selectedQuestion}"/>
                 </Col>
             </Row>
         {:else}
