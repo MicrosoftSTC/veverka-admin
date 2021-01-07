@@ -36,7 +36,6 @@
     }
 
     function handleReportSelected(event){
-        console.log(event.detail);
         selectedReport = event.detail;
     }
 
