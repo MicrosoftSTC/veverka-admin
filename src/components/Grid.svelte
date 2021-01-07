@@ -137,7 +137,7 @@
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
                             {report.reporter.username}
                             {#each report.reports as charge}
-                                <Chip size="x-small" class="red white-text ml-1">{charge.charAt(0).toUpperCase() + charge.slice(1)}</Chip>
+                                <Chip size="x-small" class="red white-text ml-1">{charge.content.charAt(0).toUpperCase() + charge.content.slice(1)}</Chip>
                             {/each}
                             {#if report.comment}
                                 <Chip size="x-small" class="blue white-text">Comment</Chip>

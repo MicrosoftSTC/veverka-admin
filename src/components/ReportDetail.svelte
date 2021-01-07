@@ -6,7 +6,7 @@
     export let detailedReport;
 
     function denyReportType(report){
-        console.log("Denying: " + report);
+        console.log("Denying: " + report.content + " " + report.content);
     }
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
@@ -23,9 +23,9 @@
                 </div>
             {/each}
             <p class="text-h5 mb-n1">Test reports:</p>
-            {#each detailedReport.reports as report}
+            {#each detailedReport.reports as report (report.id)}
                 <span class="mr-4">
-                    <Chip close size="small" on:close={() => denyReportType(report)} label class="mt-2 orange accent-3 white-text">{report.toUpperCase()}</Chip>
+                    <Chip close size="small" on:close={() => denyReportType(report)} label class="mt-2 orange accent-3 white-text">{report.content.toUpperCase()}</Chip>
                 </span>
             {/each}
             <p class="text-h5">Report Comment:</p>

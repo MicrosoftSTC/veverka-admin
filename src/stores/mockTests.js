@@ -151,7 +151,16 @@ export const mockedTests = writable(
                         joined: randomDate(new Date(2012, 0, 1), new Date()),
                         points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
                     },
-                    reports: ["rasism", "trolling"],
+                    reports: [
+                        {
+                            id: getId(),
+                            content: "Wrong answers",
+                        },
+                        {
+                            id: getId(),
+                            content: "trolling",
+                        }
+                    ],
                     comment: "This test is not a very good one, I don't like it, the question 3 is offensive agains helicopters"
                 },
                 {
@@ -166,7 +175,16 @@ export const mockedTests = writable(
                         joined: randomDate(new Date(2012, 0, 1), new Date()),
                         points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
                     },
-                    reports: ["sexual harrasment", "insulting others"],
+                    reports: [
+                        {
+                            id: getId(),
+                            content: "sexual harrasment",
+                        },
+                        {
+                            id: getId(),
+                            content: "insulting others",
+                        }
+                    ],
                     comment: "This test offends me, it shows naked letters, and has wrong answers"
                 }
             ],
