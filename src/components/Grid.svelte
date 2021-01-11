@@ -1,5 +1,6 @@
 <script>
     import {createEventDispatcher} from 'svelte';
+    import {link} from 'svelte-spa-router'
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
@@ -60,7 +61,7 @@
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                     </span>
-                        {user.username}
+                        <a use:link={"/home/user/" + user.id}>{user.username}</a>
                         <Chip size="x-small" class="grey white-text">{user.points} Points</Chip>
                         {#if user.banned}
                             <Chip class="ma-2 red white-text">Banned</Chip>
@@ -91,7 +92,9 @@
                             <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
                         {/if}
                         {#if community.founder}
-                            <Chip label class="ma-2 light-blue accent-3 white-text">{community.founder}</Chip>
+                            <Chip label class="ma-2 light-blue accent-3 white-text">
+                                <a use:link={"/home/user/" + Math.random().toString().slice(2,3)}>{community.founder}</a>
+                            </Chip>
                         {/if}
                         <span slot="subtitle">
                         <p>{community.since}</p>
