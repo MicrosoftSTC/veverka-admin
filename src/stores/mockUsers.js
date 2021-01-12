@@ -21,7 +21,90 @@ export const mockedUsers = writable(
             banned: Math.random().toString().slice(2,3) > 7.5,
             founder: Math.random().toString().slice(2,3) > 7,
             joined: randomDate(new Date(2012, 0, 1), new Date()),
-            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+            points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2)),
+            posts: [
+                {
+                    headline: "Majkraft",
+                    content: "Jak dostat skiny v kántrstrajku zadáčo, fčetně dana landy",
+                    posted: randomDate(new Date(2012, 0, 1), new Date()),
+                    needsReview: Math.random().toString().slice(2,3) > 5,
+                    banned: Math.random().toString().slice(2,3) > 7.5,
+                    reports: [
+                        {
+                            id: getId(),
+                            reporter: {
+                                name: "Igor vykřičník",
+                                username: "Attention12",
+                                needsReview: Math.random().toString().slice(2,3) > 5,
+                                banned: Math.random().toString().slice(2,3) > 7.5,
+                                founder: Math.random().toString().slice(2,3) > 7,
+                                joined: randomDate(new Date(2012, 0, 1), new Date()),
+                                points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                            },
+                            reports: [
+                                {
+                                    id: getId(),
+                                    content: "Sexual harrasment",
+                                },
+                                {
+                                    id: getId(),
+                                    content: "trolling",
+                                }
+                            ],
+                            comment: "This user is unbelievable evil"
+                        },
+                        {
+                            id: getId(),
+                            reporter: {
+                                name: "Igor vykřičník",
+                                username: "Attention12",
+                                needsReview: Math.random().toString().slice(2,3) > 5,
+                                banned: Math.random().toString().slice(2,3) > 7.5,
+                                founder: Math.random().toString().slice(2,3) > 7,
+                                joined: randomDate(new Date(2012, 0, 1), new Date()),
+                                points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                            },
+                            reports: [
+                                {
+                                    id: getId(),
+                                    content: "Sexual harrasment",
+                                },
+                                {
+                                    id: getId(),
+                                    content: "trolling",
+                                }
+                            ],
+                            comment: "This user is unbelievable evil again"
+                        }
+                    ]
+                }
+            ],
+            reportsReceived: [
+                {
+                    id: getId(),
+                    reporter: {
+                        name: "Pavel Křídlo",
+                        username: "Wingman90",
+                        num: 1,
+                        needsReview: Math.random().toString().slice(2,3) > 5,
+                        banned: Math.random().toString().slice(2,3) > 7.5,
+                        founder: Math.random().toString().slice(2,3) > 7,
+                        joined: randomDate(new Date(2012, 0, 1), new Date()),
+                        points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                    },
+                    reports: [
+                        {
+                            id: getId(),
+                            content: "Wrong answers",
+                        },
+                        {
+                            id: getId(),
+                            content: "trolling",
+                        }
+                    ],
+                    comment: "This test is not a very good one, I don't like it, the question 3 is offensive agains helicopters"
+                },
+            ]
         },
         {
             id: getId(),

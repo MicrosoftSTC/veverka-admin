@@ -11,15 +11,12 @@
 
     export let params = {};
     let selectedUser;
-    let selectedGrid;
     let gridOptions = ["posts", "stars", "reports", "questions", "communities","activity"];
+    let selectedGrid = gridOptions[0];
 
     let reportsType = "user";
 
-    let allu;
-
     mockedUsers.subscribe(u => {
-        allu = u;
         selectedUser = u.filter(user => user.id == params.id)[0]
     })
 
@@ -65,7 +62,7 @@
                             <Radio bind:group={selectedGrid} value={option}>{option.charAt(0).toUpperCase() + option.slice(1)}</Radio>
                         {/each}
                     </div>
-                    <Grid label="{selectedGrid}" disabled="{true}" gridType={"users"} data="{allu}" on:entity-selected={handleUserSelect}/>-->
+                    <Grid label="{selectedGrid}" disabled="{true}" gridType={selectedGrid} data="{selectedUser.posts}" on:entity-selected={handleUserSelect}/>
                 </Col>
                 <Col>
 

@@ -46,6 +46,8 @@
     function entitySelected(selected) {
         dispatch("entity-selected", selected);
     }
+
+    $:console.log(gridType);
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
@@ -139,7 +141,7 @@
                             </ListItem>
                         {/each}
                 </ListItemGroup>
-            {:else if gridType="testReports"}
+            {:else if gridType === "testReports"}
                 <ListItemGroup>
                     {#each data as report}
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
@@ -153,6 +155,25 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
+            {:else if gridType === "posts"}
+                <ListItemGroup>
+                    {#each data as post}
+                        <ListItem on:click={() => selectEntity(post)}>
+                            {post.headline}
+                            <Chip label class="ma-2 green accent-2 white-text">{post.content.split(" ").length} words</Chip>
+                            {#if post.reports.length > 0}
+                                <Chip label class="ma-2 pink accent-1 white-text">{post.reports.length} {post.reports.length > 1 ? "reports" : "report"}</Chip>
+                            {/if}
+                            {#if post.banned}
+                                <Chip class="ma-2 red white-text">Banned</Chip>
+                            {:else if post.needsReview}
+                                <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
+                            {/if}
+                        </ListItem>
+                    {/each}
+                </ListItemGroup>
+            {:else}
+                <p>Nothing</p>
             {/if}
         </div>
     </CardText>
