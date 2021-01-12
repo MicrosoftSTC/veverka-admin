@@ -1,5 +1,6 @@
 <script>
     import {mockedUsers} from "../../stores/mockUsers";
+    import Reports from "../../components/Reports.svelte";
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
@@ -8,6 +9,8 @@
 
     export let params = {};
     let selectedUser;
+
+    let reportsType = "user";
 
     mockedUsers.subscribe(u => {
         selectedUser = u.filter(user => user.id == params.id)[0]
@@ -24,6 +27,7 @@
                             <Avatar size={150}><img src="{`//picsum.photos/${selectedUser.id * Math.random().toString().slice(2, 5)}`}"/></Avatar>
                         </div>
                         <div class="text-h6 mt-3 mb-3" style="text-align: center">{selectedUser.username}</div>
+                        <Reports {reportsType}/>
                     </div>
                 </Col>
                 <Col>

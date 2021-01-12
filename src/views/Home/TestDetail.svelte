@@ -10,7 +10,7 @@
     import Radio from 'svelte-materialify/src/components/Radio';
 
     import {mockedTests} from "../../stores/mockTests";
-    import TestReports from "../../components/TestReports.svelte";
+    import Reports from "../../components/Reports.svelte";
 
     export let params = {};
 
@@ -20,6 +20,8 @@
     let selectedUser;
     let selectedReport;
     let selectedGrid = "questions";
+
+    let reportsType = "test";
 
     mockedTests.subscribe(t => {
         allTests = t;
@@ -56,7 +58,7 @@
                             <Avatar size={150}><img src="{`//picsum.photos/${selectedTest.id * Math.random().toString().slice(2, 5)}`}"/></Avatar>
                         </div>
                         <div class="text-h6 mt-3 mb-3" style="text-align: center">{selectedTest.name}</div>
-                        <TestReports/>
+                        <Reports {reportsType}/>
                     </div>
                 </Col>
                 <Col>

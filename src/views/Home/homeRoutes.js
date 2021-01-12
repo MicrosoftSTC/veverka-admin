@@ -31,4 +31,12 @@ export let routes = {
     "/notFound": NotFound
 };
 
+// route prefix
 export let prefix = "/home";
+
+// router constants
+export const users = prefix + "/users";
+export const userDetail = prefix + "/users/";
+export const communities = prefix + "/communities";
+export const tests = prefix + "/tests";
+export const testDetail = prefix + "/tests/";
