@@ -11,7 +11,7 @@ import {wrap} from 'svelte-spa-router/wrap'
 
 export let routes = {
     "/users": Users,
-    "/user/:id": wrap({
+    "/users/:id": wrap({
         component: UserDetails,
         conditions: [
             detail => {

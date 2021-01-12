@@ -93,7 +93,7 @@
                         {/if}
                         {#if community.founder}
                             <Chip label class="ma-2 light-blue accent-3 white-text">
-                                <a use:link={"/home/user/" + Math.random().toString().slice(2,3)}>{community.founder}</a>
+                                <a use:link={"/home/users/" + Math.random().toString().slice(2,3)}>{community.founder}</a>
                             </Chip>
                         {/if}
                         <span slot="subtitle">
