@@ -1,20 +1,31 @@
 <script>
     import {mockedUsers} from "../../stores/mockUsers";
     import Reports from "../../components/Reports.svelte";
+    import Grid from "../../components/Grid.svelte";
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
+    import Radio from 'svelte-materialify/src/components/Radio';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
 
     export let params = {};
     let selectedUser;
+    let selectedGrid;
+    let gridOptions = ["posts", "stars", "reports", "questions", "communities","activity"];
 
     let reportsType = "user";
 
+    let allu;
+
     mockedUsers.subscribe(u => {
+        allu = u;
         selectedUser = u.filter(user => user.id == params.id)[0]
     })
+
+    $:console.log(gridOptions);
+
+    function handleUserSelect(){}
 </script>
 <h3 class="text-h4">User detail</h3>
 <Card outlined style="min-width: 100%" class="mt-3">
@@ -45,6 +56,19 @@
                             </div>
                         {/each}
                     </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <div class="d-flex justify-space-around">
+                        {#each gridOptions as option}
+                            <Radio bind:group={selectedGrid} value={option}>{option.charAt(0).toUpperCase() + option.slice(1)}</Radio>
+                        {/each}
+                    </div>
+                    <Grid label="{selectedGrid}" disabled="{true}" gridType={"users"} data="{allu}" on:entity-selected={handleUserSelect}/>-->
+                </Col>
+                <Col>
+
                 </Col>
             </Row>
         {/if}
