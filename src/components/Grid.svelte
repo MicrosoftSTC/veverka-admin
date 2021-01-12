@@ -1,7 +1,7 @@
 <script>
     import {createEventDispatcher} from 'svelte';
     import {link} from 'svelte-spa-router'
-    import {userDetail} from "../views/Home/homeRoutes"
+    import {Routes} from "../views/Home/homeRoutes"
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
@@ -62,7 +62,7 @@
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                     </span>
-                        <a use:link={userDetail + user.id}>{user.username}</a>
+                        <a use:link={Routes.userDetail + user.id}>{user.username}</a>
                         <Chip size="x-small" class="grey white-text">{user.points} Points</Chip>
                         {#if user.banned}
                             <Chip class="ma-2 red white-text">Banned</Chip>
@@ -94,7 +94,7 @@
                         {/if}
                         {#if community.founder}
                             <Chip label class="ma-2 light-blue accent-3 white-text">
-                                <a use:link={userDetail + Math.random().toString().slice(2,3)}>{community.founder}</a>
+                                <a use:link={Routes.userDetail + Math.random().toString().slice(2,3)}>{community.founder}</a>
                             </Chip>
                         {/if}
                         <span slot="subtitle">
@@ -119,7 +119,11 @@
                             {:else if test.needsReview}
                                 <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
                             {/if}
-                            <Chip label class="ma-2 light-blue accent-3 white-text">{test.creatorUsername}</Chip>
+                            <Chip label class="ma-2 light-blue accent-3 white-text">
+                                <a use:link={Routes.userDetail + Math.random().toString().slice(2,3)}>
+                                    {test.creatorUsername}
+                                </a>
+                            </Chip>
                             <span slot="subtitle">
                                 <p>{test.created}</p>
                             </span>
