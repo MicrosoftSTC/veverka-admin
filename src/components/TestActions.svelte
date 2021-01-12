@@ -14,7 +14,7 @@
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
         <span class="text-overline">
-            Test detail
+            Test actions
         </span>
         {#if selectedTest}
             <div>

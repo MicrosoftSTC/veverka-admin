@@ -79,6 +79,12 @@ export const mockedUsers = writable(
                     ]
                 }
             ],
+            stars: [
+                {
+                    id: getId(),
+                    given: randomDate(new Date(2012, 0, 1), new Date()),
+                }
+            ],
             reportsReceived: [
                 {
                     id: getId(),

@@ -11,7 +11,7 @@
 
     export let params = {};
     let selectedUser;
-    let gridOptions = ["posts", "stars", "reports", "questions", "communities","activity"];
+    let gridOptions = ["posts", "stars", "reports given", "reports received","questions", "communities","activity"];
     let selectedGrid = gridOptions[0];
 
     let reportsType = "user";
@@ -62,7 +62,7 @@
                             <Radio bind:group={selectedGrid} value={option}>{option.charAt(0).toUpperCase() + option.slice(1)}</Radio>
                         {/each}
                     </div>
-                    <Grid label="{selectedGrid}" disabled="{true}" gridType={selectedGrid} data="{selectedUser.posts}" on:entity-selected={handleUserSelect}/>
+                    <Grid label="{selectedGrid}" disabled="{true}" gridType={selectedGrid} data="{selectedGrid === gridOptions[0] ? selectedUser.posts : selectedUser.stars}" on:entity-selected={handleUserSelect}/>
                 </Col>
                 <Col>
 

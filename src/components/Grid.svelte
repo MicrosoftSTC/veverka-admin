@@ -172,6 +172,14 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
+            {:else if gridType === "stars"}
+                <ListItemGroup>
+                    {#each data as star}
+                        <ListItem on:click={() => selectEntity(star)}>
+                            <Chip label class="ma-2 green accent-2 white-text">{star.given.toString().slice(0, 15)}</Chip>
+                        </ListItem>
+                    {/each}
+                </ListItemGroup>
             {:else}
                 <p>Nothing</p>
             {/if}
