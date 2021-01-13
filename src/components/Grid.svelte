@@ -12,6 +12,7 @@
 
     export let gridType;
     export let data = [];
+    export let reportType = "received";
     export let label = "board";
     export let disabled = false;
     let selectedEntities = [];
@@ -46,8 +47,6 @@
     function entitySelected(selected) {
         dispatch("entity-selected", selected);
     }
-
-    $:console.log(gridType);
 </script>
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
@@ -141,11 +140,15 @@
                             </ListItem>
                         {/each}
                 </ListItemGroup>
-            {:else if gridType === "testReports"}
+            {:else if gridType === "reports"}
                 <ListItemGroup>
                     {#each data as report}
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
                             {report.reporter.username}
+                            {#if reportType === "given"}
+                                <Chip label class="grey white-text ml-1">Receiver: {report.receiver.username}</Chip>
+                            {/if}
+                            <Chip label class="deep-purple white-text ml-1">{report.type.toUpperCase()}</Chip>
                             {#each report.reports as charge}
                                 <Chip size="x-small" class="red white-text ml-1">{charge.content.charAt(0).toUpperCase() + charge.content.slice(1)}</Chip>
                             {/each}

@@ -85,9 +85,46 @@ export const mockedUsers = writable(
                     given: randomDate(new Date(2012, 0, 1), new Date()),
                 }
             ],
+            reportsGiven: [
+                {
+                    id: getId(),
+                    type: "user",
+                    reporter: {
+                        name: "František Oprcálek",
+                        username: "Frantosakoz604",
+                        num: 1,
+                        needsReview: Math.random().toString().slice(2,3) > 5,
+                        banned: Math.random().toString().slice(2,3) > 7.5,
+                        founder: Math.random().toString().slice(2,3) > 7,
+                        joined: randomDate(new Date(2012, 0, 1), new Date()),
+                        points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                    },
+                    receiver: {
+                        name: "Igor vykřičník",
+                        username: "Attention12",
+                        needsReview: Math.random().toString().slice(2,3) > 5,
+                        banned: Math.random().toString().slice(2,3) > 7.5,
+                        founder: Math.random().toString().slice(2,3) > 7,
+                        joined: randomDate(new Date(2012, 0, 1), new Date()),
+                        points: Math.round(Math.pow(parseInt(Math.random().toString().slice(2, 3)), parseInt(Math.random().toString().slice(2, 3)) / 2))
+                    },
+                    reports: [
+                        {
+                            id: getId(),
+                            content: "Obsession with anime",
+                        },
+                        {
+                            id: getId(),
+                            content: "Propagates products, may be paid marketing",
+                        }
+                    ],
+                    comment: "Já jsem franta, a tohle se mi nelíbilo"
+                },
+            ],
             reportsReceived: [
                 {
                     id: getId(),
+                    type: "post",
                     reporter: {
                         name: "Pavel Křídlo",
                         username: "Wingman90",
@@ -101,14 +138,34 @@ export const mockedUsers = writable(
                     reports: [
                         {
                             id: getId(),
-                            content: "Wrong answers",
+                            content: "Something",
                         },
                         {
                             id: getId(),
                             content: "trolling",
                         }
                     ],
-                    comment: "This test is not a very good one, I don't like it, the question 3 is offensive agains helicopters"
+                    comment: "This user does not like Minecraft, should be banned"
+                },
+            ],
+            communities: [
+                {
+                    name: "Dějepiss středověk",
+                    id: getId(),
+                    founder: `Ariel_Pereggini${Math.random().toString().slice(2, 4)}`,
+                    members: parseInt(Math.random().toString().slice(2,4)),
+                    needsReview: Math.random().toString().slice(2,3) > 5,
+                    banned: Math.random().toString().slice(2,3) > 7.5,
+                    since: randomDate(new Date(2012, 0, 1), new Date()),
+                },
+                {
+                    name: "Geography best subject community",
+                    id: getId(),
+                    founder: `Burak Arašíd${Math.random().toString().slice(2, 4)}`,
+                    members: parseInt(Math.random().toString().slice(2,4)),
+                    needsReview: Math.random().toString().slice(2,3) > 5,
+                    banned: Math.random().toString().slice(2,3) > 7.5,
+                    since: randomDate(new Date(2012, 0, 1), new Date()),
                 },
             ]
         },

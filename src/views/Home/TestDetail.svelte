@@ -97,7 +97,7 @@
             {#if selectedTest.reports.length !== 0}
                 <Row>
                     <Col>
-                        <Grid label="reports board" gridType="{'testReports'}" data="{selectedTest.reports}" on:entity-selected={handleReportSelected}/>
+                        <Grid label="reports board" gridType="{'reports'}" data="{selectedTest.reports}" on:entity-selected={handleReportSelected}/>
                     </Col>
                     <Col>
                         <ReportDetail detailedReport="{selectedReport}"/>
