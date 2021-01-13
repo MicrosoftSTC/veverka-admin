@@ -13,7 +13,6 @@
 
     export let gridType;
     export let data = [];
-    export let isMini = false;
     export let username; // used in deciding whether to put link on grid or not
     export let reportType = "received";
     export let label = "board";
