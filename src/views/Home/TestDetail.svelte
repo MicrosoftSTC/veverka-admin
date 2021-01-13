@@ -1,7 +1,7 @@
 <script>
     import Grid from "../../components/Grid.svelte";
-    import QuestionDetail from "../../components/QuestionDetail.svelte";
-    import ReportDetail from "../../components/ReportDetail.svelte";
+    import QuestionDetail from "../../components/detail/QuestionDetail.svelte";
+    import ReportDetail from "../../components/detail/ReportDetail.svelte";
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'

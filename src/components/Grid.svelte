@@ -203,7 +203,7 @@
                 <ListItemGroup>
                     {#each data as star}
                         <ListItem on:click={() => selectEntity(star)}>
-                            <Chip label class="ma-2 green accent-2 white-text">{star.given.toString().slice(0, 15)}</Chip>
+                            <Chip label class="ma-2 deep purple white-text">{star.type.toUpperCase()}</Chip>
                             <Chip label class="ma-2 light-blue accent-3 white-text">
                                 <a use:link={Routes.userDetail + Math.random().toString().slice(2,3)}>
                                     {username}

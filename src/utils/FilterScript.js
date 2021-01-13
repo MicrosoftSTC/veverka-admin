@@ -90,10 +90,9 @@ export default function filter(data, event){
     if(objectKeys.includes("username")){
         // data is list of users
         fields = usersFields;
-    }else if(objectKeys.includes("creatorUsername")){
+    } else if(objectKeys.includes("creatorUsername")){
         fields = testFields;
-    }
-    else if(objectKeys.includes("name")){
+    } else if(objectKeys.includes("name")){
         // data is list of communities
         fields = communityFields;
     } else{

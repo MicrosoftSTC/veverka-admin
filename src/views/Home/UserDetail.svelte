@@ -8,8 +8,9 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import Radio from 'svelte-materialify/src/components/Radio';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
-    import ReportDetail from "../../components/ReportDetail.svelte";
-    import PostDetail from "../../components/PostDetail.svelte";
+    import ReportDetail from "../../components/detail/ReportDetail.svelte";
+    import PostDetail from "../../components/detail/PostDetail.svelte";
+    import StarDetail from "../../components/detail/StarDetail.svelte";
 
     export let params = {};
     let selectedUser;
@@ -18,8 +19,9 @@
 
     let reportsType = "user";
 
-    let selectedReport = null;
-    let selectedPost = null;
+    let detailedReport = null;
+    let detailedPost = null;
+    let detailedStar = null;
 
     mockedUsers.subscribe(u => {
         selectedUser = u.filter(user => user.id == params.id)[0]
@@ -27,15 +29,18 @@
 
     function handleUserSelect(event) {
         if (selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]) {
-            selectedReport = event.detail;
-        }else if(selectedGrid === gridOptions[0]){
-            selectedPost = event.detail;
+            detailedReport = event.detail;
+        } else if (selectedGrid === gridOptions[0]) {
+            detailedPost = event.detail;
+        } else if (selectedGrid === gridOptions[1]){
+            console.log(event);
+            detailedStar = event.detail;
         }
     }
 
     // when moving onto other tab in the mini grid
     function unSelectSelectableProperties(_) {
-        selectedReport = null;
+        detailedReport = null;
     }
 
     $:unSelectSelectableProperties(selectedGrid);
@@ -83,9 +88,11 @@
                 <Col>
                     <div class="mt-9">
                         {#if selectedGrid === gridOptions[0]}
-                            <PostDetail detailedPost="{selectedPost}"/>
+                            <PostDetail {detailedReport}/>
                         {:else if selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]}
-                            <ReportDetail detailedReport="{selectedReport}"/>
+                            <ReportDetail {detailedReport}/>
+                        {:else if selectedGrid === gridOptions[1]}
+                            <StarDetail {detailedStar}/>
                         {/if}
                     </div>
                 </Col>

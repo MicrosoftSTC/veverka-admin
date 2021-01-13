@@ -38,7 +38,7 @@
 <!--                <Button block class="red white-text">Deny</Button>-->
             </div>
         {:else}
-            <p class="text-subtitle-2">Report details panel will show after report will be selected</p>
+            <p class="text-subtitle-2">Report details panel will show after post will be selected</p>
         {/if}
     </div>
 </Card>

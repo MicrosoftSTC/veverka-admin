@@ -1,7 +1,7 @@
 <script>
     import Filter from "../../components/Filter.svelte";
     import Grid from "../../components/Grid.svelte";
-    import CommunityDetail from "../../components/CommunityDetail.svelte"
+    import CommunityDetail from "../../components/detail/CommunityDetail.svelte"
 
     import {mockedCommunities} from "../../stores/mockCommunities"
 

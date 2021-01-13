@@ -87,6 +87,27 @@ export const mockedUsers = writable(
                 {
                     id: getId(),
                     given: randomDate(new Date(2012, 0, 1), new Date()),
+                    type: "comment"
+                },
+                {
+                    id: getId(),
+                    given: randomDate(new Date(2012, 0, 1), new Date()),
+                    type: "comment"
+                },
+                {
+                    id: getId(),
+                    given: randomDate(new Date(2012, 0, 1), new Date()),
+                    type: "comment"
+                },
+                {
+                    id: getId(),
+                    given: randomDate(new Date(2012, 0, 1), new Date()),
+                    type: "comment"
+                },
+                {
+                    id: getId(),
+                    given: randomDate(new Date(2012, 0, 1), new Date()),
+                    type: "comment"
                 }
             ],
             reportsGiven: [
