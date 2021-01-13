@@ -145,11 +145,16 @@
                     {#each data as report}
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
                             {report.reporter.username}
-                            {#if reportType === "given"}
+                            {#if reportType === "given"} <!-- maybe scout this from the object directly -->
                                 <Chip label class="grey white-text ml-1">Receiver: {report.receiver.username}</Chip>
                             {/if}
-                            <Chip label class="deep-purple white-text ml-1">{report.type.toUpperCase()}</Chip>
+                            {#if report.type}
+                                <Chip label class="deep-purple white-text ml-1">{report.type.toUpperCase()}</Chip>
+                            {/if}
                             {#each report.reports as charge}
+                                {#if charge.type}
+                                    <Chip label class="deep-purple white-text ml-1">{charge.type.toUpperCase()}</Chip>
+                                {/if}
                                 <Chip size="x-small" class="red white-text ml-1">{charge.content.charAt(0).toUpperCase() + charge.content.slice(1)}</Chip>
                             {/each}
                             {#if report.comment}

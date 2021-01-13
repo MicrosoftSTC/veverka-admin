@@ -141,6 +141,7 @@ export const mockedTests = writable(
             reports: [
                 {
                     id: getId(),
+                    type: "test",
                     reporter: {
                         name: "Pavel Křídlo",
                         username: "Wingman90",
@@ -165,6 +166,7 @@ export const mockedTests = writable(
                 },
                 {
                     id: getId(),
+                    type: "test",
                     reporter: {
                         name: "Friend Chicked",
                         username: "KFC54",

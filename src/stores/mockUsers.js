@@ -45,10 +45,12 @@ export const mockedUsers = writable(
                                 {
                                     id: getId(),
                                     content: "Sexual harrasment",
+                                    type: "community"
                                 },
                                 {
                                     id: getId(),
                                     content: "trolling",
+                                    type: "community"
                                 }
                             ],
                             comment: "This user is unbelievable evil"
@@ -68,10 +70,12 @@ export const mockedUsers = writable(
                                 {
                                     id: getId(),
                                     content: "Sexual harrasment",
+                                    type: "community"
                                 },
                                 {
                                     id: getId(),
                                     content: "trolling",
+                                    type: "community"
                                 }
                             ],
                             comment: "This user is unbelievable evil again"
