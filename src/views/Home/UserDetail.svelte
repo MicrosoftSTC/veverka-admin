@@ -62,7 +62,7 @@
                             <Radio bind:group={selectedGrid} value={option}>{option.charAt(0).toUpperCase() + option.slice(1)}</Radio>
                         {/each}
                     </div>
-                    <Grid label="{selectedGrid}" disabled="{true}" reportType="{selectedGrid === gridOptions[2] ? 'given' : null}" gridType={selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3] ? "reports" : selectedGrid} data="{selectedUser[selectedGrid]}" on:entity-selected={handleUserSelect}/>
+                    <Grid label="{selectedGrid}" username="{selectedUser.username}" disabled="{true}" reportType="{selectedGrid === gridOptions[2] ? 'given' : null}" gridType={selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3] ? "reports" : selectedGrid} data="{selectedUser[selectedGrid]}" on:entity-selected={handleUserSelect}/>
                 </Col>
                 <Col>
 

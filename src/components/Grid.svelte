@@ -12,6 +12,7 @@
 
     export let gridType;
     export let data = [];
+    export let username; // used in deciding whether to put link on grid or not
     export let reportType = "received";
     export let label = "board";
     export let disabled = false;
@@ -144,9 +145,21 @@
                 <ListItemGroup>
                     {#each data as report}
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
-                            {report.reporter.username}
-                            {#if reportType === "given"} <!-- maybe scout this from the object directly -->
-                                <Chip label class="grey white-text ml-1">Receiver: {report.receiver.username}</Chip>
+                            {#if report.reporter.username !== username}
+                                <!-- [HARDCODED LINK :)] -->
+                                <a use:link={Routes.userDetail + 1}>
+                                    {report.reporter.username}
+                                </a>
+                                {:else}
+                                {report.reporter.username}
+                            {/if}
+                            {#if report.receiver}
+                                <Chip label class="ma-2 light-blue accent-3 white-text">
+                                    <!-- [HARDCODED LINK :)] -->
+                                    <a use:link={Routes.userDetail + Math.random().toString().slice(2,3)}>
+                                        {report.receiver.username}
+                                    </a>
+                                </Chip>
                             {/if}
                             {#if report.type}
                                 <Chip label class="deep-purple white-text ml-1">{report.type.toUpperCase()}</Chip>
