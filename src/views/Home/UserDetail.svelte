@@ -8,21 +8,34 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import Radio from 'svelte-materialify/src/components/Radio';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
+    import ReportDetail from "../../components/ReportDetail.svelte";
 
     export let params = {};
     let selectedUser;
-    let gridOptions = ["posts", "stars", "reportsGiven", "reportsReceived", "communities","activity"];
+    let gridOptions = ["posts", "stars", "reportsGiven", "reportsReceived", "communities", "activity"];
     let selectedGrid = gridOptions[0];
 
     let reportsType = "user";
+
+    let selectedReport = null;
 
     mockedUsers.subscribe(u => {
         selectedUser = u.filter(user => user.id == params.id)[0]
     })
 
-    $:console.log(gridOptions);
+    function handleUserSelect(event) {
+        console.log(event);
+        if(selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]){
+            selectedReport = event.detail;
+        }
+    }
 
-    function handleUserSelect(){}
+    // when moving onto other tab in the mini grid
+    function unSelectSelectableProperties(_){
+        selectedReport = null;
+    }
+
+    $:unSelectSelectableProperties(selectedGrid);
 </script>
 <h3 class="text-h4">User detail</h3>
 <Card outlined style="min-width: 100%" class="mt-3">
@@ -62,10 +75,12 @@
                             <Radio bind:group={selectedGrid} value={option}>{option.charAt(0).toUpperCase() + option.slice(1)}</Radio>
                         {/each}
                     </div>
-                    <Grid label="{selectedGrid}" username="{selectedUser.username}" disabled="{true}" reportType="{selectedGrid === gridOptions[2] ? 'given' : null}" gridType={selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3] ? "reports" : selectedGrid} data="{selectedUser[selectedGrid]}" on:entity-selected={handleUserSelect}/>
+                    <Grid on:entity-selected={handleUserSelect} label="{selectedGrid}" username="{selectedUser.username}" disabled="{true}" reportType="{selectedGrid === gridOptions[2] ? 'given' : null}" gridType={selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3] ? "reports" : selectedGrid} data="{selectedUser[selectedGrid]}"/>
                 </Col>
                 <Col>
-
+                    <div class="mt-9">
+                        <ReportDetail detailedReport="{selectedReport}"/>
+                    </div>
                 </Col>
             </Row>
         {/if}
