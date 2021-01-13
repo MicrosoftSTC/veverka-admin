@@ -9,9 +9,11 @@
     import ListItemGroup from "svelte-materialify/src/components/List/ListItemGroup.svelte"
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Chip from 'svelte-materialify/src/components/Chip';
+    import Switch from 'svelte-materialify/src/components/Switch';
 
     export let gridType;
     export let data = [];
+    export let isMini = false;
     export let username; // used in deciding whether to put link on grid or not
     export let reportType = "received";
     export let label = "board";
@@ -201,8 +203,10 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
+            {:else if gridType === "activity"}
+                <p>Graph should be here</p>
             {:else}
-                <p>Nothing</p>
+                <p>Error</p>
             {/if}
         </div>
     </CardText>

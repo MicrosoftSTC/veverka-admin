@@ -45,7 +45,7 @@
                                 <p class="text-subtitle-2">{field.toString().slice(0, 1).toUpperCase() + field.toString().slice(1, field.length)}</p>
                                 {#if field === "joined"}
                                     <p>{selectedUser[field].toString().slice(0, 15)}</p>
-                                {:else if field === "completedUsers" || field === "questions" || field === "reports" || field === "posts" || field === "reportsGiven" || field === "reportsReceived" || field === "stars"}
+                                {:else if field === "completedUsers" || field === "questions" || field === "reports" || field === "posts" || field === "reportsGiven" || field === "reportsReceived" || field === "stars" || field === "communities"}
                                     <p>{selectedUser[field].length}</p>
                                 {:else}
                                     <p>{selectedUser[field]}</p>
