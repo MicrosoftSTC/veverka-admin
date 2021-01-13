@@ -6,7 +6,7 @@
     export let detailedReport;
 
     function denyReportType(report){
-        console.log("Denying: " + report.content + " " + report.content);
+        // console.log("Denying: " + report.content + " " + report.content);
     }
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">

@@ -9,6 +9,7 @@
     import Radio from 'svelte-materialify/src/components/Radio';
     import Avatar from 'svelte-materialify/src/components/Avatar/Avatar.svelte'
     import ReportDetail from "../../components/ReportDetail.svelte";
+    import PostDetail from "../../components/PostDetail.svelte";
 
     export let params = {};
     let selectedUser;
@@ -18,20 +19,22 @@
     let reportsType = "user";
 
     let selectedReport = null;
+    let selectedPost = null;
 
     mockedUsers.subscribe(u => {
         selectedUser = u.filter(user => user.id == params.id)[0]
     })
 
     function handleUserSelect(event) {
-        console.log(event);
-        if(selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]){
+        if (selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]) {
             selectedReport = event.detail;
+        }else if(selectedGrid === gridOptions[0]){
+            selectedPost = event.detail;
         }
     }
 
     // when moving onto other tab in the mini grid
-    function unSelectSelectableProperties(_){
+    function unSelectSelectableProperties(_) {
         selectedReport = null;
     }
 
@@ -79,7 +82,11 @@
                 </Col>
                 <Col>
                     <div class="mt-9">
-                        <ReportDetail detailedReport="{selectedReport}"/>
+                        {#if selectedGrid === gridOptions[0]}
+                            <PostDetail detailedPost="{selectedPost}"/>
+                        {:else if selectedGrid === gridOptions[2] || selectedGrid === gridOptions[3]}
+                            <ReportDetail detailedReport="{selectedReport}"/>
+                        {/if}
                     </div>
                 </Col>
             </Row>
