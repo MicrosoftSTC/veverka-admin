@@ -7,6 +7,7 @@ import type CommunityMembership from "./CommunityMembership";
 import type Community from "./Community";
 import type Channel from "./Channel";
 import type ChannelMembership from "./ChannelMembership";
+import type Star from "./Star";
 
 export default class User{
     private _id: number;
@@ -27,8 +28,9 @@ export default class User{
     private _activeCommunityMemberships: CommunityMembership[];
     private _foundedChannels: Channel[];
     private _activeChannelMemberships: ChannelMembership[];
+    private _starsGiven: Star[];
 
-    constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean, foundedCommunities: Community[], activeCommunityMemberships: CommunityMembership[], foundedChannels: Channel[], activeChannelMemberships: ChannelMembership[]) {
+    constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean) {
         this._id = id;
         this._username = username;
         this._email = email;
@@ -43,10 +45,6 @@ export default class User{
         this._city = city;
         this._needsReview = needsReview;
         this._banned = banned;
-        this._foundedCommunities = foundedCommunities;
-        this._activeCommunityMemberships = activeCommunityMemberships;
-        this._foundedChannels = foundedChannels;
-        this._activeChannelMemberships = activeChannelMemberships;
     }
 
     get id(): number {
@@ -191,6 +189,15 @@ export default class User{
 
     set activeChannelMemberships(value: ChannelMembership[]) {
         this._activeChannelMemberships = value;
+    }
+
+
+    get starsGiven(): Star[] {
+        return this._starsGiven;
+    }
+
+    set starsGiven(value: Star[]) {
+        this._starsGiven = value;
     }
 }
 // export default User;

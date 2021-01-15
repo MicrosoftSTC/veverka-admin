@@ -3,6 +3,7 @@ import type PostType from "../enums/PostType";
 import type Channel from "./Channel";
 import type Vote from "./Vote";
 import type User from "./User";
+import type Comment from "./Comment";
 
 export default class Post {
     @IsPositive() private _id: number;
@@ -13,6 +14,7 @@ export default class Post {
     private _author: User;
     private _channel: Channel;
     private _votes: Vote[];
+    private _comments: Comment[];
 
 
     constructor(id: number, header: string, content: string, type: PostType, published: Date, author: User, channel: Channel, votes: Vote[]) {
