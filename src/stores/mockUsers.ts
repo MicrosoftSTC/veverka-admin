@@ -8,6 +8,9 @@ import CommunityType from "../utils/enums/CommunityType";
 import Role from "../utils/enums/Role";
 import CommunityMembershipStatus from "../utils/enums/CommunityMembershipStatus";
 import CommunityMembership from "../utils/entities/CommunityMembership";
+import Channel from "../utils/entities/Channel";
+import ChannelMembership from "../utils/entities/ChannelMembership";
+import ChannelMembershipStatus from "../utils/enums/ChannelMembershipStatus";
 
 enum Generator{
     CASUAL= 5,
@@ -37,27 +40,124 @@ let user6 = new User(getId(), "Pavlosak12", "filip@afdl.cfafd", EmailStatus.VERI
 let user7 = new User(getId(), "Pavlosak12", "kohout43@afdl.cfafd", EmailStatus.VERIFIED, "josef", "kahount", ranDat(getId(), getId()), ranDat(getId(), getId()), "OK, so what’s the speed of dark?", Subjects.PE, Country.SLOVAKIA, "Poprad", gen(Generator.CASUAL), gen(Generator.RARE));
 let user8 = new User(getId(), "Pavlosak12", "ejdam@afdl.cfafd", EmailStatus.VERIFIED, "adam", "kůltulič", ranDat(getId(), getId()), ranDat(getId(), getId()), "It’s a thinking universe.", Subjects.SPANISH, Country.CZECH_REPUBLIC, "Hradec Hrálové", gen(Generator.CASUAL), gen(Generator.RARE));
 
-// mocking communities
-let community0 = new Community(getId(), "chemičtíNadšenci", "Máme rádi chemii a založili jsme si na to skupinu", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.CHEMISTRY, ranDat(getId(), getId()));
-let community1 = new Community(getId(), "fyzikálníĎáblové", "Fyzika, fyzika, Newton honí skrblíka", CommunityPrivacyPolicy.PRIBLIC, CommunityType.EDUCATION, Subjects.PHYSICS, ranDat(getId(), getId()));
-let community2 = new Community(getId(), "Společenskovědátoři", "Společnost je ideální pouze tehdy, když nedávají zprávy na nově", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.HISTORY, ranDat(getId(), getId()));
-let community3 = new Community(getId(), "Matematická skupinka", "Jak říká Mirko Rokyta, ideální je pouze matika", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.MATHS, ranDat(getId(), getId()));
-let community4 = new Community(getId(), "Rybáři zlín", "Lovíme ryby a jíme olivy", CommunityPrivacyPolicy.PRIVATE, CommunityType.FREE_TIME, Subjects.NO_SUBJECT, ranDat(getId(), getId()));
+let users = [user0,user1,user2,user3,user4,user5,user6,user7];
 
-// mocking community memberships
+// mocking communities
+let community0 = new Community(getId(), "chemičtíNadšenci", "Máme rádi chemii a založili jsme si na to skupinu", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.CHEMISTRY, ranDat(getId(), getId()), user0);
+let community1 = new Community(getId(), "fyzikálníĎáblové", "Fyzika, fyzika, Newton honí skrblíka", CommunityPrivacyPolicy.PRIBLIC, CommunityType.EDUCATION, Subjects.PHYSICS, ranDat(getId(), getId()), user4);
+let community2 = new Community(getId(), "Společenskovědátoři", "Společnost je ideální pouze tehdy, když nedávají zprávy na nově", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.HISTORY, ranDat(getId(), getId()), user6);
+let community3 = new Community(getId(), "Matematická skupinka", "Jak říká Mirko Rokyta, ideální je pouze matika", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.MATHS, ranDat(getId(), getId()), user7);
+let community4 = new Community(getId(), "Rybáři zlín", "Lovíme ryby a jíme olivy", CommunityPrivacyPolicy.PRIVATE, CommunityType.FREE_TIME, Subjects.NO_SUBJECT, ranDat(getId(), getId()), user3);
+
+let communities = [community0, community1, community2, community3, community4];
+
+
+/*
+    mocking community memberships, pair of user and community is
+    based on the previous line in the mocking communities section,
+    founder always has Role.COMMUNITY_SUPERADMIN by default
+ */
 let membership0 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user0, community0);
-let membership1 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.OK, user1, community0);
+let membership1 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.REVIEW, user1, community0);
 let membership2 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_MODERATOR, CommunityMembershipStatus.OK, user2, community0);
-let membership3 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.OK, user3, community0);
+let membership3 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.REVIEW, user3, community0);
 let membership4 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user4, community1);
-let membership5 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.OK, user5, community1);
+let membership5 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.REVIEW, user5, community1);
 let membership6 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user6, community2);
 let membership7 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user7, community3);
-let membership8 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_MODERATOR, CommunityMembershipStatus.OK, user8, community3);
+let membership8 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_MODERATOR, CommunityMembershipStatus.BANNED, user8, community3);
 let membership9 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user3, community4);
-let membership10 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.OK, user4, community4);
+let membership10 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.BANNED, user4, community4);
 
-//
+let memberships = [membership0, membership1, membership2, membership3, membership4,membership5, membership6, membership7, membership8, membership9, membership10];
+
+// assigning memberships to communities
+communities.forEach(community => {
+    memberships.forEach(membership => {
+        if(community === membership.community) {
+            community.memberships.push(membership);
+        }
+    })
+})
+
+// assigning memberships and founded communities to users
+users.forEach(user => {
+    memberships.forEach(membership => {
+        if(user === membership.member){
+            if(membership.role === Role.COMMUNITY_SUPERADMIN){
+                user.foundedCommunities.push(membership.community);
+            }
+            user.activeCommunityMemberships.push(membership);
+        }
+    })
+})
+
+/*
+    mocking community channels
+ */
+
+// admin or mod creates request for creating channel
+let channel0 = new Channel(getId(), "Kanál přístav", community0, user2, user1);
+let channel1 = new Channel(getId(), "Kanál frinds", community0, user2, user0);
+// superadmin and moderator duo here
+let channel2 = new Channel(getId(), "Kanál csgo", community3, user8, user7);
+let channel3 = new Channel(getId(), "Among us", community3, user8, user7);
+let channel4 = new Channel(getId(), "LOL", community3, user8, user7);
+// superadmin created channels alone
+let channel5 = new Channel(getId(), "DOTA2", community4, user3, user3);
+let channel6 = new Channel(getId(), "Raketový přebor", community4, user3, user3);
+let channel7 = new Channel(getId(), "Raft", community4, user3, user3);
+
+let channels = [channel0,channel1,channel2,channel3,channel4,channel5,channel6,channel7];
+
+/*
+    channelMemberships are based on who found the channel, only founders are members for this moment
+ */
+let channelMembership0 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user2, channel0);
+let channelMembership1 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user2, channel1);
+let channelMembership2 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user8, channel2);
+let channelMembership3 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user8, channel3);
+let channelMembership4 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user8, channel4);
+let channelMembership5 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user3, channel5);
+let channelMembership6 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user3, channel6);
+let channelMembership7 = new ChannelMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), ChannelMembershipStatus.OK, user3, channel7);
+
+let channelMemberships = [channelMembership0,channelMembership2,channelMembership3,channelMembership4,channelMembership5,channelMembership6,channelMembership7];
+
+// assigning channels to communities
+communities.forEach(community => {
+    channels.forEach(channel => {
+        if(channel.community === community){
+            community.channels.push(channel);
+        }
+    })
+})
+
+// assigning user founded channels
+users.forEach(user => {
+    channels.forEach(channel => {
+        if(channel.founder === user){
+            user.foundedChannels.push(channel);
+        }
+    })
+})
+
+// assigning user channel memberships
+users.forEach(user => {
+    channelMemberships.forEach(channelMembership => {
+        if(channelMembership.member === user){
+            user.activeChannelMemberships.push(channelMembership);
+        }
+    })
+})
+
+channels.forEach(channel => {
+    channelMemberships.forEach(channelMembership => {
+        if(channel === channelMembership.channel){
+            channel.memberships.push(channelMembership);
+        }
+    })
+})
 
 
 // export const mockedUsers = writable(

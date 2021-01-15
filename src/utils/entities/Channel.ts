@@ -2,6 +2,7 @@ import {IsPositive, Length} from "class-validator";
 import type Community from "./Community";
 import type Post from "./Post";
 import type User from "./User";
+import type ChannelMembership from "./ChannelMembership";
 
 export default class Channel{
     @IsPositive() private _id: number;
@@ -10,14 +11,14 @@ export default class Channel{
     private _founder: User;
     private _approver: User;
     private _posts: Post[];
+    private _memberships: ChannelMembership[];
 
-    constructor(id: number, name: string, community: Community, founder: User, approver: User, posts: Post[]) {
+    constructor(id: number, name: string, community: Community, founder: User, approver: User) {
         this._id = id;
         this._name = name;
         this._community = community;
         this._founder = founder;
         this._approver = approver;
-        this._posts = posts;
     }
 
     get id(): number {
@@ -66,5 +67,13 @@ export default class Channel{
 
     set posts(value: Post[]) {
         this._posts = value;
+    }
+
+    get memberships(): ChannelMembership[] {
+        return this._memberships;
+    }
+
+    set memberships(value: ChannelMembership[]) {
+        this._memberships = value;
     }
 }

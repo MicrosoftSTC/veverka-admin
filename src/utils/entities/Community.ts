@@ -19,9 +19,9 @@ export default class Community{
     private _members: User[];
     private _posts: Post[];
     private _channels: Channel[];
-    private _memberships: CommunityMembership[];
+    private _memberships: CommunityMembership[] = [];
 
-    constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date) {
+    constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date, founder: User) {
         this._id = id;
         this._name = name;
         this._description = description;
@@ -127,4 +127,6 @@ export default class Community{
     set memberships(value: CommunityMembership[]) {
         this._memberships = value;
     }
+
+
 }

@@ -4,6 +4,7 @@ import type Community from "./Community";
 import type Role from "../enums/Role";
 import type User from "./User";
 import type ChannelMembershipStatus from "../enums/ChannelMembershipStatus";
+import type Channel from "./Channel";
 
 export default class ChannelMembership{
     @IsPositive() private _id: number;
@@ -11,16 +12,15 @@ export default class ChannelMembership{
     private _lastModified: Date;
     private _status: ChannelMembershipStatus;
     private _member: User;
-    private _community: Community;
+    private _channel: Channel;
 
-
-    constructor(id: number, since: Date, lastModified: Date, status: ChannelMembershipStatus, member: User, community: Community) {
+    constructor(id: number, since: Date, lastModified: Date, status: ChannelMembershipStatus, member: User, channel: Channel) {
         this._id = id;
         this._since = since;
         this._lastModified = lastModified;
         this._status = status;
         this._member = member;
-        this._community = community;
+        this._channel = channel;
     }
 
     get id(): number {
@@ -63,11 +63,11 @@ export default class ChannelMembership{
         this._member = value;
     }
 
-    get community(): Community {
-        return this._community;
+    get channel(): Channel {
+        return this._channel;
     }
 
-    set community(value: Community) {
-        this._community = value;
+    set channel(value: Channel) {
+        this._channel = value;
     }
 }
