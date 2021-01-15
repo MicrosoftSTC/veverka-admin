@@ -32,6 +32,7 @@
     "@mdi/js": "^5.8.55",
     "@rollup/plugin-typescript": "^8.1.0",
     "chart.js": "^2.9.4",
+    "class-validator": "^0.13.1",
     "sirv-cli": "^1.0.0",
     "svelte-materialify": "^0.3.4",
     "svelte-spa-router": "^3.1.0"

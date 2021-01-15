@@ -2,6 +2,7 @@
     import {mockedUsers} from "../../stores/mockUsers";
     import Reports from "../../components/Reports.svelte";
     import Grid from "../../components/Grid.svelte";
+    import Param from "../../utils/types/Param"
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
@@ -12,7 +13,7 @@
     import PostDetail from "../../components/detail/PostDetail.svelte";
     import StarDetail from "../../components/detail/StarDetail.svelte";
 
-    export let params = {};
+    export let params : Param;
     let selectedUser;
     let gridOptions = ["posts", "stars", "reportsGiven", "reportsReceived", "communities", "activity"];
     let selectedGrid = gridOptions[0];
