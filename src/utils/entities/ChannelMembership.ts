@@ -1,23 +1,23 @@
 import {IsPositive} from "class-validator";
-import type CommunityMembershipStatus from "../enums/CommunityMembershipStatus";
+import type ChannelM from "../enums/CommunityMembershipStatus";
 import type Community from "./Community";
 import type Role from "../enums/Role";
 import type User from "./User";
+import type ChannelMembershipStatus from "../enums/ChannelMembershipStatus";
 
-export default class CommunityMembership{
+export default class ChannelMembership{
     @IsPositive() private _id: number;
     private _since: Date;
     private _lastModified: Date;
-    private _role: Role;
-    private _status: CommunityMembershipStatus;
+    private _status: ChannelMembershipStatus;
     private _member: User;
     private _community: Community;
 
-    constructor(id: number, since: Date, lastModified: Date, role: Role, status: CommunityMembershipStatus, member: User, community: Community) {
+
+    constructor(id: number, since: Date, lastModified: Date, status: ChannelMembershipStatus, member: User, community: Community) {
         this._id = id;
         this._since = since;
         this._lastModified = lastModified;
-        this._role = role;
         this._status = status;
         this._member = member;
         this._community = community;
@@ -47,19 +47,11 @@ export default class CommunityMembership{
         this._lastModified = value;
     }
 
-    get role(): Role {
-        return this._role;
-    }
-
-    set role(value: Role) {
-        this._role = value;
-    }
-
-    get status(): CommunityMembershipStatus {
+    get status(): ChannelMembershipStatus {
         return this._status;
     }
 
-    set status(value: CommunityMembershipStatus) {
+    set status(value: ChannelMembershipStatus) {
         this._status = value;
     }
 
