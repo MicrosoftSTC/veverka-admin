@@ -1,0 +1,8 @@
+enum Role {
+    COMMUNITY_SUPERADMIN,
+    COMMUNITY_ADMIN,
+    COMMUNITY_MODERATOR,
+    COMMUNITY_USER,
+}
+
+export default Role;
