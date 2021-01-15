@@ -1,8 +1,13 @@
-import {writable} from 'svelte/store';
 import User from "../utils/entities/User";
 import EmailStatus from "../utils/enums/EmailStatus";
 import Subjects from "../utils/enums/Subject";
 import Country from "../utils/enums/Country";
+import Community from "../utils/entities/Community";
+import CommunityPrivacyPolicy from "../utils/enums/CommunityPrivacyPolicy";
+import CommunityType from "../utils/enums/CommunityType";
+import Role from "../utils/enums/Role";
+import CommunityMembershipStatus from "../utils/enums/CommunityMembershipStatus";
+import CommunityMembership from "../utils/entities/CommunityMembership";
 
 enum Generator{
     CASUAL= 5,
@@ -22,17 +27,38 @@ function gen(type:Generator):boolean{
 }
 
 // mocking users
-let pavel = new User(getId(), "Pavlosak12", "pavel@afdl.cfafd", EmailStatus.NOT_VERIFIED, "pavel", "pijkola", ranDat(getId(), getId()), ranDat(getId(), getId()), "If you have nothing, are you a nillionaire?", Subjects.ARTS, Country.AUSTRIA, "Vienna", gen(Generator.CASUAL), gen(Generator.RARE));
-let jakub = new User(getId(), "Jacob__", "jacob@afdl.cfafd", EmailStatus.NOT_VERIFIED, "jakub", "sober", ranDat(getId(), getId()), ranDat(getId(), getId()), "Gas smells awful, You might as well live.", Subjects.CHEMISTRY, Country.CZECH_REPUBLIC, "Brno", gen(Generator.CASUAL), gen(Generator.RARE));
-let filip = new User(getId(), "Pavlosak12", "filip@afdl.cfafd", EmailStatus.NOT_VERIFIED, "filip", "trůníček", ranDat(getId(), getId()), ranDat(getId(), getId()), "Let your day be neither manic nor volcanic.", Subjects.PHYSICS, Country.POLAND, "Varšava", gen(Generator.CASUAL), gen(Generator.RARE));
-let klára = new User(getId(), "Pavlosak12", "klarinet@afdl.cfafd", EmailStatus.NOT_VERIFIED, "klarinet", "skočdopolová", ranDat(getId(), getId()), ranDat(getId(), getId()), "Out of my mind. Back in five minutes.", Subjects.CZECH, Country.USA, "Ohio", gen(Generator.CASUAL), gen(Generator.RARE));
-let brabora = new User(getId(), "Pavlosak12", "barbra@afdl.cfafd", EmailStatus.NOT_VERIFIED, "barbora", "flašinetová", ranDat(getId(), getId()), ranDat(getId(), getId()), "A hangover is the wrath of grapes.", Subjects.MATHS, Country.HUNGARY, "Debrecen", gen(Generator.CASUAL), gen(Generator.RARE));
-let jan = new User(getId(), "Pavlosak12", "johnysmrdijakdvazvony@afdl.cfafd", EmailStatus.NOT_VERIFIED, "jan", "cihlík", ranDat(getId(), getId()), ranDat(getId(), getId()), "Death and Taxes", Subjects.HISTORY, Country.LITHUANIA, "Kaunas", gen(Generator.CASUAL), gen(Generator.RARE));
-let františek = new User(getId(), "Pavlosak12", "filip@afdl.cfafd", EmailStatus.VERIFIED, "františek", "štítek", ranDat(getId(), getId()), ranDat(getId(), getId()), "Two wrongs don’t make a right, but three lefts do.", Subjects.ENGLISH, Country.CZECH_REPUBLIC, "Pardubice", gen(Generator.CASUAL), gen(Generator.RARE));
-let josef = new User(getId(), "Pavlosak12", "kohout43@afdl.cfafd", EmailStatus.VERIFIED, "josef", "kahount", ranDat(getId(), getId()), ranDat(getId(), getId()), "OK, so what’s the speed of dark?", Subjects.PE, Country.SLOVAKIA, "Poprad", gen(Generator.CASUAL), gen(Generator.RARE));
-let adam = new User(getId(), "Pavlosak12", "ejdam@afdl.cfafd", EmailStatus.VERIFIED, "adam", "kůltulič", ranDat(getId(), getId()), ranDat(getId(), getId()), "It’s a thinking universe.", Subjects.SPANISH, Country.CZECH_REPUBLIC, "Hradec Hrálové", gen(Generator.CASUAL), gen(Generator.RARE));
+let user0 = new User(getId(), "Pavlosak12", "pavel@afdl.cfafd", EmailStatus.NOT_VERIFIED, "pavel", "pijkola", ranDat(getId(), getId()), ranDat(getId(), getId()), "If you have nothing, are you a nillionaire?", Subjects.ARTS, Country.AUSTRIA, "Vienna", gen(Generator.CASUAL), gen(Generator.RARE));
+let user1 = new User(getId(), "Jacob__", "jacob@afdl.cfafd", EmailStatus.NOT_VERIFIED, "jakub", "sober", ranDat(getId(), getId()), ranDat(getId(), getId()), "Gas smells awful, You might as well live.", Subjects.CHEMISTRY, Country.CZECH_REPUBLIC, "Brno", gen(Generator.CASUAL), gen(Generator.RARE));
+let user2 = new User(getId(), "Pavlosak12", "filip@afdl.cfafd", EmailStatus.NOT_VERIFIED, "filip", "trůníček", ranDat(getId(), getId()), ranDat(getId(), getId()), "Let your day be neither manic nor volcanic.", Subjects.PHYSICS, Country.POLAND, "Varšava", gen(Generator.CASUAL), gen(Generator.RARE));
+let user3 = new User(getId(), "Pavlosak12", "klarinet@afdl.cfafd", EmailStatus.NOT_VERIFIED, "klarinet", "skočdopolová", ranDat(getId(), getId()), ranDat(getId(), getId()), "Out of my mind. Back in five minutes.", Subjects.CZECH, Country.USA, "Ohio", gen(Generator.CASUAL), gen(Generator.RARE));
+let user4 = new User(getId(), "Pavlosak12", "barbra@afdl.cfafd", EmailStatus.NOT_VERIFIED, "barbora", "flašinetová", ranDat(getId(), getId()), ranDat(getId(), getId()), "A hangover is the wrath of grapes.", Subjects.MATHS, Country.HUNGARY, "Debrecen", gen(Generator.CASUAL), gen(Generator.RARE));
+let user5 = new User(getId(), "Pavlosak12", "johnysmrdijakdvazvony@afdl.cfafd", EmailStatus.NOT_VERIFIED, "jan", "cihlík", ranDat(getId(), getId()), ranDat(getId(), getId()), "Death and Taxes", Subjects.HISTORY, Country.LITHUANIA, "Kaunas", gen(Generator.CASUAL), gen(Generator.RARE));
+let user6 = new User(getId(), "Pavlosak12", "filip@afdl.cfafd", EmailStatus.VERIFIED, "františek", "štítek", ranDat(getId(), getId()), ranDat(getId(), getId()), "Two wrongs don’t make a right, but three lefts do.", Subjects.ENGLISH, Country.CZECH_REPUBLIC, "Pardubice", gen(Generator.CASUAL), gen(Generator.RARE));
+let user7 = new User(getId(), "Pavlosak12", "kohout43@afdl.cfafd", EmailStatus.VERIFIED, "josef", "kahount", ranDat(getId(), getId()), ranDat(getId(), getId()), "OK, so what’s the speed of dark?", Subjects.PE, Country.SLOVAKIA, "Poprad", gen(Generator.CASUAL), gen(Generator.RARE));
+let user8 = new User(getId(), "Pavlosak12", "ejdam@afdl.cfafd", EmailStatus.VERIFIED, "adam", "kůltulič", ranDat(getId(), getId()), ranDat(getId(), getId()), "It’s a thinking universe.", Subjects.SPANISH, Country.CZECH_REPUBLIC, "Hradec Hrálové", gen(Generator.CASUAL), gen(Generator.RARE));
 
 // mocking communities
+let community0 = new Community(getId(), "chemičtíNadšenci", "Máme rádi chemii a založili jsme si na to skupinu", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.CHEMISTRY, ranDat(getId(), getId()));
+let community1 = new Community(getId(), "fyzikálníĎáblové", "Fyzika, fyzika, Newton honí skrblíka", CommunityPrivacyPolicy.PRIBLIC, CommunityType.EDUCATION, Subjects.PHYSICS, ranDat(getId(), getId()));
+let community2 = new Community(getId(), "Společenskovědátoři", "Společnost je ideální pouze tehdy, když nedávají zprávy na nově", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.HISTORY, ranDat(getId(), getId()));
+let community3 = new Community(getId(), "Matematická skupinka", "Jak říká Mirko Rokyta, ideální je pouze matika", CommunityPrivacyPolicy.PUBLIC, CommunityType.EDUCATION, Subjects.MATHS, ranDat(getId(), getId()));
+let community4 = new Community(getId(), "Rybáři zlín", "Lovíme ryby a jíme olivy", CommunityPrivacyPolicy.PRIVATE, CommunityType.FREE_TIME, Subjects.NO_SUBJECT, ranDat(getId(), getId()));
+
+// mocking community memberships
+let membership0 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user0, community0);
+let membership1 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.OK, user1, community0);
+let membership2 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_MODERATOR, CommunityMembershipStatus.OK, user2, community0);
+let membership3 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.OK, user3, community0);
+let membership4 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user4, community1);
+let membership5 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_ADMIN, CommunityMembershipStatus.OK, user5, community1);
+let membership6 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user6, community2);
+let membership7 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user7, community3);
+let membership8 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_MODERATOR, CommunityMembershipStatus.OK, user8, community3);
+let membership9 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_SUPERADMIN, CommunityMembershipStatus.OK, user3, community4);
+let membership10 = new CommunityMembership(getId(), ranDat(getId(), getId()), ranDat(getId(), getId()), Role.COMMUNITY_USER, CommunityMembershipStatus.OK, user4, community4);
+
+//
+
 
 // export const mockedUsers = writable(
     // [

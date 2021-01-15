@@ -1,27 +1,34 @@
-import {MinLength} from "class-validator";
+import {IsPositive, Length, MinLength} from "class-validator";
 import type CommunityType from "../enums/CommunityType";
 import type Subject from "../enums/Subject";
 import type User from "./User";
+import type Post from "./Post";
+import type Channel from "./Channel";
+import type CommunityPrivacyPolicy from "../enums/CommunityPrivacyPolicy";
+import type CommunityMembership from "./CommunityMembership";
 
 export default class Community{
-    private _id: number;
-    @MinLength(5) private _name: string;
-    @MinLength(5) private _description:string
-    private _isPrivate: boolean;
+    @IsPositive() private _id: number;
+    @Length(5,30) private _name: string;
+    @Length(5, 30) private _description:string
+    private _privacyPolicy: CommunityPrivacyPolicy;
     private _communityType: CommunityType;
     private _subject: Subject;
     private _founded: Date;
     private _founder: User;
+    private _members: User[];
+    private _posts: Post[];
+    private _channels: Channel[];
+    private _memberships: CommunityMembership[];
 
-    constructor(id: number, name: string, description: string, isPrivate: boolean, communityType: CommunityType, subject: Subject, founded: Date, founder: User) {
+    constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date) {
         this._id = id;
         this._name = name;
         this._description = description;
-        this._isPrivate = isPrivate;
+        this._privacyPolicy = _privacyPolicy;
         this._communityType = communityType;
         this._subject = subject;
         this._founded = founded;
-        this._founder = founder;
     }
 
     get id(): number {
@@ -48,12 +55,12 @@ export default class Community{
         this._description = value;
     }
 
-    get isPrivate(): boolean {
-        return this._isPrivate;
+    get privacyPolicy(): CommunityPrivacyPolicy {
+        return this._privacyPolicy;
     }
 
-    set isPrivate(value: boolean) {
-        this._isPrivate = value;
+    set privacyPolicy(value: CommunityPrivacyPolicy) {
+        this._privacyPolicy = value;
     }
 
     get communityType(): CommunityType {
@@ -86,5 +93,38 @@ export default class Community{
 
     set founder(value: User) {
         this._founder = value;
+    }
+
+    get posts(): Post[] {
+        return this._posts;
+    }
+
+    set posts(value: Post[]) {
+        this._posts = value;
+    }
+
+    get channels(): Channel[] {
+        return this._channels;
+    }
+
+    set channels(value: Channel[]) {
+        this._channels = value;
+    }
+
+
+    get members(): User[] {
+        return this._members;
+    }
+
+    set members(value: User[]) {
+        this._members = value;
+    }
+
+    get memberships(): CommunityMembership[] {
+        return this._memberships;
+    }
+
+    set memberships(value: CommunityMembership[]) {
+        this._memberships = value;
     }
 }

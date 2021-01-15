@@ -1,5 +1,5 @@
 enum CommunityType{
-    SCHOOL, FREE_TIME
+    EDUCATION, FREE_TIME
 }
 
 export default CommunityType;
