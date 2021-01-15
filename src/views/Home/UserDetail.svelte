@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {mockedUsers} from "../../stores/mockUsers";
     import Reports from "../../components/Reports.svelte";
     import Grid from "../../components/Grid.svelte";
@@ -19,7 +19,7 @@
 
     let reportsType = "user";
 
-    let detailedReport = null;
+    let detailedReport : number = null;
     let detailedPost = null;
     let detailedStar = null;
 
