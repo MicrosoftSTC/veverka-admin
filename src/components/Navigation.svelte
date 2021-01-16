@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {pushTo} from "../utils/redirectService"
 
     import Icon from "svelte-materialify/src/components/Icon"
@@ -10,7 +10,7 @@
     import NavigationDrawer from "svelte-materialify/src/components/NavigationDrawer/NavigationDrawer.svelte"
     import {mdiHome, mdiAccountBoxOutline, mdiChartBox, mdiHumanQueue, mdiGoogleDownasaur} from "@mdi/js"
 
-    let active;
+    let active : boolean;
 </script>
 <div class="d-inline-block" style="min-width: 100%;">
     <NavigationDrawer style="height: 120vh; min-width: 100%; background: #9e9e9e">

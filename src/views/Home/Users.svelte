@@ -11,7 +11,7 @@
 
     // variable to hold state of entities selected in Grid component
     let selectedEntities = [];
-    let gridType = "users";
+    let gridType : string = "users";
 
     let allUsers = [];
     mockedUsers.subscribe(u => {

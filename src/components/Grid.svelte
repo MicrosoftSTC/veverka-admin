@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {createEventDispatcher} from 'svelte';
     import {link} from 'svelte-spa-router'
     import {Routes} from "../views/Home/homeRoutes"
@@ -10,6 +10,22 @@
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Chip from 'svelte-materialify/src/components/Chip';
     import Switch from 'svelte-materialify/src/components/Switch';
+    import GridType from "../utils/enums/GridType";
+    import User from "../utils/entities/User";
+    import Community from "../utils/entities/Community";
+    import Test from "../utils/entities/Test";
+    import Post from "../utils/entities/Post";
+
+    export interface Props {
+        gridType: GridType;
+        data: User[] | Community[] | Test[] | Post[];
+        username?:string;
+        reportType?:string;
+        label:string;
+        disabled:boolean;
+    }
+
+    export let props:Props;
 
     export let gridType;
     export let data = [];
