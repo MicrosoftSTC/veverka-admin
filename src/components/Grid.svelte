@@ -9,7 +9,6 @@
     import ListItemGroup from "svelte-materialify/src/components/List/ListItemGroup.svelte"
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Chip from 'svelte-materialify/src/components/Chip';
-    import Switch from 'svelte-materialify/src/components/Switch';
     import GridType from "../utils/enums/GridType";
     import User from "../utils/entities/User";
     import Community from "../utils/entities/Community";
@@ -27,38 +26,57 @@
 
     export let props:Props;
 
-    export let gridType;
-    export let data = [];
-    export let username; // used in deciding whether to put link on grid or not
-    export let reportType = "received";
-    export let label = "board";
-    export let disabled = false;
-    let selectedEntities = [];
-    let selectedEntity = null;
+    // register selectedEntity and selectedEntities variable globally
+    if(props.data instanceof User){
+        var selectedEntity : User;
+        var selectedEntities : User[];
+    }else if(props.data instanceof Community){
+        var selectedEntity : Community;
+        var selectedEntities : Community[];
+    }else if(props.data instanceof Test){
+        var selectedEntity : Test;
+        var selectedEntities : Test[];
+    }else if(props.data instanceof Post){
+        var selectedEntity : Post;
+        var selectedEntities : Post[];
+    }
     let entitySelectedInGrid = false;
+
+    // replace these lines of code, props are placed into interface
+    // export let gridType;
+    // export let data = [];
+    // export let username; // used in deciding whether to put link on grid or not
+    // export let reportType = "received";
+    // export let label = "board";
+    // export let disabled = false;
+
 
     const dispatch = createEventDispatcher();
 
-    function selectEntity(entity) {
-        if(gridType === "users"){
-            let name = entity.name;
-            let entityIsNew = selectedEntities.findIndex(en => en.name === name);
+    function selectEntity(entity : User | Community | Test | Post) : void{
+        if(entity instanceof User){
+            let name = entity.username;
+            let entityIsNew = selectedEntities.findIndex(user => user.username === name);
             if (entityIsNew > -1) {
-                selectedEntities = selectedEntities.filter(en => en.name !== name);
+                selectedEntities = selectedEntities.filter(en => en.username !== name);
             } else {
                 selectedEntities = [...selectedEntities, entity]
             }
-            entitySelected(selectedEntities);
         }else{
-            if(entitySelectedInGrid && selectedEntity.id === entity.id){
+            if(entitySelectedInGrid && selectedEntity.id === entity.id) {
                 // unselect currently selected entity
                 selectedEntity = null;
                 entitySelectedInGrid = false;
             }else{
-                selectedEntity = entity;
+                if(entity instanceof Community){
+                    selectedEntity = entity;
+                }else if(entity instanceof Test){
+                    selectedEntity = entity;
+                }else if(entity instanceof Post){
+                    selectedEntity = entity;
+                }
                 entitySelectedInGrid = true;
             }
-            entitySelected(selectedEntity);
         }
     }
 
