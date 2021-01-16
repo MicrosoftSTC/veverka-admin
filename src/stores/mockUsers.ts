@@ -24,7 +24,8 @@ import TestType from "../utils/enums/TestType";
 import TestStatus from "../utils/enums/TestStatus";
 import Question from "../utils/entities/Question";
 import Option from "../utils/entities/Option";
-import {test} from "svelte/types/compiler/config";
+import TestReport from "../utils/entities/TestReport";
+import {TestReportCause} from "../utils/enums/TestReportCause";
 
 enum Generator{
     CASUAL= 5,
@@ -340,6 +341,17 @@ questions.forEach(question => {
     })
 })
 
+let testReport0 = new TestReport(getId(), ranDat(getId(), getId()), "Tehnle test se mi nelíní", [TestReportCause.SEXUAL_HARASSMENT, TestReportCause.MANIPULATION], user0, test0);
+
+let testReports = [testReport0];
+
+tests.forEach(test => {
+    testReports.forEach(testReport => {
+        if(testReport.reportedTest === test){
+            test.testReports.push(testReport);
+        }
+    })
+})
 
 // export const mockedUsers = writable(
     // [
