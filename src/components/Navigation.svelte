@@ -12,8 +12,8 @@
 
     let active;
 </script>
-<div class="d-inline-block" style="min-width: 100%; height: 100vh; background: #00c853">
-    <NavigationDrawer style="height: 100vh; min-width: 100%; background: #d0def5">
+<div class="d-inline-block" style="min-width: 100%;">
+    <NavigationDrawer style="height: 120vh; min-width: 100%; background: #9e9e9e">
         <ListItem>
                     <span slot="prepend" class="ml-n2">
                         <Avatar size={40}><img src="//picsum.photos/200" alt="profile" /></Avatar>

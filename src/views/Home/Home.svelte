@@ -12,11 +12,13 @@
         pushTo("/home/notFound");
     }
 </script>
-<Row style="height: 100vh">
-    <Col cols="{2}" style="background: red; padding: 0px">
-        <Navigation/>
-    </Col>
-    <Col cols="{10}" style="background: lightgrey">
-        <Router on:conditionsFailed={conditionsFailed} {routes} {prefix}/>
-    </Col>
-</Row>
+<div class="mt-n3">
+    <Row>
+        <Col cols="{2}" style="height: 100vh">
+            <Navigation/>
+        </Col>
+        <Col cols="{10}">
+            <Router on:conditionsFailed={conditionsFailed} {routes} {prefix}/>
+        </Col>
+    </Row>
+</div>
