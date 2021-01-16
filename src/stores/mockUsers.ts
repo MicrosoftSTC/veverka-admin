@@ -19,6 +19,11 @@ import Vote from "../utils/entities/Vote";
 import VoteValue from "../utils/enums/VoteValue";
 import SocialSiteMembership from "../utils/entities/SocialSiteMembership";
 import SocialSite from "../utils/entities/SocialSite";
+import Test from "../utils/entities/Test";
+import TestType from "../utils/enums/TestType";
+import TestStatus from "../utils/enums/TestStatus";
+import Question from "../utils/entities/Question";
+import Option from "../utils/entities/Option";
 
 enum Generator{
     CASUAL= 5,
@@ -283,6 +288,47 @@ socialSites.forEach(site => {
         }
     })
 })
+
+/*
+    mocking tests
+ */
+let test0 = new Test(getId(), 342, user0, Subjects.MATHS, TestType.COMMUNITY, TestStatus.APPROVED);
+
+let tests =[test0];
+
+// assigning created test to user
+users.forEach(user => {
+    tests.forEach(test => {
+        if(test.creator === user){
+            user.createdTest.push(test);
+        }
+    })
+})
+
+/*
+    mocking questions
+ */
+
+let question0 = new Question(getId(),test0,"What is the biggest continent on Earth?")
+
+let questions = [question0];
+/*
+    mocking options
+ */
+
+let option0 = new Option(getId(),true,"Asia", question0);
+
+let options = [option0];
+
+// assigning options to question
+questions.forEach(question => {
+    options.forEach(option => {
+        if(option.question === question){
+            question.options.push(option);
+        }
+    })
+})
+
 
 // export const mockedUsers = writable(
     // [
