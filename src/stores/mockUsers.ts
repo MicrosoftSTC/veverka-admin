@@ -15,6 +15,10 @@ import PostType from "../utils/enums/PostType";
 import Post from "../utils/entities/Post";
 import Comment from "../utils/entities/Comment";
 import Star from "../utils/entities/Star";
+import Vote from "../utils/entities/Vote";
+import VoteValue from "../utils/enums/VoteValue";
+import SocialSiteMembership from "../utils/entities/SocialSiteMembership";
+import SocialSite from "../utils/entities/SocialSite";
 
 enum Generator{
     CASUAL= 5,
@@ -231,7 +235,54 @@ comments.forEach(comment => {
     })
 })
 
+let vote = new Vote(getId(), VoteValue.POSITIVE, user2, post0);
 
+let votes = [vote];
+
+// assigning votes to posts
+posts.forEach(post => {
+    votes.forEach(vote => {
+        if(vote.post === post){
+            post.votes.push(vote);
+        }
+    })
+})
+
+/*
+    mocking social sites
+ */
+
+let socialSite0 = new SocialSite(getId(), "facebook", "http://facebook.com");
+let socialSite1 = new SocialSite(getId(), "instagram", "http://instagram.com");
+
+let socialSites = [socialSite0, socialSite1];
+
+/*
+    social sites memberships
+ */
+
+let socialSiteMembership0 = new SocialSiteMembership(getId(), user0, socialSite0, "parek v rohliku");
+let socialSiteMembership1 = new SocialSiteMembership(getId(), user0, socialSite1, "parek v rohliku");
+
+let socialSiteMemberships = [socialSiteMembership0, socialSiteMembership1]
+
+// assigning social site memberships to user
+users.forEach(user => {
+    socialSiteMemberships.forEach(membership => {
+        if(membership.member === user){
+            user.socialSiteMemberships.push(membership);
+        }
+    })
+})
+
+// assigning social site memberships to social site
+socialSites.forEach(site => {
+    socialSiteMemberships.forEach(membership => {
+        if(membership.site === site){
+            site.memberships.push(membership);
+        }
+    })
+})
 
 // export const mockedUsers = writable(
     // [

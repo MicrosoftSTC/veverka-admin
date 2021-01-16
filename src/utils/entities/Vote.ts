@@ -1,13 +1,14 @@
 import type User from "./User";
 import type Post from "./Post";
+import type VoteValue from "../enums/VoteValue";
 
 export default class Vote{
     private _id: number;
-    private _value: boolean;
+    private _value: VoteValue;
     private _user: User;
     private _post: Post;
 
-    constructor(id: number, value: boolean, user: User, post: Post) {
+    constructor(id: number, value: VoteValue, user: User, post: Post) {
         this._id = id;
         this._value = value;
         this._user = user;
@@ -22,11 +23,11 @@ export default class Vote{
         this._id = value;
     }
 
-    get value(): boolean {
+    get value(): VoteValue {
         return this._value;
     }
 
-    set value(value: boolean) {
+    set value(value: VoteValue) {
         this._value = value;
     }
 
