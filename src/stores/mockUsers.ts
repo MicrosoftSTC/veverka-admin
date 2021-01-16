@@ -26,6 +26,7 @@ import Question from "../utils/entities/Question";
 import Option from "../utils/entities/Option";
 import TestReport from "../utils/entities/TestReport";
 import {TestReportCause} from "../utils/enums/TestReportCause";
+import {writable} from "svelte/store";
 
 enum Generator{
     CASUAL= 5,
@@ -352,6 +353,13 @@ tests.forEach(test => {
         }
     })
 })
+
+// stores
+export const mockedUsers = writable(users);
+export const mockedTests = writable(tests);
+export const mockedCommunities = writable(communities);
+
+// FOLLOWING CODE IS PREVIOUS STATE MODEL, AND IT'S BAD //
 
 // export const mockedUsers = writable(
     // [
