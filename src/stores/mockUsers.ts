@@ -24,6 +24,7 @@ import TestType from "../utils/enums/TestType";
 import TestStatus from "../utils/enums/TestStatus";
 import Question from "../utils/entities/Question";
 import Option from "../utils/entities/Option";
+import {test} from "svelte/types/compiler/config";
 
 enum Generator{
     CASUAL= 5,
@@ -312,6 +313,16 @@ users.forEach(user => {
 let question0 = new Question(getId(),test0,"What is the biggest continent on Earth?")
 
 let questions = [question0];
+
+// assign questions to tests
+tests.forEach(test => {
+    questions.forEach(question => {
+        if(question.test === test){
+            test.questions.push(question);
+        }
+    })
+})
+
 /*
     mocking options
  */
