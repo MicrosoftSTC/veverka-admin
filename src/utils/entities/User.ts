@@ -27,14 +27,14 @@ export default class User{
     private _city: string;
     private _needsReview: boolean;
     private _banned: boolean;
-    private _foundedCommunities: Community[];
-    private _activeCommunityMemberships: CommunityMembership[];
-    private _foundedChannels: Channel[];
-    private _activeChannelMemberships: ChannelMembership[];
-    private _posts: Post[];
-    private _starsGiven: Star[];
-    private _socialSiteMemberships: SocialSiteMembership[];
-    private _createdTest: Test[];
+    private _foundedCommunities: Community[] = [];
+    private _activeCommunityMemberships: CommunityMembership[] = [];
+    private _foundedChannels: Channel[] = [];
+    private _activeChannelMemberships: ChannelMembership[] = [];
+    private _posts: Post[] = [];
+    private _starsGiven: Star[] = [];
+    private _socialSiteMemberships: SocialSiteMembership[] = [];
+    private _createdTest: Test[] = [];
 
     constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean) {
         this._id = id;

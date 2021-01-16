@@ -16,8 +16,8 @@ export default class Community{
     private _subject: Subject;
     private _founded: Date;
     private _founder: User;
-    private _members: User[];
-    private _channels: Channel[];
+    private _members: User[] = [];
+    private _channels: Channel[] = [];
     private _memberships: CommunityMembership[] = [];
 
     constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date, founder: User) {

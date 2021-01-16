@@ -8,7 +8,7 @@ export default class Comment {
     private _created: Date;
     private _publisher: User;
     private _post: Post;
-    private _stars : Star[];
+    private _stars : Star[] = [];
     private _commentParent?: Comment;
 
 

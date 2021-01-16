@@ -13,8 +13,8 @@ export default class Post {
     private _published: Date;
     private _author: User;
     private _channel: Channel;
-    private _votes: Vote[];
-    private _comments: Comment[];
+    private _votes: Vote[] = [];
+    private _comments: Comment[] = [];
 
 
     constructor(id: number, header: string, content: string, type: PostType, published: Date, author: User, channel: Channel) {

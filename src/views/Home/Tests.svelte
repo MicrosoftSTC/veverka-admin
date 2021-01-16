@@ -2,14 +2,12 @@
     import Filter from "../../components/Filter.svelte";
     import Grid from "../../components/Grid.svelte";
 
-    import {mockedTests} from "../../stores/mockTests"
+    import {mockedTests} from "../../stores/central"
     import filter from "../../utils/FilterScript";
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import TestActions from "../../components/TestActions.svelte";
-
-
 
     let selectedEntity;
     let selectedEntitiesLength;

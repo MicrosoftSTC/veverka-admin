@@ -7,7 +7,7 @@ export default class TestReport{
     private _id:number;
     private _issuedAt:Date;
     private _comment:string;
-    private _testReportCauses:TestReportCause[];
+    private _testReportCauses:TestReportCause[] = [];
     private _reporter: User;
     private _reportedTest:Test;
 

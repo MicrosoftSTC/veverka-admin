@@ -4,7 +4,7 @@ export default class SocialSite{
     private _id:number;
     private _name:string;
     private _url:string;
-    private _memberships:SocialSiteMembership[];
+    private _memberships:SocialSiteMembership[] = [];
 
     constructor(id: number, name: string, url: string) {
         this._id = id;

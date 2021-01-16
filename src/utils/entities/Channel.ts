@@ -10,8 +10,8 @@ export default class Channel{
     private _community: Community;
     private _founder: User;
     private _approver: User;
-    private _posts: Post[];
-    private _memberships: ChannelMembership[];
+    private _posts: Post[] = [];
+    private _memberships: ChannelMembership[] = [];
 
     constructor(id: number, name: string, community: Community, founder: User, approver: User) {
         this._id = id;

@@ -12,8 +12,8 @@ export default class Test{
     private _subject:Subject;
     private _testType:TestType;
     private _testStatus:TestStatus;
-    private _testReports:TestReport[];
-    private _questions:Question[];
+    private _testReports:TestReport[] = [];
+    private _questions:Question[] = [];
 
     constructor(id: number, points: number, creator: User, subject: Subject, testType: TestType, testStatus: TestStatus) {
         this._id = id;

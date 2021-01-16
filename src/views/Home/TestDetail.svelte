@@ -9,7 +9,7 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import Radio from 'svelte-materialify/src/components/Radio';
 
-    import {mockedTests} from "../../stores/mockTests";
+    import {mockedTests} from "../../stores/central";
     import Reports from "../../components/Reports.svelte";
 
     export let params = {};

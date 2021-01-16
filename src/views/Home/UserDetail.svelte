@@ -1,8 +1,8 @@
 <script lang="ts">
-    import {mockedUsers} from "../../stores/mockUsers";
+    import {mockedUsers} from "../../stores/central";
     import Reports from "../../components/Reports.svelte";
     import Grid from "../../components/Grid.svelte";
-    import Param from "../../utils/types/Param"
+    import type {Param} from "../../utils/types/Param"
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';

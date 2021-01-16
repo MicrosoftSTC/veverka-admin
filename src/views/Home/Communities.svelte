@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import Filter from "../../components/Filter.svelte";
     import Grid from "../../components/Grid.svelte";
     import CommunityDetail from "../../components/detail/CommunityDetail.svelte"
 
-    import {mockedCommunities} from "../../stores/mockCommunities"
+    import {mockedCommunities} from "../../stores/central"
 
     import filter from "../../utils/FilterScript";
 

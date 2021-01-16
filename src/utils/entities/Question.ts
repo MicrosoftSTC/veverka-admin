@@ -5,7 +5,7 @@ export default class Question{
     private _id:number;
     private _test:Test;
     private _content:string;
-    private _options:Option[];
+    private _options:Option[] = [];
 
 
     constructor(id: number, test: Test, content: string) {
