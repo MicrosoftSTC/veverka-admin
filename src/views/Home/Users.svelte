@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
     import Grid from "../../components/Grid.svelte";
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
     import filter from "../../utils/FilterScript";
-
-    import {mockedUsers} from "../../stores/mockUsers"
+    import {mockedUsers} from "../../stores/central"
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
