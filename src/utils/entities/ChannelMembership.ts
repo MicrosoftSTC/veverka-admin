@@ -7,7 +7,7 @@ import type ChannelMembershipStatus from "../enums/ChannelMembershipStatus";
 import type Channel from "./Channel";
 
 export default class ChannelMembership{
-    @IsPositive() private _id: number;
+    private _id: number;
     private _since: Date;
     private _lastModified: Date;
     private _status: ChannelMembershipStatus;

@@ -8,7 +8,7 @@ import type CommunityPrivacyPolicy from "../enums/CommunityPrivacyPolicy";
 import type CommunityMembership from "./CommunityMembership";
 
 export default class Community{
-    @IsPositive() private _id: number;
+    private _id: number;
     @Length(5,30) private _name: string;
     @Length(5, 30) private _description:string
     private _privacyPolicy: CommunityPrivacyPolicy;
@@ -17,7 +17,6 @@ export default class Community{
     private _founded: Date;
     private _founder: User;
     private _members: User[];
-    private _posts: Post[];
     private _channels: Channel[];
     private _memberships: CommunityMembership[] = [];
 
@@ -93,14 +92,6 @@ export default class Community{
 
     set founder(value: User) {
         this._founder = value;
-    }
-
-    get posts(): Post[] {
-        return this._posts;
-    }
-
-    set posts(value: Post[]) {
-        this._posts = value;
     }
 
     get channels(): Channel[] {

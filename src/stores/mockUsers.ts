@@ -11,6 +11,10 @@ import CommunityMembership from "../utils/entities/CommunityMembership";
 import Channel from "../utils/entities/Channel";
 import ChannelMembership from "../utils/entities/ChannelMembership";
 import ChannelMembershipStatus from "../utils/enums/ChannelMembershipStatus";
+import PostType from "../utils/enums/PostType";
+import Post from "../utils/entities/Post";
+import Comment from "../utils/entities/Comment";
+import Star from "../utils/entities/Star";
 
 enum Generator{
     CASUAL= 5,
@@ -151,6 +155,7 @@ users.forEach(user => {
     })
 })
 
+// assigning memberships to channels
 channels.forEach(channel => {
     channelMemberships.forEach(channelMembership => {
         if(channel === channelMembership.channel){
@@ -159,6 +164,72 @@ channels.forEach(channel => {
     })
 })
 
+/*
+    posts are assigned to the channel that user is member in
+ */
+let post0 = new Post(getId(), "Jak si postavit skleník", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user2, channel0);
+let post1 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user2, channel0);
+let post2 = new Post(getId(), "Jak hacknout bakaláře", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user2, channel0);
+let post3 = new Post(getId(), "Jak opravit převodovku", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user2, channel0);
+let post4 = new Post(getId(), "Upečme dort ve 3 krocích", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user2, channel0);
+let post5 = new Post(getId(), "Krocan jako pochutina", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user2, channel1);
+let post6 = new Post(getId(), "Opravujeme plechvou střechu", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user8, channel2);
+let post7 = new Post(getId(), "Připravit pochutinu zvládne každý", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user8, channel3);
+let post8 = new Post(getId(), "Matematika, logaritmická funkce", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user8, channel4);
+let post9 = new Post(getId(), "Matematika, inverzní funkce", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user3, channel6);
+let post10 = new Post(getId(), "Fyzika, Brownův pohyb", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user3, channel7);
+let post11 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user8, channel3);
+let post12 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user8, channel3);
+let post13 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user8, channel4);
+let post14 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.INFORMATIVE, ranDat(getId(), getId()), user2, channel1);
+let post15 = new Post(getId(), null, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem", PostType.CASUAL, ranDat(getId(), getId()), user2, channel0);
+
+let posts = [post0,post1,post2,post3,post4,post5,post6,post7,post8,post9,post10,post11,post12,post13,post14,post15]
+
+// assigning posts to users
+users.forEach(user => {
+    posts.forEach(post => {
+        if(post.author === user){
+            user.posts.push(post);
+        }
+    })
+})
+
+// assigning posts to channels
+channels.forEach(channel => {
+    posts.forEach(post => {
+        if(channel === post.channel){
+            channel.posts.push(post);
+        }
+    })
+})
+
+// @ts-ignore
+let comment0 = new Comment(getId(), "Tohle je fakt dobrý příspěvek", ranDat(getId(), getId()), user2, post0, null);
+
+let comments : Comment[] = [comment0];
+
+// assigning comments to post
+posts.forEach(post => {
+    comments.forEach(comment => {
+        if(comment.post === post){
+            post.comments.push(comment);
+        }
+    })
+})
+
+let star0 = new Star(getId(), user2, ranDat(getId(), getId()), comment0);
+
+let stars = [star0]
+
+// assigning stars to comments
+comments.forEach(comment => {
+    stars.forEach(star => {
+        if (star.comment === comment) {
+            comment.stars.push(star);
+        }
+    })
+})
 
 // export const mockedUsers = writable(
     // [

@@ -6,8 +6,8 @@ import type User from "./User";
 import type Comment from "./Comment";
 
 export default class Post {
-    @IsPositive() private _id: number;
-    private _header: string;
+    private _id: number;
+    private _header?: string;
     private _content: string;
     private _type: PostType;
     private _published: Date;
@@ -17,7 +17,7 @@ export default class Post {
     private _comments: Comment[];
 
 
-    constructor(id: number, header: string, content: string, type: PostType, published: Date, author: User, channel: Channel, votes: Vote[]) {
+    constructor(id: number, header: string, content: string, type: PostType, published: Date, author: User, channel: Channel) {
         this._id = id;
         this._header = header;
         this._content = content;
@@ -25,7 +25,6 @@ export default class Post {
         this._published = published;
         this._author = author;
         this._channel = channel;
-        this._votes = votes;
     }
 
     get id(): number {
@@ -90,5 +89,13 @@ export default class Post {
 
     set votes(value: Vote[]) {
         this._votes = value;
+    }
+
+    get comments(): Comment[] {
+        return this._comments;
+    }
+
+    set comments(value: Comment[]) {
+        this._comments = value;
     }
 }

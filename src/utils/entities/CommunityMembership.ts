@@ -5,7 +5,7 @@ import type Role from "../enums/Role";
 import type User from "./User";
 
 export default class CommunityMembership{
-    @IsPositive() private _id: number;
+    private _id: number;
     private _since: Date;
     private _lastModified: Date;
     private _role: Role;

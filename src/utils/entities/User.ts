@@ -8,6 +8,7 @@ import type Community from "./Community";
 import type Channel from "./Channel";
 import type ChannelMembership from "./ChannelMembership";
 import type Star from "./Star";
+import type Post from "./Post";
 
 export default class User{
     private _id: number;
@@ -28,6 +29,7 @@ export default class User{
     private _activeCommunityMemberships: CommunityMembership[];
     private _foundedChannels: Channel[];
     private _activeChannelMemberships: ChannelMembership[];
+    private _posts: Post[];
     private _starsGiven: Star[];
 
     constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean) {
@@ -198,6 +200,14 @@ export default class User{
 
     set starsGiven(value: Star[]) {
         this._starsGiven = value;
+    }
+
+    get posts(): Post[] {
+        return this._posts;
+    }
+
+    set posts(value: Post[]) {
+        this._posts = value;
     }
 }
 // export default User;

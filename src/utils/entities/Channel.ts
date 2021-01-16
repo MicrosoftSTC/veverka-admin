@@ -5,7 +5,7 @@ import type User from "./User";
 import type ChannelMembership from "./ChannelMembership";
 
 export default class Channel{
-    @IsPositive() private _id: number;
+    private _id: number;
     @Length(5, 20) private _name: string;
     private _community: Community;
     private _founder: User;
