@@ -54,7 +54,7 @@
     const dispatch = createEventDispatcher();
 
     function selectEntity(entity : User | Community | Test | Post) : void{
-        if(entity instanceof User){
+        if(entity instanceof User && selectedEntities[0] instanceof User){
             let name = entity.username;
             let entityIsNew = selectedEntities.findIndex(user => user.username === name);
             if (entityIsNew > -1) {
@@ -87,15 +87,15 @@
 <Card class="mt-3" outlined style="min-width: 100%">
     <div class="pl-4 pr-4 pt-3">
         <span class="text-overline">
-            {label}
+            {props.label}
         </span>
     </div>
     <CardText>
         <div class="ml-auto mr-auto elevation-2" style="width:100%">
-            {#if gridType === "users"}
+            {#if props.gridType === GridType.USERS}
                 <ListItemGroup multiple>
-                {#each data as user}
-                    <ListItem bind:disabled on:click={() => selectEntity(user)} value="{user.username}">
+                {#each props.data as user}
+                    <ListItem bind:disabled={props.disabled} on:click={() => selectEntity(user)} value="{user.username}">
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
                     </span>
@@ -115,9 +115,9 @@
                     </ListItem>
                 {/each}
                 </ListItemGroup>
-            {:else if gridType === "communities"}
+            {:else if props.gridType === GridType.COMMUNITIES}
                 <ListItemGroup>
-                {#each data as community}
+                {#each props.data as community}
                     <ListItem on:click={() => selectEntity(community)} value="{community.name}">
                     <span slot="prepend" class="mt-n2">
                         <Avatar size={40}><img src="{`//picsum.photos/${community.members}`}" alt="profile"/></Avatar>
@@ -140,9 +140,9 @@
                     </ListItem>
                 {/each}
                 </ListItemGroup>
-            {:else if gridType === "tests"}
+            {:else if props.gridType === GridType.TESTS}
                 <ListItemGroup>
-                    {#each data as test}
+                    {#each props.data as test}
                         <ListItem on:click={() => selectEntity(test)} value="{test.name}">
                         <span slot="prepend" class="mt-n2">
                             <Avatar size={40}><img src="{`//picsum.photos/${test.points}`}" alt="profile"/></Avatar>
@@ -167,18 +167,18 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
-            {:else if gridType === "questions"}
+            {:else if props.gridType === GridType.QUESTIONS}
                 <ListItemGroup>
-                        {#each data as question}
+                        {#each props.data as question}
                             <ListItem on:click={() => selectEntity(question)} value="{question.content}">
                                 {question.content}
                                 <Chip size="x-small" class="grey white-text">{question.answers.length} Answers</Chip>
                             </ListItem>
                         {/each}
                 </ListItemGroup>
-            {:else if gridType === "reports"}
+            {:else if props.gridType === GridType.REPORTS}
                 <ListItemGroup>
-                    {#each data as report}
+                    {#each props.data as report}
                         <ListItem on:click={() => selectEntity(report)} value="{report.reporter.username}">
                             {#if report.reporter.username !== username}
                                 <!-- [HARDCODED LINK :)] -->
@@ -211,9 +211,9 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
-            {:else if gridType === "posts"}
+            {:else if props.gridType === GridType.POSTS}
                 <ListItemGroup>
-                    {#each data as post}
+                    {#each props.data as post}
                         <ListItem on:click={() => selectEntity(post)}>
                             {post.headline}
                             <Chip label class="ma-2 green accent-2 white-text">{post.content.split(" ").length} words</Chip>
@@ -233,9 +233,9 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
-            {:else if gridType === "stars"}
+            {:else if props.gridType === GridType.STARS}
                 <ListItemGroup>
-                    {#each data as star}
+                    {#each props.data as star}
                         <ListItem on:click={() => selectEntity(star)}>
                             <Chip label class="ma-2 deep purple white-text">{star.type.toUpperCase()}</Chip>
                             <Chip label class="ma-2 light-blue accent-3 white-text">
@@ -246,7 +246,7 @@
                         </ListItem>
                     {/each}
                 </ListItemGroup>
-            {:else if gridType === "activity"}
+            {:else if props.gridType === GridType.ACTIVITY}
                 <p>Graph should be here</p>
             {:else}
                 <p>Error</p>
