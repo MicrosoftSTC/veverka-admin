@@ -4,7 +4,7 @@
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
-    import {filterUsers} from "../../utils/FilterScript"
+    import {filterEntities} from "../../utils/FilterScript"
     import {mockedUsers} from "../../stores/central"
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
@@ -28,7 +28,7 @@
     }
 
     function filterHandler(event) {
-        activeUsersInGrid = filterUsers(allUsers,event);
+        activeUsersInGrid = filterEntities<User>(allUsers,event);
     }
 
     let gridProps:GridProps;
