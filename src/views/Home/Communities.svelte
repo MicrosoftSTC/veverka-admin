@@ -10,7 +10,7 @@
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
 
-    // variable to hold state of entities selected in Grid component
+    // variable to hold state of entity selected in Grid component
     let selectedEntity;
     let gridType = "communities";
     let actionAble = false;

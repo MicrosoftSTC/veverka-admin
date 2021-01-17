@@ -39,20 +39,23 @@
     const dispatch = createEventDispatcher();
 
     function selectEntity(entity : User | Community | Test | Post) : void{
-        if(entity instanceof User && selectedEntities[0] instanceof User){
-            let name = entity.username;
-            let entityIsNew = selectedEntities.findIndex(user => user.username === name);
-            if (entityIsNew > -1) {
-                selectedEntities = selectedEntities.filter(en => en.username !== name);
-            } else {
-                selectedEntities = [...selectedEntities, entity]
-            }
-        }else{
+        // if(entity instanceof User && selectedEntities[0] instanceof User){
+        //     let name = entity.username;
+        //     let entityIsNew = selectedEntities.findIndex(user => user.username === name);
+        //     if (entityIsNew > -1) {
+        //         selectedEntities = selectedEntities.filter(en => en.username !== name);
+        //     } else {
+        //         selectedEntities = [...selectedEntities, entity]
+        //     }
+        // }else{
             if(entitySelectedInGrid && selectedEntity.id === entity.id) {
                 // unselect currently selected entity
                 selectedEntity = null;
                 entitySelectedInGrid = false;
             }else{
+                if(entity instanceof User){
+                    selectedEntity = entity;
+                }
                 if(entity instanceof Community){
                     selectedEntity = entity;
                 }else if(entity instanceof Test){
@@ -62,7 +65,7 @@
                 }
                 entitySelectedInGrid = true;
             }
-        }
+        // }
     }
 
     function entitySelected(selected) {
@@ -78,7 +81,7 @@
     <CardText>
         <div class="ml-auto mr-auto elevation-2" style="width:100%">
             {#if props.gridType === GridType.USERS}
-                <ListItemGroup multiple>
+                <ListItemGroup>
                 {#each props.data as user}
                     <ListItem bind:disabled={props.disabled} on:click={() => selectEntity(user)} value="{user.username}">
                     <span slot="prepend" class="mt-n2">

@@ -4,45 +4,33 @@
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
-    import filter from "../../utils/FilterScript";
+    // import filter from "../../utils/FilterScript";/
     import {mockedUsers} from "../../stores/central"
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import GridType from "../../utils/enums/GridType";
+    import User from "../../utils/entities/User";
 
-    // variable to hold state of entities selected in Grid component
-    let selectedEntities = [];
-    let gridType : string = "users";
-
-    let allUsers = [];
-    mockedUsers.subscribe(u => {
-        allUsers = u;
+    // variable to hold state of entity selected in Grid component
+    let selectedEntity;
+    let gridType = "communities";
+    let actionAble = false;
+    let allUsers : User[];
+    mockedUsers.subscribe(communities => {
+        allUsers = communities;
     });
-
     let activeUsersInGrid = allUsers;
-
-    let maxUserScoreIndex = 0;
-
-    $:activeUsersInGrid.forEach((user, index) => {
-        if(activeUsersInGrid[maxUserScoreIndex]){
-            if(activeUsersInGrid[index].points > activeUsersInGrid[maxUserScoreIndex].points){
-                maxUserScoreIndex = index;
-            }
-        }else{
-            maxUserScoreIndex = 0;
-        }
-    })
+    let maxPoints : number = Math.max(...allUsers.map(user => user.points));
 
     function handleEntitySelect(event) {
-        selectedEntities = event.detail;
+        selectedEntity = event.detail;
     }
 
     function filterHandler(event) {
-        activeUsersInGrid = filter(allUsers,event);
+        console.log(event);
+        // activeUsersInGrid = filter(allUsers,event);
     }
-
-    $:console.log(selectedEntities);
 
     let gridProps:GridProps = {
         gridType: GridType.USERS,
@@ -52,13 +40,12 @@
     };
 </script>
 <h3 class="text-h4">Users administration</h3>
-<Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{activeUsersInGrid[maxUserScoreIndex] ? activeUsersInGrid[maxUserScoreIndex].points : 99999999999}"/>
+<Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}"/>
 <Row>
     <Col cols="{8}">
-<!--        <Grid {gridType} data="{activeUsersInGrid}" on:entity-selected={handleEntitySelect}/>-->
         <Grid props="{gridProps}" on:entity-selected={handleEntitySelect}/>
     </Col>
     <Col cols="{4}">
-        <UserActions {selectedEntities}/>
+<!--        <UserActions {selectedEntities}/>-->
     </Col>
 </Row>
