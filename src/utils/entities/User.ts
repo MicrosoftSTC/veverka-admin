@@ -1,4 +1,4 @@
-import {Length, IsEmail, IsDate, MinLength} from "class-validator";
+import {Length, IsEmail, IsDate, MinLength, IsPositive} from "class-validator";
 
 import type EmailStatus from "../enums/EmailStatus";
 import type Subject from "../enums/Subject";
@@ -35,8 +35,10 @@ export default class User{
     private _starsGiven: Star[] = [];
     private _socialSiteMemberships: SocialSiteMembership[] = [];
     private _createdTest: Test[] = [];
+    @IsPositive()
+    private _points:number;
 
-    constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean) {
+    constructor(id: number, username: string, email: string, emailStatus: EmailStatus, firstName: string, lastName: string, joined: Date, lastModified: Date, bio: string, favouriteSubject: Subject, country: Country, city: string, needsReview: boolean, banned: boolean, points:number) {
         this._id = id;
         this._username = username;
         this._email = email;
@@ -51,6 +53,7 @@ export default class User{
         this._city = city;
         this._needsReview = needsReview;
         this._banned = banned;
+        this._points = points;
     }
 
     get id(): number {
@@ -228,5 +231,12 @@ export default class User{
     set createdTest(value: Test[]) {
         this._createdTest = value;
     }
+
+    get points(): number {
+        return this._points;
+    }
+
+    set points(value: number) {
+        this._points = value;
+    }
 }
-// export default User;

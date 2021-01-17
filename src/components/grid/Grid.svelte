@@ -82,20 +82,20 @@
                 {#each props.data as user}
                     <ListItem bind:disabled={props.disabled} on:click={() => selectEntity(user)} value="{user.username}">
                     <span slot="prepend" class="mt-n2">
-                        <Avatar size={40}><img src="{`//picsum.photos/${user.num}`}" alt="profile"/></Avatar>
+                        <Avatar size={40}><img src="{`//picsum.photos/${user.id}`}" alt="profile"/></Avatar>
                     </span>
                         <a use:link={Routes.userDetail + user.id}>{user.username}</a>
                         <Chip size="x-small" class="grey white-text">{user.points} Points</Chip>
                         {#if user.banned}
-                            <Chip class="ma-2 red white-text">Banned</Chip>
+                            <Chip size="x-small" class="ma-2 red white-text">Banned</Chip>
                         {:else if user.needsReview}
-                            <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
+                            <Chip size="x-small" class="ma-2 orange accent-3 white-text">Needs Review</Chip>
                         {/if}
-                        {#if user.founder}
-                            <Chip label class="ma-2 light-blue accent-3 white-text">Founder</Chip>
+                        {#if user.foundedCommunities.length > 0}
+                            <Chip size="x-small" label class="ma-2 light-blue accent-3 white-text">Founder</Chip>
                         {/if}
                         <span slot="subtitle">
-                        <p>{user.name}, {user.joined}</p>
+                        <p>{user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) + " " + user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}, {user.joined}</p>
                     </span>
                     </ListItem>
                 {/each}
@@ -208,7 +208,7 @@
                             {#if post.banned}
                                 <Chip class="ma-2 red white-text">Banned</Chip>
                             {:else if post.needsReview}
-                                <Chip label class="ma-2 orange accent-3 white-text">Needs Review</Chip>
+                                <Chip class="ma-2 orange accent-3 white-text">Needs Review</Chip>
                             {/if}
                             <Chip label class="ma-2 light-blue accent-3 white-text">
                                 <a use:link={Routes.userDetail + Math.random().toString().slice(2,3)}>
