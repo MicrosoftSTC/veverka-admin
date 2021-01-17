@@ -14,18 +14,31 @@ interface FilterConstraints{
     secondInputValue: string, // no idea what this is at the moment
 }
 
-export default function filter(data:User[] | Community[] | Test[] | Post[], event:CustomEvent){
+export default function filterUsers(data:User[], event:CustomEvent) : User[]{
 
     let filterConstraints:FilterConstraints = event.detail;
 
     // decide which entity to filter
     if(data[0] instanceof User){
-
+        if(filterConstraints.textInputValue !== ""){
+            // @ts-ignore
+            data = data.filter(user => user.username.startsWith(filterConstraints.textInputValue));
+        }
+        if(filterConstraints.filterByRadio !== 3){
+            if(filterConstraints.filterByRadio === 1){
+                // @ts-ignore
+                data = data.filter(user => user.needsReview);
+            }
+        }
     }else if(data[0] instanceof Community){
 
     }else if(data[0] instanceof Test){
 
     }
+
+    console.log(data);
+
+    return data;
 
     // let fields;
 

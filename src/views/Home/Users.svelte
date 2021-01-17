@@ -4,7 +4,7 @@
     import Filter from "../../components/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
-    // import filter from "../../utils/FilterScript";/
+    import filter from "../../utils/FilterScript"
     import {mockedUsers} from "../../stores/central"
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
@@ -28,16 +28,18 @@
     }
 
     function filterHandler(event) {
-        console.log(event);
-        // activeUsersInGrid = filter(allUsers,event);
+        activeUsersInGrid = filter(allUsers,event);
     }
 
-    let gridProps:GridProps = {
+    let gridProps:GridProps;
+
+    $:gridProps ={
         gridType: GridType.USERS,
         data: activeUsersInGrid,
         label: "Users grid",
         disabled: false,
-    };
+    }
+
 </script>
 <h3 class="text-h4">Users administration</h3>
 <Filter filterType="{'users'}" on:filter-event={filterHandler} maxValueOnSlider="{maxPoints}"/>
