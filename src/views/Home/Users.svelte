@@ -28,7 +28,7 @@
     }
 
     function filterHandler(event) {
-        activeUsersInGrid = filterEntities<User>(allUsers,event);
+        activeUsersInGrid = filterEntities<User>(allUsers,event.detail);
     }
 
     let gridProps:GridProps;

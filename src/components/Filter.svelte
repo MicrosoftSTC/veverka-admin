@@ -1,5 +1,5 @@
-<script>
-    import { createEventDispatcher } from 'svelte';
+<script lang="ts">
+    import {createEventDispatcher} from 'svelte';
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
@@ -11,88 +11,131 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
-    export let filterType; // users or communities
-    export let maxValueOnSlider;
-    export let maxValueOnSecondSlider;
+    import type {FilterByRadio, FilterBySwitch} from "../utils/FilterScript";
+    import {FilterByRadio, FilterBySwitch, FilterConstraints, Order} from "../utils/FilterScript";
 
-    // filter-specific labels etc.
-    let textInputLabel;
-    let secondTextInputLabel;
-    let sliderLabel;
-    let secondSliderLabel;
-    let switchLabel;
-    let radioLabels;
-    let selectOptions;
+    export enum FilterType{
+        USERS, COMMUNITY, TEST, POST
+    }
+
+    export interface FilterProps {
+        filterType:FilterType,
+        maxValueOnSlider:number,
+        maxValueOnSecondSlider:number;
+    }
+
+
+    export let props:FilterProps;
+
+    // export let filterType; // users or communities
+    // export let maxValueOnSlider;
+    // export let maxValueOnSecondSlider;
+
+    let showFilter = false;
 
     const dispatch = createEventDispatcher();
-    let showFilter = false;
-    let initialMaxOnSlider = maxValueOnSlider;
-    let initialMaxOnSecondSlider = maxValueOnSecondSlider;
+    let initialMaxOnSlider = props.maxValueOnSlider;
+    let initialMaxOnSecondSlider = props.maxValueOnSecondSlider;
     let initialValueOnSlider = [0, initialMaxOnSlider];
-    let initialValueSecondOnSlider = [0, maxValueOnSecondSlider];
+    let initialValueSecondOnSlider = [0, initialMaxOnSecondSlider];
     let selectedValue;
-    let textInputValue = "";
-    let secondTextInputValue = "";
-    let filterBySwitch = false;
-    let filterByRadio = 3;
-    let filterConstraints = {
-        "textInputValue": "",
-        "secondTextInputValue": "",
-        "secondInputValue": "",
-        "filterBySwitch": false,
-        "filterByRadio": 3,
-        "order": "none",
-        "pointsScale": [0, initialMaxOnSlider],
-        "secondPointsScale":[0, initialMaxOnSecondSlider]
-    };
 
-    switch(filterType){
-        case "users":
-            textInputLabel = "Search by username";
-            sliderLabel = "Restrict points";
+    // internal state of filter
+    let filterConstraints : FilterConstraints = {
+        filterByRadio: FilterByRadio.SHOW_ALL,
+        filterBySwitch: FilterBySwitch.SHOW_ALL,
+        order: [Order.NONE],
+        pointsScale: [0, props.maxValueOnSlider],
+        secondPointsScale: [0, props.maxValueOnSecondSlider],
+        textInputValue: "",
+        secondTextInputValue: "",
+        secondInputValue: "",
+    }
+
+    // set labels
+    let textInputLabel:TextInputLabel;
+    let secondTextInputLabel:SliderLabel;
+    let sliderLabel:SwitchLabel;
+    let secondSliderLabel:string;
+    let switchLabel:string;
+    let radioLabels:string;
+    let selectOptions:string;
+
+    enum TextInputLabel{
+        SEARCH_BY_USERNAME = "Search by username"
+    }
+
+    enum SliderLabel{
+        RESTRICT_POINTS = "Restrict points"
+    }
+
+    enum SwitchLabel{
+        SHOW_ONLY_FOUNDERS = "Show only founders"
+    }
+
+    switch (props.filterType) {
+        case FilterType.USERS:
+            textInputLabel = TextInputLabel.SEARCH_BY_USERNAME;
+            sliderLabel = SwitchLabel.SHOW_ONLY_FOUNDERS;
             switchLabel = "Show only group founders";
-            radioLabels = ["Show only reported", "Show only non-reported", "Show all", "Show only banned"];
-            selectOptions = [
-                { name: 'Username Asc', value: 'Username Asc' },
-                { name: 'Username Desc', value: 'Username Desc' },
-                { name: 'Joined Oldest', value: 'Joined Oldest' },
-                { name: 'Joined Newest', value: 'Joined Newest' },
-                { name: "Points Acs", value: "Points Acs"},
-                { name: "Points Desc", value: 'Points Desc'}
-            ];
             break;
-        case "communities":
-            textInputLabel = "Search by community name";
-            secondTextInputLabel = "Search by founder username";
-            sliderLabel = "Restrict members";
-            radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
-            selectOptions = [
-                { name: 'Name Asc', value: 'Name Asc' },
-                { name: 'Name Desc', value: 'Name Desc' },
-                { name: 'Since Oldest', value: 'Since Oldest' },
-                { name: 'Since Newest', value: 'Since Newest' },
-                { name: 'Members Asc', value: 'Members Asc' },
-                { name: 'Members Desc', value: 'Members Desc' },
-            ];
+        case FilterType.COMMUNITY:
             break;
-        case "tests":
-            textInputLabel = "Search by test name";
-            secondTextInputLabel = "Search by creator username";
-            sliderLabel = "Restrict points";
-            secondSliderLabel = "Restrict users completed";
-            radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
-            selectOptions = [
-                { name: 'Name Asc', value: 'Name Asc' },
-                { name: 'Name Desc', value: 'Name Desc' },
-                { name: 'Created Oldest', value: 'Created Oldest' },
-                { name: 'Created Newest', value: 'Created Newest' },
-                { name: "Points Acs", value: "Points Acs"},
-                { name: "Points Desc", value: 'Points Desc'},
-                {name: "Questions Count Asc", value: "Questions Asc"},
-                {name: "Questions Count Desc", value: "Questions Desc"},
-            ];
+        case FilterType.TEST:
+            break;
+        case FilterType.POST:
             break;
     }
+
+
+
+    // switch(filterType){
+    //     case "users":
+    //         textInputLabel = "Search by username";
+    //         sliderLabel = "Restrict points";
+    //         switchLabel = "Show only group founders";
+    //         radioLabels = ["Show only reported", "Show only non-reported", "Show all", "Show only banned"];
+    //         selectOptions = [
+    //             { name: 'Username Asc', value: 'Username Asc' },
+    //             { name: 'Username Desc', value: 'Username Desc' },
+    //             { name: 'Joined Oldest', value: 'Joined Oldest' },
+    //             { name: 'Joined Newest', value: 'Joined Newest' },
+    //             { name: "Points Acs", value: "Points Acs"},
+    //             { name: "Points Desc", value: 'Points Desc'}
+    //         ];
+    //         break;
+    //     case "communities":
+    //         textInputLabel = "Search by community name";
+    //         secondTextInputLabel = "Search by founder username";
+    //         sliderLabel = "Restrict members";
+    //         radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
+    //         selectOptions = [
+    //             { name: 'Name Asc', value: 'Name Asc' },
+    //             { name: 'Name Desc', value: 'Name Desc' },
+    //             { name: 'Since Oldest', value: 'Since Oldest' },
+    //             { name: 'Since Newest', value: 'Since Newest' },
+    //             { name: 'Members Asc', value: 'Members Asc' },
+    //             { name: 'Members Desc', value: 'Members Desc' },
+    //         ];
+    //         break;
+    //     case "tests":
+    //         textInputLabel = "Search by test name";
+    //         secondTextInputLabel = "Search by creator username";
+    //         sliderLabel = "Restrict points";
+    //         secondSliderLabel = "Restrict users completed";
+    //         radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
+    //         selectOptions = [
+    //             { name: 'Name Asc', value: 'Name Asc' },
+    //             { name: 'Name Desc', value: 'Name Desc' },
+    //             { name: 'Created Oldest', value: 'Created Oldest' },
+    //             { name: 'Created Newest', value: 'Created Newest' },
+    //             { name: "Points Acs", value: "Points Acs"},
+    //             { name: "Points Desc", value: 'Points Desc'},
+    //             {name: "Questions Count Asc", value: "Questions Asc"},
+    //             {name: "Questions Count Desc", value: "Questions Desc"},
+    //         ];
+    //         break;
+    // }
 
     function filterEvent(fieldName, value){
         filterConstraints = {...filterConstraints, [fieldName]:value};
@@ -171,7 +214,7 @@
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
                     {#each radioLabels as label, index}
-                        <Radio bind:group={filterByRadio} value={++index}>{label}</Radio>
+                        <Radio bind:group={filterByRadio} value={FilterByRadio[index]}>{label}</Radio>
                     {/each}
                 </div>
             </Col>

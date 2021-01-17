@@ -3,10 +3,22 @@ import Community from "./entities/Community";
 import Test from "./entities/Test";
 import type Post from "./entities/Post";
 
-interface FilterConstraints{
-    filterByRadio: number,
-    filterBySwitch: boolean,
-    order: User[],
+export enum FilterByRadio{
+    SHOW_ONLY_REPORTED, SHOW_ONLY_NON_REPORTED, SHOW_ALL, SHOW_ONLY_BANNED
+}
+
+export enum FilterBySwitch{
+    SHOW_ONLY_FOUNDERS, SHOW_ALL
+}
+
+export enum Order{
+    NONE, POINTS_ASC, POINTS_DESC, USERNAME_ASC, USERNAME_DESC
+}
+
+export interface FilterConstraints{
+    filterByRadio: FilterByRadio,
+    filterBySwitch: FilterBySwitch,
+    order: Order[],
     pointsScale: number[],
     secondPointsScale: number[],
     textInputValue: string,
@@ -14,9 +26,7 @@ interface FilterConstraints{
     secondInputValue: string, // no idea what this is at the moment
 }
 
-export function filterEntities<T>(data:T[], event:CustomEvent) : T[]{
-
-    let filterConstraints:FilterConstraints = event.detail;
+export function filterEntities<T>(data:T[], filterConstraints:FilterConstraints) : T[]{
 
     // decide which entity to filter
     if(data[0] instanceof User){
@@ -24,10 +34,16 @@ export function filterEntities<T>(data:T[], event:CustomEvent) : T[]{
             // @ts-ignore
             data = data.filter(user => user.username.startsWith(filterConstraints.textInputValue));
         }
-        if(filterConstraints.filterByRadio !== 3){
-            if(filterConstraints.filterByRadio === 1){
+        if(filterConstraints.filterByRadio !== FilterByRadio.SHOW_ALL){
+            if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_REPORTED){
                 // @ts-ignore
                 data = data.filter(user => user.needsReview);
+            }else if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_NON_REPORTED){
+                // @ts-ignore
+                data = data.filter(user => !user.needsReview);
+            }else if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_BANNED){
+                // @ts-ignore
+                data = data.filter(user => user.banned);
             }
         }
     }else if(data[0] instanceof Community){
