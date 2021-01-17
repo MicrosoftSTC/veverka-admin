@@ -1,6 +1,6 @@
 <script>
     import Filter from "../../components/Filter.svelte";
-    import Grid from "../../components/Grid.svelte";
+    import Grid from "../../components/grid/Grid.svelte";
 
     import {mockedTests} from "../../stores/central"
     import filter from "../../utils/FilterScript";

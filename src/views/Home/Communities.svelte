@@ -1,6 +1,6 @@
 <script lang="ts">
     import Filter from "../../components/Filter.svelte";
-    import Grid from "../../components/Grid.svelte";
+    import Grid from "../../components/grid/Grid.svelte";
     import CommunityDetail from "../../components/detail/CommunityDetail.svelte"
 
     import {mockedCommunities} from "../../stores/central"

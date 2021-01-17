@@ -1,7 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher} from 'svelte';
     import {link} from 'svelte-spa-router'
-    import {Routes} from "../views/Home/homeRoutes"
+    import {Routes} from "../../views/Home/homeRoutes"
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
@@ -9,22 +9,16 @@
     import ListItemGroup from "svelte-materialify/src/components/List/ListItemGroup.svelte"
     import Avatar from "svelte-materialify/src/components/Avatar/Avatar.svelte"
     import Chip from 'svelte-materialify/src/components/Chip';
-    import GridType from "../utils/enums/GridType";
-    import User from "../utils/entities/User";
-    import Community from "../utils/entities/Community";
-    import Test from "../utils/entities/Test";
-    import Post from "../utils/entities/Post";
+    import GridType from "../../utils/enums/GridType";
+    import User from "../../utils/entities/User";
+    import Community from "../../utils/entities/Community";
+    import Test from "../../utils/entities/Test";
+    import Post from "../../utils/entities/Post";
+    import type GridProps from "./GridProps";
 
-    export interface Props {
-        gridType: GridType;
-        data: User[] | Community[] | Test[] | Post[];
-        username?:string;
-        reportType?:string;
-        label:string;
-        disabled:boolean;
-    }
+    export let props:GridProps;
 
-    export let props:Props;
+    $:console.log(props);
 
     // register selectedEntity and selectedEntities variable globally
     if(props.data instanceof User){
@@ -41,15 +35,6 @@
         var selectedEntities : Post[];
     }
     let entitySelectedInGrid = false;
-
-    // replace these lines of code, props are placed into interface
-    // export let gridType;
-    // export let data = [];
-    // export let username; // used in deciding whether to put link on grid or not
-    // export let reportType = "received";
-    // export let label = "board";
-    // export let disabled = false;
-
 
     const dispatch = createEventDispatcher();
 

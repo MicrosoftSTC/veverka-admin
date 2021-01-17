@@ -1,5 +1,5 @@
 <script>
-    import Grid from "../../components/Grid.svelte";
+    import Grid from "../../components/grid/Grid.svelte";
     import QuestionDetail from "../../components/detail/QuestionDetail.svelte";
     import ReportDetail from "../../components/detail/ReportDetail.svelte";
 

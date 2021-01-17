@@ -1,7 +1,7 @@
 <script lang="ts">
     import {mockedUsers} from "../../stores/central";
     import Reports from "../../components/Reports.svelte";
-    import Grid from "../../components/Grid.svelte";
+    import Grid from "../../components/grid/Grid.svelte";
     import type {Param} from "../../utils/types/Param"
 
     import Card from 'svelte-materialify/src/components/Card/Card.svelte';
