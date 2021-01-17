@@ -3,7 +3,7 @@
     import Grid from "../../components/grid/Grid.svelte";
 
     import {mockedTests} from "../../stores/central"
-    import filter from "../../utils/FilterScript";
+    // import filter from "../../utils/FilterScript";
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
@@ -23,7 +23,7 @@
     let maxCompletedUsers = Math.max(...allTests.map(c => c.completedUsers.length));
 
     function filterHandler(event) {
-        activeTestsInGrid = filter(allTests, event)
+        // activeTestsInGrid = filter(allTests, event)
     }
 
     function handleEntitySelect(event) {

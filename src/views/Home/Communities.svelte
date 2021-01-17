@@ -5,7 +5,7 @@
 
     import {mockedCommunities} from "../../stores/central"
 
-    import filter from "../../utils/FilterScript";
+    // import filter from "../../utils/FilterScript";
 
     import Col from 'svelte-materialify/src/components/Grid/Col.svelte';
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
@@ -26,7 +26,7 @@
     }
 
     function filterHandler(event) {
-        activeCommunitiesInGrid = filter(allCommunities,event);
+        // activeCommunitiesInGrid = filter(allCommunities,event);
     }
 </script>
 <h3 class="text-h4">Community administration</h3>

@@ -14,7 +14,7 @@ interface FilterConstraints{
     secondInputValue: string, // no idea what this is at the moment
 }
 
-export default function filterUsers(data:User[], event:CustomEvent) : User[]{
+export function filterUsers(data:User[], event:CustomEvent) : User[]{
 
     let filterConstraints:FilterConstraints = event.detail;
 
