@@ -9,10 +9,9 @@ export default class Comment {
     private _publisher: User;
     private _post: Post;
     private _stars : Star[] = [];
-    private _commentParent?: Comment;
+    private _commentParent: Comment | null;
 
-
-    constructor(id: number, content: string, created: Date, publisher: User, post: Post, commentParent: Comment) {
+    constructor(id: number, content: string, created: Date, publisher: User, post: Post, commentParent: Comment | null) {
         this._id = id;
         this._content = content;
         this._created = created;
@@ -70,11 +69,11 @@ export default class Comment {
         this._stars = value;
     }
 
-    get commentParent(): Comment {
+    get commentParent(): Comment | null{
         return this._commentParent;
     }
 
-    set commentParent(value: Comment) {
+    set commentParent(value: Comment | null) {
         this._commentParent = value;
     }
 }

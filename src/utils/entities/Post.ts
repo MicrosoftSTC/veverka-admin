@@ -7,7 +7,7 @@ import type Comment from "./Comment";
 
 export default class Post {
     private _id: number;
-    private _header?: string;
+    private _header: string | null;
     private _content: string;
     private _type: PostType;
     private _published: Date;
@@ -17,7 +17,7 @@ export default class Post {
     private _comments: Comment[] = [];
 
 
-    constructor(id: number, header: string, content: string, type: PostType, published: Date, author: User, channel: Channel) {
+    constructor(id: number, header: string | null, content: string, type: PostType, published: Date, author: User, channel: Channel) {
         this._id = id;
         this._header = header;
         this._content = content;
@@ -35,11 +35,11 @@ export default class Post {
         this._id = value;
     }
 
-    get header(): string {
+    get header(): string | null {
         return this._header;
     }
 
-    set header(value: string) {
+    set header(value: string | null) {
         this._header = value;
     }
 

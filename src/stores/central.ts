@@ -35,7 +35,7 @@ enum Generator{
 }
 let id = 0;
 
-function ranDat(start, end) : Date{
+function ranDat(start:number, end:number) : Date{
     return new Date(start + Math.random() * (end- start));
 }
 function getId():number{

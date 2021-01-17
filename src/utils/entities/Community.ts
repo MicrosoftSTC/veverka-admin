@@ -20,7 +20,7 @@ export default class Community{
     private _channels: Channel[] = [];
     private _memberships: CommunityMembership[] = [];
 
-    constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date, founder: User) {
+    constructor(id: number, name: string, description: string, _privacyPolicy: CommunityPrivacyPolicy, communityType: CommunityType, subject: Subject, founded: Date, _founder: User) {
         this._id = id;
         this._name = name;
         this._description = description;
@@ -28,6 +28,7 @@ export default class Community{
         this._communityType = communityType;
         this._subject = subject;
         this._founded = founded;
+        this._founder = _founder;
     }
 
     get id(): number {
