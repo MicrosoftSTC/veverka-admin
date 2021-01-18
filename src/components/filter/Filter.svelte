@@ -135,12 +135,13 @@
     }
 
     function filterBySwitchValue(){
-        // switch needs to happen
-        if(props.filterType = FilterType.USERS){
-            if(filterConstraints.filterBySwitch === FilterBySwitch.SHOW_ALL)
+        if(props.filterType === FilterType.USERS){
+            console.log(filterConstraints.filterBySwitch);
+            if(filterConstraints.filterBySwitch === FilterBySwitch.SHOW_ALL){
                 filterConstraints.filterBySwitch = FilterBySwitch.SHOW_ONLY_FOUNDERS;
-            else
+            } else {
                 filterConstraints.filterBySwitch = FilterBySwitch.SHOW_ALL;
+            }
         }
         filterEvent();
     }
@@ -196,7 +197,7 @@
             </Col>
             {#if switchLabel}
             <Col>
-                <Switch on:change={() => filterBySwitchValue()}>{switchLabel}</Switch>
+                <Switch on:change={filterBySwitchValue}>{switchLabel}</Switch>
             </Col>
             {/if}
         </Row>

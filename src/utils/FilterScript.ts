@@ -49,6 +49,9 @@ export function filterEntities<T>(data:T[], filterConstraints:FilterConstraints)
                 data = data.filter(user => user.banned);
             }
         }
+        if(filterConstraints.filterBySwitch !== FilterBySwitch.SHOW_ALL){
+            data = data.filter(user => user.foundedCommunities.length > 0);
+        }
     }else if(data[0] instanceof Community){
 
     }else if(data[0] instanceof Test){
