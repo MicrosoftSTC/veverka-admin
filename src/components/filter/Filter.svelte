@@ -11,9 +11,10 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
-    import type {FilterByRadio, FilterBySwitch, FilterConstraints, Order} from "../../utils/FilterScript";
-    import type {FilterType} from "./FilterType.ts";
-    import type {FilterProps} from "./FilterProps";
+    import {FilterByRadio, FilterBySwitch, Order} from "../../utils/FilterScript";
+    import type {FilterConstraints} from "../../utils/FilterScript"
+    import FilterType from "./FilterType.ts";
+    import type FilterProps from "./FilterProps";
 
     export let props:FilterProps;
 

@@ -1,6 +1,5 @@
 <script lang="ts">
     import Grid from "../../components/grid/Grid.svelte";
-    import type GridProps from "../../components/grid/GridProps";
     import Filter from "../../components/filter/Filter.svelte";
     import UserActions from "../../components/UserActions.svelte";
 
@@ -11,8 +10,9 @@
     import Row from 'svelte-materialify/src/components/Grid/Row.svelte';
     import GridType from "../../utils/enums/GridType";
     import User from "../../utils/entities/User";
-    import type {FilterProps} from "../../components/filter/FilterProps";
-    import type {FilterType} from "../../components/filter/FilterType";
+    import type GridProps from "../../components/grid/GridProps";
+    import type FilterProps from "../../components/filter/FilterProps";
+    import FilterType from "../../components/filter/FilterType";
 
     // variable to hold state of entity selected in Grid component
     let selectedEntity;

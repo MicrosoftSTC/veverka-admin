@@ -1,9 +1,7 @@
-import type {FilterType} from "./FilterType";
+import type  FilterType from "./FilterType";
 
-interface FilterProps {
+export default interface FilterProps {
     filterType:FilterType,
     maxValueOnSlider:number,
     maxValueOnSecondSlider:number;
 }
-
-export type {FilterProps};
