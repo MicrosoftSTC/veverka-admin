@@ -145,11 +145,7 @@
         filterEvent();
     }
 
-    function filterByRadioValue(reportsDependency){
-        // filterEvent("filterByRadio", reportsDependency);
-        if(props.filterType = FilterType.USERS){
-            filterConstraints.filterByRadio = FilterByRadio.USERS_SHOW_ALL; // TODO: wtf is this
-        }
+    function filterByRadioValue(_:FilterByRadio){
         filterEvent();
     }
 
@@ -165,7 +161,7 @@
         // filterEvent("order", orderDependency);
     }
 
-    // $:filterByRadioValue(filterByRadio);
+    $:filterByRadioValue(filterConstraints.filterByRadio);
     // $:order(selectedValue);
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
@@ -208,7 +204,7 @@
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
                     {#each Object.values(FilterByRadio) as option, index}
-                        <Radio bind:group={filterConstraints.filterByRadio} value={FilterByRadio[index]}>{option}</Radio>
+                        <Radio bind:group={filterConstraints.filterByRadio} value={option}>{option}</Radio>
                     {/each}
                 </div>
             </Col>
