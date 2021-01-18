@@ -1,5 +1,5 @@
 <script>
-    import Filter from "../../components/Filter.svelte";
+    import Filter from "../../components/filter/Filter.svelte";
     import Grid from "../../components/grid/Grid.svelte";
 
     import {mockedTests} from "../../stores/central"

@@ -4,7 +4,10 @@ import Test from "./entities/Test";
 import type Post from "./entities/Post";
 
 export enum FilterByRadio{
-    SHOW_ONLY_REPORTED, SHOW_ONLY_NON_REPORTED, SHOW_ALL, SHOW_ONLY_BANNED
+    USERS_SHOW_ALL = "Show all",
+    USERS_SHOW_ONLY_NON_REPORTED = "Show only non-reported",
+    USERS_SHOW_ONLY_REPORTED = "Show only reported",
+    USERS_SHOW_ONLY_BANNED = "Show only banned"
 }
 
 export enum FilterBySwitch{
@@ -34,14 +37,14 @@ export function filterEntities<T>(data:T[], filterConstraints:FilterConstraints)
             // @ts-ignore
             data = data.filter(user => user.username.startsWith(filterConstraints.textInputValue));
         }
-        if(filterConstraints.filterByRadio !== FilterByRadio.SHOW_ALL){
-            if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_REPORTED){
+        if(filterConstraints.filterByRadio !== FilterByRadio.USERS_SHOW_ALL){
+            if(filterConstraints.filterByRadio === FilterByRadio.USERS_SHOW_ONLY_REPORTED){
                 // @ts-ignore
                 data = data.filter(user => user.needsReview);
-            }else if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_NON_REPORTED){
+            }else if(filterConstraints.filterByRadio === FilterByRadio.USERS_SHOW_ONLY_NON_REPORTED){
                 // @ts-ignore
                 data = data.filter(user => !user.needsReview);
-            }else if(filterConstraints.filterByRadio === FilterByRadio.SHOW_ONLY_BANNED){
+            }else if(filterConstraints.filterByRadio === FilterByRadio.USERS_SHOW_ONLY_BANNED){
                 // @ts-ignore
                 data = data.filter(user => user.banned);
             }

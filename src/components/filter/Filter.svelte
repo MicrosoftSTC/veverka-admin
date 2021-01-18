@@ -11,25 +11,11 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
-    import type {FilterByRadio, FilterBySwitch} from "../utils/FilterScript";
-    import {FilterByRadio, FilterBySwitch, FilterConstraints, Order} from "../utils/FilterScript";
-
-    export enum FilterType{
-        USERS, COMMUNITY, TEST, POST
-    }
-
-    export interface FilterProps {
-        filterType:FilterType,
-        maxValueOnSlider:number,
-        maxValueOnSecondSlider:number;
-    }
-
+    import type {FilterByRadio, FilterBySwitch, FilterConstraints, Order} from "../../utils/FilterScript";
+    import type {FilterType} from "./FilterType.ts";
+    import type {FilterProps} from "./FilterProps";
 
     export let props:FilterProps;
-
-    // export let filterType; // users or communities
-    // export let maxValueOnSlider;
-    // export let maxValueOnSecondSlider;
 
     let showFilter = false;
 
@@ -42,7 +28,7 @@
 
     // internal state of filter
     let filterConstraints : FilterConstraints = {
-        filterByRadio: FilterByRadio.SHOW_ALL,
+        filterByRadio: props.filterType === FilterType.USERS ? FilterByRadio.USERS_SHOW_ALL : FilterByRadio.USERS_SHOW_ONLY_BANNED, // TODO: needs implementation
         filterBySwitch: FilterBySwitch.SHOW_ALL,
         order: [Order.NONE],
         pointsScale: [0, props.maxValueOnSlider],
@@ -86,8 +72,6 @@
         case FilterType.POST:
             break;
     }
-
-
 
     // switch(filterType){
     //     case "users":
@@ -137,42 +121,51 @@
     //         break;
     // }
 
-    function filterEvent(fieldName, value){
-        filterConstraints = {...filterConstraints, [fieldName]:value};
+    function filterEvent(){
         dispatch("filter-event", filterConstraints);
     }
 
     function filterByTextInputValue(){
-        filterEvent("textInputValue", textInputValue);
+        filterEvent();
     }
 
     function filterBySecondTextInputValue(){
-        filterEvent("secondTextInputValue", secondTextInputValue);
+        filterEvent();
     }
 
     function filterBySwitchValue(){
-        filterBySwitch = !filterBySwitch;
-        filterEvent("filterBySwitch", filterBySwitch);
+        // switch needs to happen
+        if(props.filterType = FilterType.USERS){
+            if(filterConstraints.filterBySwitch === FilterBySwitch.SHOW_ALL)
+                filterConstraints.filterBySwitch = FilterBySwitch.SHOW_ONLY_FOUNDERS;
+            else
+                filterConstraints.filterBySwitch = FilterBySwitch.SHOW_ALL;
+        }
+        filterEvent();
     }
 
     function filterByRadioValue(reportsDependency){
-        filterEvent("filterByRadio", reportsDependency);
+        // filterEvent("filterByRadio", reportsDependency);
+        if(props.filterType = FilterType.USERS){
+            filterConstraints.filterByRadio = FilterByRadio.USERS_SHOW_ALL; // TODO: wtf is this
+        }
+        filterEvent();
     }
 
     function scaleFilter(){
-        filterEvent("pointsScale", initialValueOnSlider)
+        // filterEvent("pointsScale", initialValueOnSlider)
     }
 
     function scaleSecondFilter(){
-        filterEvent("secondPointsScale", initialValueSecondOnSlider)
+        // filterEvent("secondPointsScale", initialValueSecondOnSlider)
     }
 
     function order(orderDependency){
-        filterEvent("order", orderDependency);
+        // filterEvent("order", orderDependency);
     }
 
-    $:filterByRadioValue(filterByRadio);
-    $:order(selectedValue);
+    // $:filterByRadioValue(filterByRadio);
+    // $:order(selectedValue);
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -185,14 +178,14 @@
     <CardText>
         <Row>
             <Col>
-                <TextField bind:value={textInputValue} on:input={() => filterByTextInputValue()} filled>{textInputLabel}</TextField>
+                <TextField bind:value={filterConstraints.textInputValue} on:input={() => filterByTextInputValue()} filled>{textInputLabel}</TextField>
             </Col>
             {#if secondTextInputLabel}
             <Col>
-                <TextField bind:value={secondTextInputValue} on:input={() => filterBySecondTextInputValue()} filled>{secondTextInputLabel}</TextField>
+                <TextField bind:value={filterConstraints.secondTextInputValue} on:input={() => filterBySecondTextInputValue()} filled>{secondTextInputLabel}</TextField>
             </Col>
             {/if}
-            <Col cols="{filterType === 'tests' ? 8 : 6}">
+            <Col cols="{props.filterType === FilterType.TEST ? 8 : 6}">
                 <Row>
                     <Col>
                         <Slider on:update={() => scaleFilter()} min="{0}" max="{initialMaxOnSlider}" bind:value={initialValueOnSlider} thumb={[true, true]} persistentThumb>{sliderLabel}</Slider>
@@ -213,8 +206,8 @@
         <Row>
             <Col cols="{6}">
                 <div class="d-flex justify-space-around">
-                    {#each radioLabels as label, index}
-                        <Radio bind:group={filterByRadio} value={FilterByRadio[index]}>{label}</Radio>
+                    {#each Object.values(FilterByRadio) as option, index}
+                        <Radio bind:group={filterConstraints.filterByRadio} value={FilterByRadio[index]}>{option}</Radio>
                     {/each}
                 </div>
             </Col>
