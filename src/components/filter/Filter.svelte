@@ -13,7 +13,7 @@
 
     import {FilterByRadio, FilterBySwitch, Order} from "../../utils/FilterScript";
     import type {FilterConstraints} from "../../utils/FilterScript"
-    import FilterType from "./FilterType.ts";
+    import FilterType from "./FilterType"
     import type FilterProps from "./FilterProps";
 
     export let props:FilterProps;
