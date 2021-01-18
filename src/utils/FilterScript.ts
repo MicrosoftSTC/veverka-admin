@@ -50,6 +50,7 @@ export function filterEntities<T>(data:T[], filterConstraints:FilterConstraints)
             }
         }
         if(filterConstraints.filterBySwitch !== FilterBySwitch.SHOW_ALL){
+            // @ts-ignore
             data = data.filter(user => user.foundedCommunities.length > 0);
         }
     }else if(data[0] instanceof Community){
