@@ -11,7 +11,7 @@
     import CardText from 'svelte-materialify/src/components/Card/CardText.svelte';
     import Select from "svelte-materialify/src/components/Select/Select.svelte"
 
-    import {FilterByRadio, FilterBySwitch, Order} from "../../utils/FilterScript";
+    import {FilterByRadio, FilterBySwitch, OrderType} from "../../utils/FilterScript";
     import type {FilterConstraints} from "../../utils/FilterScript"
     import FilterType from "./FilterType"
     import type FilterProps from "./FilterProps";
@@ -25,13 +25,13 @@
     let initialMaxOnSecondSlider = props.maxValueOnSecondSlider;
     let initialValueOnSlider = [0, initialMaxOnSlider];
     let initialValueSecondOnSlider = [0, initialMaxOnSecondSlider];
-    let selectedValue;
+    let selectedValue = OrderType.NONE;
 
     // internal state of filter
     let filterConstraints : FilterConstraints = {
         filterByRadio: props.filterType === FilterType.USERS ? FilterByRadio.USERS_SHOW_ALL : FilterByRadio.USERS_SHOW_ONLY_BANNED, // TODO: needs implementation
         filterBySwitch: FilterBySwitch.SHOW_ALL,
-        order: [Order.NONE],
+        order: [OrderType.NONE],
         pointsScale: [0, props.maxValueOnSlider],
         secondPointsScale: [0, props.maxValueOnSecondSlider],
         textInputValue: "",
@@ -39,15 +39,7 @@
         secondInputValue: "",
     }
 
-    // set labels
-    let textInputLabel:TextInputLabel;
-    let secondTextInputLabel:SliderLabel;
-    let sliderLabel:SwitchLabel;
-    let secondSliderLabel:string;
-    let switchLabel:string;
-    let radioLabels:string;
-    let selectOptions:string;
-
+    // enums for labels
     enum TextInputLabel{
         SEARCH_BY_USERNAME = "Search by username"
     }
@@ -60,11 +52,20 @@
         SHOW_ONLY_FOUNDERS = "Show only founders"
     }
 
+    // set labels
+    let textInputLabel:TextInputLabel;
+    let secondTextInputLabel:SliderLabel;
+    let sliderLabel:SliderLabel;
+    let secondSliderLabel:string;
+    let switchLabel:SwitchLabel;
+    let radioLabels:string;
+    let selectOptions:string;
+
     switch (props.filterType) {
         case FilterType.USERS:
             textInputLabel = TextInputLabel.SEARCH_BY_USERNAME;
-            sliderLabel = SwitchLabel.SHOW_ONLY_FOUNDERS;
-            switchLabel = "Show only group founders";
+            sliderLabel = SliderLabel.RESTRICT_POINTS;
+            switchLabel = SwitchLabel.SHOW_ONLY_FOUNDERS;
             break;
         case FilterType.COMMUNITY:
             break;
@@ -73,54 +74,6 @@
         case FilterType.POST:
             break;
     }
-
-    // switch(filterType){
-    //     case "users":
-    //         textInputLabel = "Search by username";
-    //         sliderLabel = "Restrict points";
-    //         switchLabel = "Show only group founders";
-    //         radioLabels = ["Show only reported", "Show only non-reported", "Show all", "Show only banned"];
-    //         selectOptions = [
-    //             { name: 'Username Asc', value: 'Username Asc' },
-    //             { name: 'Username Desc', value: 'Username Desc' },
-    //             { name: 'Joined Oldest', value: 'Joined Oldest' },
-    //             { name: 'Joined Newest', value: 'Joined Newest' },
-    //             { name: "Points Acs", value: "Points Acs"},
-    //             { name: "Points Desc", value: 'Points Desc'}
-    //         ];
-    //         break;
-    //     case "communities":
-    //         textInputLabel = "Search by community name";
-    //         secondTextInputLabel = "Search by founder username";
-    //         sliderLabel = "Restrict members";
-    //         radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
-    //         selectOptions = [
-    //             { name: 'Name Asc', value: 'Name Asc' },
-    //             { name: 'Name Desc', value: 'Name Desc' },
-    //             { name: 'Since Oldest', value: 'Since Oldest' },
-    //             { name: 'Since Newest', value: 'Since Newest' },
-    //             { name: 'Members Asc', value: 'Members Asc' },
-    //             { name: 'Members Desc', value: 'Members Desc' },
-    //         ];
-    //         break;
-    //     case "tests":
-    //         textInputLabel = "Search by test name";
-    //         secondTextInputLabel = "Search by creator username";
-    //         sliderLabel = "Restrict points";
-    //         secondSliderLabel = "Restrict users completed";
-    //         radioLabels = ["Show only investigated", "Show only non-investigated", "Show all", "Show only banned"];
-    //         selectOptions = [
-    //             { name: 'Name Asc', value: 'Name Asc' },
-    //             { name: 'Name Desc', value: 'Name Desc' },
-    //             { name: 'Created Oldest', value: 'Created Oldest' },
-    //             { name: 'Created Newest', value: 'Created Newest' },
-    //             { name: "Points Acs", value: "Points Acs"},
-    //             { name: "Points Desc", value: 'Points Desc'},
-    //             {name: "Questions Count Asc", value: "Questions Asc"},
-    //             {name: "Questions Count Desc", value: "Questions Desc"},
-    //         ];
-    //         break;
-    // }
 
     function filterEvent(){
         dispatch("filter-event", filterConstraints);
@@ -163,7 +116,10 @@
     }
 
     $:filterByRadioValue(filterConstraints.filterByRadio);
-    // $:order(selectedValue);
+
+
+
+    // TODO: write logic which radio buttons to show depending on the FilterType
 </script>
 <Card outlined style="min-width: 100%" class="mt-3">
     <div class="pl-4 pr-4 pt-3">
@@ -210,7 +166,7 @@
                 </div>
             </Col>
             <Col cols="{3}">
-                <Select solo bind:value={selectedValue} items="{selectOptions}" class="mt-n3" placeholder="Sort by"/>
+                <Select solo bind:value={selectedValue} items="{selectAble}" class="mt-n3" placeholder="Sort by"/>
             </Col>
         </Row>
     </CardText>

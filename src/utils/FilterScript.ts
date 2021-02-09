@@ -14,14 +14,14 @@ export enum FilterBySwitch{
     SHOW_ONLY_FOUNDERS, SHOW_ALL
 }
 
-export enum Order{
-    NONE, POINTS_ASC, POINTS_DESC, USERNAME_ASC, USERNAME_DESC
+export enum OrderType{
+    NONE, USERS_POINTS_ASC, USERS_POINTS_DESC, USERS_USERNAME_ASC, USERS_USERNAME_DESC
 }
 
 export interface FilterConstraints{
     filterByRadio: FilterByRadio,
     filterBySwitch: FilterBySwitch,
-    order: Order[],
+    order: OrderType[],
     pointsScale: number[],
     secondPointsScale: number[],
     textInputValue: string,
